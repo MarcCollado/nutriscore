@@ -1,8 +1,13 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
-function HomePage() {
-  return <div>Welcome to Next.js!</div>;
+export default function BasicButtons() {
+  return (
+    <Stack spacing={2} direction="row">
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
+  );
 }
-
-export default HomePage;
