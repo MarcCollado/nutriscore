@@ -1,3 +1,16 @@
+logs
+*.log
+npm-debug.log*
+
+.vscode
+build
+coverage
 node_modules/
-.cache/
+jspm_packages/
 public
+
+.cache/
+.env
+.eslintcache
+.npm
+.DS_Store
