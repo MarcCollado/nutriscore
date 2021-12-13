@@ -4,7 +4,7 @@ import { Formik, Field, Form } from 'formik';
 const IndexPage = () => {
   const [data, setData] = useState(null);
 
-  const baseUrl = `https://nutri-score-auditor-api.ew.r.appspot.com/`;
+  const baseUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
 
   return (
     <div>
