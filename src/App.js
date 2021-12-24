@@ -2,15 +2,34 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-function App() {
+const App = () => {
+  // URLs
+  const baseApiUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
+  // Categories
+  const [category, setCategory] = 'others';
+  // Points A
+  const [energy, setEnergy] = 356;
+  const [sugars, setSugars] = 3.0;
+  const [saturatedFats, setSaturatedFats] = 0;
+  const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = 0;
+  const [sodium, setSodium] = 920;
+  // Points C
+  const [fruitAndVegetables, setFruitAndVegetables] = 0;
+  const [fibre, setFibre] = 0;
+  const [protein, setProtein] = 16;
+  const [isWater, setIsWater] = false;
+
   return (
-    <div className="App">
+    <div>
       <Box>
         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
       </Box>
+      <h2>Categoría</h2>
+
+      <h2>Puntos A</h2>
     </div>
   );
-}
+};
 
 export default App;
 
@@ -20,24 +39,11 @@ import { Formik, Field, Form } from 'formik';
 const IndexPage = () => {
   const [data, setData] = useState(null);
 
-  const baseUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
-
   return (
     <div>
       <Formik
         initialValues={{
-          category: 'others',
-          // Points A
-          energy: 356,
-          sugars: 3.0,
-          saturatedFats: 0,
-          saturatedFatsAndLipids: 0,
-          sodium: 920,
-          // Points C
-          fruitAndVegetables: 0,
-          fibre: 0,
-          protein: 16,
-          isWater: 'False',
+
         }}
         onSubmit={async (values) => {
           const foodData = {
@@ -67,7 +73,7 @@ const IndexPage = () => {
             <option value="otros">Otros</option>
           </Field>
 
-          <h2>Puntos A</h2>
+
 
           <label htmlFor="energy">Energía (KJ)</label>
           <Field id="energy" name="energy" placeholder="0.0" type="number" />
