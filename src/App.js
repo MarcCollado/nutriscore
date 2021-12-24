@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 const App = () => {
   // URLs
@@ -8,146 +15,173 @@ const App = () => {
   // Categories
   const [category, setCategory] = useState('others');
   // Points A
-  const [energy, setEnergy] = useState(356);
+  const [energy, setEnergy] = useState(356.0);
   const [sugars, setSugars] = useState(3.0);
-  const [saturatedFats, setSaturatedFats] = useState(0);
-  const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = useState(0);
-  const [sodium, setSodium] = useState(920);
+  const [saturatedFats, setSaturatedFats] = useState(0.0);
+  const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = useState(0.0);
+  const [sodium, setSodium] = useState(920.0);
   // Points C
-  const [fruitAndVegetables, setFruitAndVegetables] = useState(0);
-  const [fibre, setFibre] = useState(0);
-  const [protein, setProtein] = useState(16);
+  const [fruitAndVegetables, setFruitAndVegetables] = useState(0.0);
+  const [fibre, setFibre] = useState(0.0);
+  const [protein, setProtein] = useState(16.0);
   const [isWater, setIsWater] = useState(false);
+  // API response
+  const [apiResult, setApiResult] = useState(null);
+
+  // Submit
+  const onSubmit = async () => {
+    const foodData = {
+      category: category,
+      energy: energy,
+      fibre: fibre,
+      fruit_and_vegetables: fruitAndVegetables,
+      is_water: isWater,
+      protein: protein,
+      sodium: sodium,
+      saturated_fats: saturatedFats,
+      saturated_fats_and_lipids: saturatedFatsAndLipids,
+      sugars: sugars,
+    };
+
+    fetch(`${baseApiUrl}calculate?q=${JSON.stringify(foodData)}`)
+      .then((res) => res.json())
+      .then((res) => setApiResult(res));
+  };
 
   return (
     <div>
+      <Typography variant="h5">Categoría</Typography>
       <Box>
+        <FormControl fullWidth>
+          <Select
+            defaultValue={category}
+            id="category"
+            value={category}
+            label="Categoría"
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <MenuItem value="cheese">Queso</MenuItem>
+            <MenuItem value="drinks">Bebidas</MenuItem>
+            <MenuItem value="fats">Grasas, aceites, o mantequillas</MenuItem>
+            <MenuItem value="others">Otros</MenuItem>
+          </Select>
+          <InputLabel id="category">Categoría</InputLabel>
+        </FormControl>
+      </Box>
+      <Box>
+        <Typography variant="h5">Puntos A</Typography>
         <TextField
           defaultValue={energy}
           id="energy"
           label="Energía (KJ)"
+          margin="normal"
+          onChange={(e) => setEnergy(e.target.value)}
           required={true}
+          type="number"
           variant="outlined"
         />
         <TextField
           defaultValue={sugars}
           id="sugars"
           label="Azúcares (g)"
+          margin="normal"
+          onChange={(e) => setSugars(e.target.value)}
           required={true}
+          type="number"
           variant="outlined"
         />
         <TextField
           defaultValue={saturatedFats}
           id="saturatedFats"
           label="Grasas saturadas (g)"
+          margin="normal"
+          onChange={(e) => setSaturatedFats(e.target.value)}
+          required={false}
+          type="number"
+          variant="outlined"
+        />
+        <TextField
+          defaultValue={saturatedFatsAndLipids}
+          id="saturatedFatsAndLipids"
+          label="Grasas saturadas y lípidos (%)"
+          margin="normal"
+          onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
+          required={false}
+          type="number"
+          variant="outlined"
+        />
+        <TextField
+          defaultValue={sodium}
+          id="sodium"
+          label="Sodio (mg)"
+          margin="normal"
+          onChange={(e) => setSodium(e.target.value)}
           required={true}
+          type="number"
           variant="outlined"
         />
       </Box>
-      <h2>Categoría</h2>
-
-      <h2>Puntos A</h2>
+      <Box>
+        <Typography variant="h5">Puntos C</Typography>
+        <TextField
+          defaultValue={fruitAndVegetables}
+          id="fruitAndVegetables"
+          label="Frutas y vegetales (%)"
+          margin="normal"
+          onChange={(e) => setFruitAndVegetables(e.target.value)}
+          required={true}
+          type="number"
+          variant="outlined"
+        />
+        <TextField
+          defaultValue={fibre}
+          id="fibre"
+          label="Fibra (g)"
+          margin="normal"
+          onChange={(e) => setFibre(e.target.value)}
+          required={true}
+          type="number"
+          variant="outlined"
+        />
+        <TextField
+          defaultValue={protein}
+          id="protein"
+          label="Proteínas (g)"
+          margin="normal"
+          onChange={(e) => setProtein(e.target.value)}
+          required={true}
+          type="number"
+          variant="outlined"
+        />
+      </Box>
+      <Box>
+        <Stack spacing={2} direction="row">
+          <Button variant="outlined">Reset</Button>
+          <Button onClick={onSubmit} variant="contained">
+            Calcular
+          </Button>
+        </Stack>
+      </Box>
+      <Box>
+        <h2>Resultado</h2>
+        <li>Final score: {apiResult?.final_score}</li>
+        <li>Nutri score: {apiResult?.nutri_score}</li>
+        <li>Points A:</li>
+        <ul>
+          <li>A: {apiResult?.points_a.a}</li>
+          <li>B: {apiResult?.points_a.b}</li>
+          <li>C: {apiResult?.points_a.c}</li>
+          <li>D: {apiResult?.points_a.d}</li>
+        </ul>
+        <li>Points C:</li>
+        <ul>
+          <li>A: {apiResult?.points_c.a}</li>
+          <li>B: {apiResult?.points_c.b}</li>
+          <li>C: {apiResult?.points_c.c}</li>
+        </ul>
+      </Box>
     </div>
   );
 };
 
 export default App;
-
-/* import React, { useState, useEffect } from 'react';
-import { Formik, Field, Form } from 'formik';
-
-const IndexPage = () => {
-  const [data, setData] = useState(null);
-
-  return (
-    <div>
-      <Formik
-        initialValues={{
-
-        }}
-        onSubmit={async (values) => {
-          const foodData = {
-            category: `${values.category}`,
-            energy: values.energy,
-            fibre: values.fibre,
-            fruit_and_vegetables: values.fruitAndVegetables,
-            is_water: `${values.isWater}`,
-            protein: values.protein,
-            sodium: values.sodium,
-            saturated_fats: values.saturatedFats,
-            saturated_fats_and_lipids: values.saturatedFatsAndLipids,
-            sugars: values.sugars,
-          };
-
-          fetch(`${baseUrl}calculate?q=${JSON.stringify(foodData)}`)
-            .then((res) => res.json())
-            .then((res) => setData(res));
-        }}
-      >
-        <Form>
-          <label htmlFor="category">Categoría</label>
-          <Field id="category" name="category" as="select">
-            <option value="queso">Queso</option>
-            <option value="bebidas">Bebidas</option>
-            <option value="grasas">Grasas, aceites, o mantequillas</option>
-            <option value="otros">Otros</option>
-          </Field>
-
-
-
-
-          <label htmlFor="saturatedFats">Grasas saturadas (g)</label>
-          <Field
-            id="saturatedFats"
-            name="saturatedFats"
-            placeholder="0,0"
-            type="number"
-          />
-
-          <label htmlFor="sodium">Sodio (mg)</label>
-          <Field id="sodium" name="sodium" placeholder="0,0" type="number" />
-
-          <h2>Puntos C</h2>
-
-          <label htmlFor="fruitAndVegetables">Frutas y vegetales (%)</label>
-          <Field
-            id="fruitAndVegetables"
-            name="fruitAndVegetables"
-            placeholder="0.0"
-            type="number"
-          />
-
-          <label htmlFor="fibre">Fibra (g)</label>
-          <Field id="fibre" name="fibre" placeholder="0,0" type="number" />
-
-          <label htmlFor="protein">Proteínas (g)</label>
-          <Field id="protein" name="protein" placeholder="0,0" type="number" />
-
-          <button type="submit">Calcular Nutri-score</button>
-        </Form>
-      </Formik>
-
-      <h2>Resultado</h2>
-
-      <li>Final score: {data ? data.final_score : null}</li>
-      <li>Nutri score: {data ? data.nutri_score : null}</li>
-      <li>Points A:</li>
-      <ul>
-        <li>A: {data ? data.points_a.a : null}</li>
-        <li>B: {data ? data.points_a.b : null}</li>
-        <li>C:{data ? data.points_a.c : null}</li>
-        <li>D:{data ? data.points_a.d : null}</li>
-      </ul>
-      <li>Points C:</li>
-      <ul>
-        <li>A:{data ? data.points_c.a : null}</li>
-        <li>B:{data ? data.points_c.b : null}</li>
-        <li>C:{data ? data.points_c.c : null}</li>
-      </ul>
-    </div>
-  );
-};
-
-export default IndexPage;
-
-*/
