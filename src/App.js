@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
@@ -6,23 +6,43 @@ const App = () => {
   // URLs
   const baseApiUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
   // Categories
-  const [category, setCategory] = 'others';
+  const [category, setCategory] = useState('others');
   // Points A
-  const [energy, setEnergy] = 356;
-  const [sugars, setSugars] = 3.0;
-  const [saturatedFats, setSaturatedFats] = 0;
-  const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = 0;
-  const [sodium, setSodium] = 920;
+  const [energy, setEnergy] = useState(356);
+  const [sugars, setSugars] = useState(3.0);
+  const [saturatedFats, setSaturatedFats] = useState(0);
+  const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = useState(0);
+  const [sodium, setSodium] = useState(920);
   // Points C
-  const [fruitAndVegetables, setFruitAndVegetables] = 0;
-  const [fibre, setFibre] = 0;
-  const [protein, setProtein] = 16;
-  const [isWater, setIsWater] = false;
+  const [fruitAndVegetables, setFruitAndVegetables] = useState(0);
+  const [fibre, setFibre] = useState(0);
+  const [protein, setProtein] = useState(16);
+  const [isWater, setIsWater] = useState(false);
 
   return (
     <div>
       <Box>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <TextField
+          defaultValue={energy}
+          id="energy"
+          label="Energía (KJ)"
+          required={true}
+          variant="outlined"
+        />
+        <TextField
+          defaultValue={sugars}
+          id="sugars"
+          label="Azúcares (g)"
+          required={true}
+          variant="outlined"
+        />
+        <TextField
+          defaultValue={saturatedFats}
+          id="saturatedFats"
+          label="Grasas saturadas (g)"
+          required={true}
+          variant="outlined"
+        />
       </Box>
       <h2>Categoría</h2>
 
@@ -75,11 +95,6 @@ const IndexPage = () => {
 
 
 
-          <label htmlFor="energy">Energía (KJ)</label>
-          <Field id="energy" name="energy" placeholder="0.0" type="number" />
-
-          <label htmlFor="sugars">Azúcares (g)</label>
-          <Field id="sugars" name="sugars" placeholder="0,0" type="number" />
 
           <label htmlFor="saturatedFats">Grasas saturadas (g)</label>
           <Field
