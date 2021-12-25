@@ -3,8 +3,10 @@ import {
   Box,
   Button,
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
+  Paper,
   Select,
   Stack,
   TextField,
@@ -51,119 +53,131 @@ const App = () => {
   };
 
   return (
-    <div>
-      <Typography variant="h5">Categoría</Typography>
-      <Box>
-        <FormControl fullWidth>
-          <Select
-            defaultValue={category}
-            id="category"
-            value={category}
-            label="Categoría"
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <MenuItem value="cheese">Queso</MenuItem>
-            <MenuItem value="drinks">Bebidas</MenuItem>
-            <MenuItem value="fats">Grasas, aceites, o mantequillas</MenuItem>
-            <MenuItem value="others">Otros</MenuItem>
-          </Select>
-          <InputLabel id="category">Categoría</InputLabel>
-        </FormControl>
-      </Box>
-      <Box>
-        <Typography variant="h5">Puntos A</Typography>
-        <TextField
-          defaultValue={energy}
-          id="energy"
-          label="Energía (KJ)"
-          margin="normal"
-          onChange={(e) => setEnergy(e.target.value)}
-          required={true}
-          type="number"
-          variant="outlined"
-        />
-        <TextField
-          defaultValue={sugars}
-          id="sugars"
-          label="Azúcares (g)"
-          margin="normal"
-          onChange={(e) => setSugars(e.target.value)}
-          required={true}
-          type="number"
-          variant="outlined"
-        />
-        <TextField
-          defaultValue={saturatedFats}
-          id="saturatedFats"
-          label="Grasas saturadas (g)"
-          margin="normal"
-          onChange={(e) => setSaturatedFats(e.target.value)}
-          required={false}
-          type="number"
-          variant="outlined"
-        />
-        <TextField
-          defaultValue={saturatedFatsAndLipids}
-          id="saturatedFatsAndLipids"
-          label="Grasas saturadas y lípidos (%)"
-          margin="normal"
-          onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
-          required={false}
-          type="number"
-          variant="outlined"
-        />
-        <TextField
-          defaultValue={sodium}
-          id="sodium"
-          label="Sodio (mg)"
-          margin="normal"
-          onChange={(e) => setSodium(e.target.value)}
-          required={true}
-          type="number"
-          variant="outlined"
-        />
-      </Box>
-      <Box>
-        <Typography variant="h5">Puntos C</Typography>
-        <TextField
-          defaultValue={fruitAndVegetables}
-          id="fruitAndVegetables"
-          label="Frutas y vegetales (%)"
-          margin="normal"
-          onChange={(e) => setFruitAndVegetables(e.target.value)}
-          required={true}
-          type="number"
-          variant="outlined"
-        />
-        <TextField
-          defaultValue={fibre}
-          id="fibre"
-          label="Fibra (g)"
-          margin="normal"
-          onChange={(e) => setFibre(e.target.value)}
-          required={true}
-          type="number"
-          variant="outlined"
-        />
-        <TextField
-          defaultValue={protein}
-          id="protein"
-          label="Proteínas (g)"
-          margin="normal"
-          onChange={(e) => setProtein(e.target.value)}
-          required={true}
-          type="number"
-          variant="outlined"
-        />
-      </Box>
-      <Box>
-        <Stack spacing={2} direction="row">
-          <Button variant="outlined">Reset</Button>
-          <Button onClick={onSubmit} variant="contained">
-            Calcular
-          </Button>
-        </Stack>
-      </Box>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Typography variant="h5">Categoría</Typography>
+          <Box>
+            <FormControl fullWidth>
+              <Select
+                defaultValue={category}
+                id="category"
+                value={category}
+                label="Categoría"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <MenuItem value="cheese">Queso</MenuItem>
+                <MenuItem value="drinks">Bebidas</MenuItem>
+                <MenuItem value="fats">
+                  Grasas, aceites, o mantequillas
+                </MenuItem>
+                <MenuItem value="others">Otros</MenuItem>
+              </Select>
+              <InputLabel id="category">Categoría</InputLabel>
+            </FormControl>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box>
+            <Typography variant="h5">Puntos A</Typography>
+            <TextField
+              defaultValue={energy}
+              id="energy"
+              label="Energía (KJ)"
+              margin="normal"
+              onChange={(e) => setEnergy(e.target.value)}
+              required={true}
+              type="number"
+              variant="outlined"
+            />
+            <TextField
+              defaultValue={sugars}
+              id="sugars"
+              label="Azúcares (g)"
+              margin="normal"
+              onChange={(e) => setSugars(e.target.value)}
+              required={true}
+              type="number"
+              variant="outlined"
+            />
+            <TextField
+              defaultValue={saturatedFats}
+              id="saturatedFats"
+              label="Grasas saturadas (g)"
+              margin="normal"
+              onChange={(e) => setSaturatedFats(e.target.value)}
+              required={false}
+              type="number"
+              variant="outlined"
+            />
+            <TextField
+              defaultValue={saturatedFatsAndLipids}
+              id="saturatedFatsAndLipids"
+              label="Grasas saturadas y lípidos (%)"
+              margin="normal"
+              onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
+              required={false}
+              type="number"
+              variant="outlined"
+            />
+            <TextField
+              defaultValue={sodium}
+              id="sodium"
+              label="Sodio (mg)"
+              margin="normal"
+              onChange={(e) => setSodium(e.target.value)}
+              required={true}
+              type="number"
+              variant="outlined"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box>
+            <Typography variant="h5">Puntos C</Typography>
+            <TextField
+              defaultValue={fruitAndVegetables}
+              id="fruitAndVegetables"
+              label="Frutas y vegetales (%)"
+              margin="normal"
+              onChange={(e) => setFruitAndVegetables(e.target.value)}
+              required={true}
+              type="number"
+              variant="outlined"
+            />
+            <TextField
+              defaultValue={fibre}
+              id="fibre"
+              label="Fibra (g)"
+              margin="normal"
+              onChange={(e) => setFibre(e.target.value)}
+              required={true}
+              type="number"
+              variant="outlined"
+            />
+            <TextField
+              defaultValue={protein}
+              id="protein"
+              label="Proteínas (g)"
+              margin="normal"
+              onChange={(e) => setProtein(e.target.value)}
+              required={true}
+              type="number"
+              variant="outlined"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <Box>
+            <Stack spacing={2} direction="row">
+              <Button variant="outlined">Reset</Button>
+              <Button onClick={onSubmit} variant="contained">
+                Calcular
+              </Button>
+            </Stack>
+          </Box>
+        </Grid>
+      </Grid>
       <Box>
         <h2>Resultado</h2>
         <li>Final score: {apiResult?.final_score}</li>
@@ -182,7 +196,7 @@ const App = () => {
           <li>C: {apiResult?.points_c.c}</li>
         </ul>
       </Box>
-    </div>
+    </Box>
   );
 };
 
