@@ -32,7 +32,7 @@ const App = () => {
   // API response
   const [apiResult, setApiResult] = useState(null);
 
-  // Submit
+  // Submit button
   const onSubmit = async () => {
     const foodData = {
       category: category,
@@ -52,6 +52,20 @@ const App = () => {
       .then((res) => setApiResult(res));
   };
 
+  // Reset button
+  const onReset = async () => {
+    setEnergy(0);
+    setFibre(0);
+    setFruitAndVegetables(0);
+    setIsWater(false);
+    setProtein(0);
+    setSodium(0);
+    setSaturatedFats(0);
+    setSaturatedFatsAndLipids(0);
+    setSugars(0);
+    setApiResult(null);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -60,12 +74,12 @@ const App = () => {
             <Typography variant="h5">Categoría</Typography>
             <InputLabel id="category">Categoría</InputLabel>
             <Select
-              fullWidth
               defaultValue={category}
+              fullWidth
               id="category"
-              value={category}
               label="Categoría"
               onChange={(e) => setCategory(e.target.value)}
+              value={category}
             >
               <MenuItem value="cheese">Queso</MenuItem>
               <MenuItem value="drinks">Bebidas</MenuItem>
@@ -85,6 +99,7 @@ const App = () => {
               onChange={(e) => setEnergy(e.target.value)}
               required={true}
               type="number"
+              value={energy}
               variant="outlined"
             />
             <TextField
@@ -95,6 +110,7 @@ const App = () => {
               onChange={(e) => setSugars(e.target.value)}
               required={true}
               type="number"
+              value={sugars}
               variant="outlined"
             />
             {category === ('cheese' || 'others') ? (
@@ -106,6 +122,7 @@ const App = () => {
                 onChange={(e) => setSaturatedFats(e.target.value)}
                 required={false}
                 type="number"
+                value={saturatedFats}
                 variant="outlined"
               />
             ) : null}
@@ -118,6 +135,7 @@ const App = () => {
                 onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
                 required={false}
                 type="number"
+                value={saturatedFatsAndLipids}
                 variant="outlined"
               />
             ) : null}
@@ -129,6 +147,7 @@ const App = () => {
               onChange={(e) => setSodium(e.target.value)}
               required={true}
               type="number"
+              value={sodium}
               variant="outlined"
             />
           </Box>
@@ -144,6 +163,7 @@ const App = () => {
               onChange={(e) => setFruitAndVegetables(e.target.value)}
               required={true}
               type="number"
+              value={fruitAndVegetables}
               variant="outlined"
             />
             <TextField
@@ -154,6 +174,7 @@ const App = () => {
               onChange={(e) => setFibre(e.target.value)}
               required={true}
               type="number"
+              value={fibre}
               variant="outlined"
             />
             <TextField
@@ -164,6 +185,7 @@ const App = () => {
               onChange={(e) => setProtein(e.target.value)}
               required={true}
               type="number"
+              value={protein}
               variant="outlined"
             />
             {category === 'drinks' ? (
@@ -185,7 +207,9 @@ const App = () => {
         <Grid item xs={4}>
           <Box>
             <Stack spacing={2} direction="row">
-              <Button variant="outlined">Reset</Button>
+              <Button onClick={onReset} variant="outlined">
+                Reset
+              </Button>
               <Button onClick={onSubmit} variant="contained">
                 Calcular
               </Button>
@@ -193,24 +217,26 @@ const App = () => {
           </Box>
         </Grid>
       </Grid>
-      <Box>
-        <h2>Resultado</h2>
-        <li>Final score: {apiResult?.final_score}</li>
-        <li>Nutri score: {apiResult?.nutri_score}</li>
-        <li>Points A:</li>
-        <ul>
-          <li>A: {apiResult?.points_a.a}</li>
-          <li>B: {apiResult?.points_a.b}</li>
-          <li>C: {apiResult?.points_a.c}</li>
-          <li>D: {apiResult?.points_a.d}</li>
-        </ul>
-        <li>Points C:</li>
-        <ul>
-          <li>A: {apiResult?.points_c.a}</li>
-          <li>B: {apiResult?.points_c.b}</li>
-          <li>C: {apiResult?.points_c.c}</li>
-        </ul>
-      </Box>
+      {apiResult ? (
+        <Box>
+          <h2>Resultado</h2>
+          <li>Final score: {apiResult?.final_score}</li>
+          <li>Nutri score: {apiResult?.nutri_score}</li>
+          <li>Points A:</li>
+          <ul>
+            <li>A: {apiResult?.points_a.a}</li>
+            <li>B: {apiResult?.points_a.b}</li>
+            <li>C: {apiResult?.points_a.c}</li>
+            <li>D: {apiResult?.points_a.d}</li>
+          </ul>
+          <li>Points C:</li>
+          <ul>
+            <li>A: {apiResult?.points_c.a}</li>
+            <li>B: {apiResult?.points_c.b}</li>
+            <li>C: {apiResult?.points_c.c}</li>
+          </ul>
+        </Box>
+      ) : null}
     </Box>
   );
 };
