@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
-  FormControl,
+  FormControlLabel,
   Grid,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
   Stack,
+  Switch,
   TextField,
   Typography,
 } from '@mui/material';
@@ -56,25 +56,22 @@ const App = () => {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Typography variant="h5">Categoría</Typography>
           <Box>
-            <FormControl fullWidth>
-              <Select
-                defaultValue={category}
-                id="category"
-                value={category}
-                label="Categoría"
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <MenuItem value="cheese">Queso</MenuItem>
-                <MenuItem value="drinks">Bebidas</MenuItem>
-                <MenuItem value="fats">
-                  Grasas, aceites, o mantequillas
-                </MenuItem>
-                <MenuItem value="others">Otros</MenuItem>
-              </Select>
-              <InputLabel id="category">Categoría</InputLabel>
-            </FormControl>
+            <Typography variant="h5">Categoría</Typography>
+            <InputLabel id="category">Categoría</InputLabel>
+            <Select
+              fullWidth
+              defaultValue={category}
+              id="category"
+              value={category}
+              label="Categoría"
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <MenuItem value="cheese">Queso</MenuItem>
+              <MenuItem value="drinks">Bebidas</MenuItem>
+              <MenuItem value="fats">Grasas, aceites, o mantequillas</MenuItem>
+              <MenuItem value="others">Otros</MenuItem>
+            </Select>
           </Box>
         </Grid>
         <Grid item xs={12}>
@@ -100,26 +97,30 @@ const App = () => {
               type="number"
               variant="outlined"
             />
-            <TextField
-              defaultValue={saturatedFats}
-              id="saturatedFats"
-              label="Grasas saturadas (g)"
-              margin="normal"
-              onChange={(e) => setSaturatedFats(e.target.value)}
-              required={false}
-              type="number"
-              variant="outlined"
-            />
-            <TextField
-              defaultValue={saturatedFatsAndLipids}
-              id="saturatedFatsAndLipids"
-              label="Grasas saturadas y lípidos (%)"
-              margin="normal"
-              onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
-              required={false}
-              type="number"
-              variant="outlined"
-            />
+            {category === ('cheese' || 'others') ? (
+              <TextField
+                defaultValue={saturatedFats}
+                id="saturatedFats"
+                label="Grasas saturadas (g)"
+                margin="normal"
+                onChange={(e) => setSaturatedFats(e.target.value)}
+                required={false}
+                type="number"
+                variant="outlined"
+              />
+            ) : null}
+            {category === 'fats' ? (
+              <TextField
+                defaultValue={saturatedFatsAndLipids}
+                id="saturatedFatsAndLipids"
+                label="Grasas saturadas y lípidos (%)"
+                margin="normal"
+                onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
+                required={false}
+                type="number"
+                variant="outlined"
+              />
+            ) : null}
             <TextField
               defaultValue={sodium}
               id="sodium"
@@ -165,6 +166,20 @@ const App = () => {
               type="number"
               variant="outlined"
             />
+            {category === 'drinks' ? (
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isWater}
+                    onChange={(e) => setIsWater(e.target.checked)}
+                    name="isWater"
+                  />
+                }
+                label="Es agua"
+                labelPlacement="start"
+                value="isWater"
+              />
+            ) : null}
           </Box>
         </Grid>
         <Grid item xs={4}>
