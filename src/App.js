@@ -113,7 +113,7 @@ const App = () => {
               value={sugars}
               variant="outlined"
             />
-            {category === ('cheese' || 'others') ? (
+            {category === 'cheese' || category === 'others' ? (
               <TextField
                 defaultValue={saturatedFats}
                 id="saturatedFats"
@@ -126,7 +126,7 @@ const App = () => {
                 variant="outlined"
               />
             ) : null}
-            {category === 'fats' ? (
+            {category === 'fats' || category === 'drinks' ? (
               <TextField
                 defaultValue={saturatedFatsAndLipids}
                 id="saturatedFatsAndLipids"
