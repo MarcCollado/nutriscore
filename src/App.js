@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   Box,
   Button,
@@ -69,88 +70,89 @@ const App = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Box>
-            <Typography variant="h5">Categoría</Typography>
-            <InputLabel id="category">Categoría</InputLabel>
-            <Select
-              defaultValue={category}
-              fullWidth
-              id="category"
-              label="Categoría"
-              onChange={(e) => setCategory(e.target.value)}
-              value={category}
-            >
-              <MenuItem value="cheese">Queso</MenuItem>
-              <MenuItem value="drinks">Bebidas</MenuItem>
-              <MenuItem value="fats">Grasas, aceites, o mantequillas</MenuItem>
-              <MenuItem value="others">Otros</MenuItem>
-            </Select>
-          </Box>
+        <Grid item xs={5}>
+          <Typography sx={{ maxWidth: 'md', mb: 1.5 }} variant="h5">
+            Categoría
+          </Typography>
+          <Select
+            defaultValue={category}
+            fullWidth
+            id="category"
+            label="Categoría"
+            onChange={(e) => setCategory(e.target.value)}
+            value={category}
+          >
+            <MenuItem value="cheese">Queso</MenuItem>
+            <MenuItem value="drinks">Bebidas</MenuItem>
+            <MenuItem value="fats">Grasas, aceites, o mantequillas</MenuItem>
+            <MenuItem value="others">Otros</MenuItem>
+          </Select>
         </Grid>
         <Grid item xs={12}>
-          <Box>
-            <Typography variant="h5">Puntos A</Typography>
+          <Typography variant="h5">Puntos A</Typography>
+          <TextField
+            defaultValue={energy}
+            id="energy"
+            label="Energía (KJ)"
+            margin="normal"
+            onChange={(e) => setEnergy(e.target.value)}
+            required={true}
+            sx={{ pr: 2 }}
+            type="number"
+            value={energy}
+            variant="outlined"
+          />
+          <TextField
+            defaultValue={sugars}
+            id="sugars"
+            label="Azúcares (g)"
+            margin="normal"
+            onChange={(e) => setSugars(e.target.value)}
+            required={true}
+            sx={{ pr: 2 }}
+            type="number"
+            value={sugars}
+            variant="outlined"
+          />
+          {category === 'cheese' || category === 'others' ? (
             <TextField
-              defaultValue={energy}
-              id="energy"
-              label="Energía (KJ)"
+              defaultValue={saturatedFats}
+              id="saturatedFats"
+              label="Grasas saturadas (g)"
               margin="normal"
-              onChange={(e) => setEnergy(e.target.value)}
-              required={true}
+              onChange={(e) => setSaturatedFats(e.target.value)}
+              required={false}
+              sx={{ pr: 2 }}
               type="number"
-              value={energy}
+              value={saturatedFats}
               variant="outlined"
             />
+          ) : null}
+          {category === 'fats' || category === 'drinks' ? (
             <TextField
-              defaultValue={sugars}
-              id="sugars"
-              label="Azúcares (g)"
+              defaultValue={saturatedFatsAndLipids}
+              id="saturatedFatsAndLipids"
+              label="Grasas saturadas y lípidos (%)"
               margin="normal"
-              onChange={(e) => setSugars(e.target.value)}
-              required={true}
+              onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
+              required={false}
+              sx={{ pr: 2 }}
               type="number"
-              value={sugars}
+              value={saturatedFatsAndLipids}
               variant="outlined"
             />
-            {category === 'cheese' || category === 'others' ? (
-              <TextField
-                defaultValue={saturatedFats}
-                id="saturatedFats"
-                label="Grasas saturadas (g)"
-                margin="normal"
-                onChange={(e) => setSaturatedFats(e.target.value)}
-                required={false}
-                type="number"
-                value={saturatedFats}
-                variant="outlined"
-              />
-            ) : null}
-            {category === 'fats' || category === 'drinks' ? (
-              <TextField
-                defaultValue={saturatedFatsAndLipids}
-                id="saturatedFatsAndLipids"
-                label="Grasas saturadas y lípidos (%)"
-                margin="normal"
-                onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
-                required={false}
-                type="number"
-                value={saturatedFatsAndLipids}
-                variant="outlined"
-              />
-            ) : null}
-            <TextField
-              defaultValue={sodium}
-              id="sodium"
-              label="Sodio (mg)"
-              margin="normal"
-              onChange={(e) => setSodium(e.target.value)}
-              required={true}
-              type="number"
-              value={sodium}
-              variant="outlined"
-            />
-          </Box>
+          ) : null}
+          <TextField
+            defaultValue={sodium}
+            id="sodium"
+            label="Sodio (mg)"
+            margin="normal"
+            onChange={(e) => setSodium(e.target.value)}
+            required={true}
+            type="number"
+            value={sodium}
+            variant="outlined"
+          />
         </Grid>
         <Grid item xs={12}>
           <Box>
@@ -162,6 +164,7 @@ const App = () => {
               margin="normal"
               onChange={(e) => setFruitAndVegetables(e.target.value)}
               required={true}
+              sx={{ pr: 2 }}
               type="number"
               value={fruitAndVegetables}
               variant="outlined"
@@ -173,6 +176,7 @@ const App = () => {
               margin="normal"
               onChange={(e) => setFibre(e.target.value)}
               required={true}
+              sx={{ pr: 2 }}
               type="number"
               value={fibre}
               variant="outlined"
@@ -184,6 +188,7 @@ const App = () => {
               margin="normal"
               onChange={(e) => setProtein(e.target.value)}
               required={true}
+              sx={{ pr: 2 }}
               type="number"
               value={protein}
               variant="outlined"
