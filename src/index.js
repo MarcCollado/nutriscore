@@ -20,10 +20,10 @@ ReactDOM.render(
         border: '1px solid #00000025',
         borderRadius: 2,
         mt: 2,
-        ml: 'auto',
-        mb: 2,
         mr: 'auto',
-        p: 4,
+        mb: 2,
+        ml: 'auto',
+        p: 2,
       }}
     >
       <App />
