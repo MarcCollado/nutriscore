@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 
 import Form from './Form';
+import NutriScore from './NutriScore';
 
 const App = () => {
+  // Form data
+  const [formData, setFormData] = useState(null);
   // API response
   const [apiResult, setApiResult] = useState(null);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Form setApiResult={setApiResult}></Form>
+      <Form setApiResult={setApiResult} setFormData={setFormData}></Form>
+      {apiResult ? <NutriScore apiResult={apiResult} /> : null}
       {apiResult ? (
         <Box>
           <h2>Resultado</h2>

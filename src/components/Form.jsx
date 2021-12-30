@@ -13,37 +13,40 @@ import {
   Typography,
 } from '@mui/material';
 
-const Form = ({ setApiResult }) => {
+const Form = ({ setFormData, setApiResult }) => {
   // URLs
   const baseApiUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
   // Categories
   const [category, setCategory] = useState('others');
   // Points A
-  const [energy, setEnergy] = useState(356.0);
-  const [sugars, setSugars] = useState(3.0);
+  const [energy, setEnergy] = useState(0.0);
+  const [sugars, setSugars] = useState(0.0);
   const [saturatedFats, setSaturatedFats] = useState(0.0);
   const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = useState(0.0);
-  const [sodium, setSodium] = useState(920.0);
+  const [sodium, setSodium] = useState(0.0);
   // Points C
   const [fruitAndVegetables, setFruitAndVegetables] = useState(0.0);
   const [fibre, setFibre] = useState(0.0);
-  const [protein, setProtein] = useState(16.0);
+  const [protein, setProtein] = useState(0.0);
   const [isWater, setIsWater] = useState(false);
+
+  const formData = {
+    category: category,
+    energy: energy,
+    fibre: fibre,
+    fruit_and_vegetables: fruitAndVegetables,
+    is_water: isWater,
+    protein: protein,
+    sodium: sodium,
+    saturated_fats: saturatedFats,
+    saturated_fats_and_lipids: saturatedFatsAndLipids,
+    sugars: sugars,
+  };
 
   // Submit button
   const onSubmit = async () => {
-    const formData = {
-      category: category,
-      energy: energy,
-      fibre: fibre,
-      fruit_and_vegetables: fruitAndVegetables,
-      is_water: isWater,
-      protein: protein,
-      sodium: sodium,
-      saturated_fats: saturatedFats,
-      saturated_fats_and_lipids: saturatedFatsAndLipids,
-      sugars: sugars,
-    };
+    // Set form data on App.js before submit
+    setFormData(formData);
 
     fetch(`${baseApiUrl}calculate?q=${JSON.stringify(formData)}`)
       .then((res) => res.json())
@@ -52,21 +55,24 @@ const Form = ({ setApiResult }) => {
 
   // Reset button
   const onReset = async () => {
-    setEnergy(0);
-    setFibre(0);
-    setFruitAndVegetables(0);
+    setEnergy(0.0);
+    setFibre(0.0);
+    setFruitAndVegetables(0.0);
     setIsWater(false);
-    setProtein(0);
-    setSodium(0);
-    setSaturatedFats(0);
-    setSaturatedFatsAndLipids(0);
-    setSugars(0);
+    setProtein(0.0);
+    setSodium(0.0);
+    setSaturatedFats(0.0);
+    setSaturatedFatsAndLipids(0.0);
+    setSugars(0.0);
+
+    // Reset data on App.js component
+    setFormData(formData);
     setApiResult(null);
   };
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sm={9} md={6} lg={4} xl={3}>
+      <Grid item xs={12} sm={9} md={6} lg={4} sx={{ pr: 2 }} xl={3}>
         <Typography sx={{ maxWidth: 'md', mb: 1.5 }} variant="h5">
           Categoría
         </Typography>
@@ -145,6 +151,7 @@ const Form = ({ setApiResult }) => {
           margin="normal"
           onChange={(e) => setSodium(e.target.value)}
           required={true}
+          sx={{ pr: 2 }}
           type="number"
           value={sodium}
           variant="outlined"

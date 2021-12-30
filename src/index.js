@@ -10,7 +10,7 @@ import '@fontsource/roboto/700.css';
 // Global container
 import Container from '@mui/material/Container';
 
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
