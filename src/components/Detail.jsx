@@ -10,9 +10,13 @@ import {
 } from '@mui/material';
 
 const Detail = ({ apiResult }) => {
-  function createData(energy, points, saturatedFats, sodium, sugars) {
-    return { energy, points, saturatedFats, sodium, sugars };
-  }
+  const createData = (energy, points, saturatedFats, sodium, sugars) => ({
+    energy,
+    points,
+    saturatedFats,
+    sodium,
+    sugars,
+  });
 
   const rows = [
     createData('≤ 335', 0, '≤ 1', '≤ 90', '≤ 4,5'),
@@ -31,22 +35,20 @@ const Detail = ({ apiResult }) => {
   return (
     apiResult && (
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 413.72 }} aria-label="simple table">
+        <Table sx={{ minWidth: 400 }} aria-label="Detail table">
           <TableHead>
             <TableRow>
               <TableCell align="right">Puntos</TableCell>
-              <TableCell align="right">Energía (Kj)</TableCell>
+              <TableCell align="right">Energía (KJ)</TableCell>
               <TableCell align="right">Azúcares (g)</TableCell>
               <TableCell align="right">Grasas saturadas (g)</TableCell>
               <TableCell align="right">Sodio (mg)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* Populate table data */}
             {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
+              <TableRow key={row.points}>
                 <TableCell align="right" component="th" scope="row">
                   {row.points}
                 </TableCell>
@@ -56,6 +58,14 @@ const Detail = ({ apiResult }) => {
                 <TableCell align="right">{row.sodium}</TableCell>
               </TableRow>
             ))}
+            {/* Category score */}
+            <TableRow key="11" sx={{ border: 2 }}>
+              <TableCell align="right" component="th" scope="row"></TableCell>
+              <TableCell align="right">a = {apiResult.points_a.a}</TableCell>
+              <TableCell align="right">b = {apiResult.points_a.b}</TableCell>
+              <TableCell align="right">c = {apiResult.points_a.c}</TableCell>
+              <TableCell align="right">d = {apiResult.points_a.d}</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
