@@ -19,10 +19,8 @@ ReactDOM.render(
       sx={{
         border: '1px solid #00000025',
         borderRadius: 2,
-        mt: 2,
-        mr: 'auto',
-        mb: 2,
-        ml: 'auto',
+        mx: 'auto',
+        my: 2,
         p: 2,
       }}
     >
