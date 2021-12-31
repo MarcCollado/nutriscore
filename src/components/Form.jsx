@@ -13,9 +13,10 @@ import {
   Typography,
 } from '@mui/material';
 
+// Base API URL
+const baseApiUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
+
 const Form = ({ setFormData, setApiResult }) => {
-  // URLs
-  const baseApiUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
   // Categories
   const [category, setCategory] = useState('others');
   // Points A
@@ -47,7 +48,7 @@ const Form = ({ setFormData, setApiResult }) => {
   const onSubmit = async () => {
     // Set form data on App.js before submit
     setFormData(formData);
-
+    // Fetch Calculate API
     fetch(`${baseApiUrl}calculate?q=${JSON.stringify(formData)}`)
       .then((res) => res.json())
       .then((res) => setApiResult(res));
@@ -64,7 +65,6 @@ const Form = ({ setFormData, setApiResult }) => {
     setSaturatedFats(0.0);
     setSaturatedFatsAndLipids(0.0);
     setSugars(0.0);
-
     // Reset data on App.js component
     setFormData(formData);
     setApiResult(null);
@@ -73,7 +73,7 @@ const Form = ({ setFormData, setApiResult }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={9} md={6} lg={4} sx={{ pr: 2 }} xl={3}>
-        <Typography sx={{ maxWidth: 'md', mb: 1.5 }} variant="h5">
+        <Typography sx={{ my: 1.5 }} variant="h5">
           Categoría
         </Typography>
         <Select
