@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
 
+import Detail from './Detail';
 import Form from './Form';
 import NutriScore from './NutriScore';
 
@@ -14,7 +15,8 @@ const App = () => {
     <Box sx={{ flexGrow: 1 }}>
       <Form setApiResult={setApiResult} setFormData={setFormData}></Form>
       {apiResult ? <NutriScore apiResult={apiResult} /> : null}
-      {apiResult ? (
+      {apiResult ? <Detail apiResult={apiResult} /> : null}
+      {/* {apiResult ? (
         <Box>
           <h2>Resultado</h2>
           <li>Final score: {apiResult?.final_score}</li>
@@ -33,7 +35,7 @@ const App = () => {
             <li>C: {apiResult?.points_c.c}</li>
           </ul>
         </Box>
-      ) : null}
+      ) : null} */}
     </Box>
   );
 };

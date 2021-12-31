@@ -1,22 +1,21 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 const NutriScore = ({ apiResult }) => {
-  const letter = apiResult?.nutri_score.toLowerCase();
-
   return (
     apiResult && (
-      <Box
-        component="img"
-        sx={{
-          height: 233,
-          width: 350,
-          maxHeight: { xs: 233, md: 167 },
-          maxWidth: { xs: 350, md: 250 },
-        }}
-        alt="Nutri-Score"
-        src={require(`../assets/img/nutri_score_${letter}.png`)}
-      />
+      <Grid container justifyContent="center">
+        <Box
+          component="img"
+          /*sx={{
+            height: 108,
+            width: 200,
+          }}*/
+          alt={`Nutri-Score ${apiResult?.nutri_score}`}
+          src={require(`../assets/img/nutri_score_${apiResult?.nutri_score.toLowerCase()}.png`)}
+          srcset = {`${require(`../assets/img/nutri_score_${apiResult?.nutri_score.toLowerCase()}_2x.png`)} 2x`}
+        />
+      </Grid>
     )
   );
 };
