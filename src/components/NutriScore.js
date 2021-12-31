@@ -2,8 +2,6 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 
 const NutriScore = ({ apiResult }) => {
-  const letter = apiResult?.nutri_score.toLowerCase();
-
   return (
     apiResult && (
       <>
