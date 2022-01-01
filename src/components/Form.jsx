@@ -85,7 +85,7 @@ const Form = ({ setFormData, setApiResult }) => {
           value={category}
         >
           <MenuItem value="cheese">Queso</MenuItem>
-          <MenuItem value="drinks">Bebidas</MenuItem>
+          <MenuItem value="beverages">Bebidas</MenuItem>
           <MenuItem value="fats">Grasas, aceites, o mantequillas</MenuItem>
           <MenuItem value="others">Otros</MenuItem>
         </Select>
@@ -130,7 +130,7 @@ const Form = ({ setFormData, setApiResult }) => {
             variant="outlined"
           />
         ) : null}
-        {category === 'fats' || category === 'drinks' ? (
+        {category === 'fats' || category === 'beverages' ? (
           <TextField
             defaultValue={saturatedFatsAndLipids}
             id="saturatedFatsAndLipids"
@@ -196,7 +196,7 @@ const Form = ({ setFormData, setApiResult }) => {
             value={protein}
             variant="outlined"
           />
-          {category === 'drinks' ? (
+          {category === 'beverages' ? (
             <FormControlLabel
               control={
                 <Switch

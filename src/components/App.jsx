@@ -19,7 +19,7 @@ const App = () => {
         setFormData={setFormData}
       ></Form>
       {apiResult ? <NutriScore apiResult={apiResult} /> : null}
-      {apiResult ? <Detail apiResult={apiResult} /> : null}
+      {apiResult ? <Detail apiResult={apiResult} formData={formData}/> : null}
       {/* {apiResult ? (
         <Box>
           <h2>Resultado</h2>
