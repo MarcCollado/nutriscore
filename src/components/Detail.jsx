@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  FormControlUnstyledContext,
   Paper,
   Table,
   TableBody,
@@ -9,7 +8,6 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { format } from 'prettier';
 
 const Detail = ({ apiResult, formData }) => {
   function createPointsATableRow(beveragesEnergy, beveragesSugars, key, notBeveragesEnergy, notBeveragesSugars, sodium) {
@@ -17,35 +15,35 @@ const Detail = ({ apiResult, formData }) => {
     return (
       <TableRow key={key}>
         <TableCell align="right" component="th" scope="row" sx={{ backgroundColor: colors[key - 1] }}>{key}</TableCell>
-        {formData.category !== 'beverages' && apiResult.points_a.a == key &&
+        {formData.category !== 'beverages' && apiResult.points_a.a === key &&
             <TableCell align="right" sx={{ backgroundColor: 'LightGrey' }}>{notBeveragesEnergy}</TableCell>
         }
-        {formData.category !== 'beverages' && apiResult.points_a.a != key &&
+        {formData.category !== 'beverages' && apiResult.points_a.a !== key &&
             <TableCell align="right">{notBeveragesEnergy}</TableCell>
         }
-        {formData.category === 'beverages' && apiResult.points_a.a == key &&
+        {formData.category === 'beverages' && apiResult.points_a.a === key &&
             <TableCell align="right" sx={{ backgroundColor: 'LightGrey' }}>{beveragesEnergy}</TableCell>
         }
-        {formData.category === 'beverages' && apiResult.points_a.a != key &&
+        {formData.category === 'beverages' && apiResult.points_a.a !== key &&
             <TableCell align="right">{beveragesEnergy}</TableCell>
         }
-        {formData.category !== 'beverages' && apiResult.points_a.b == key &&
+        {formData.category !== 'beverages' && apiResult.points_a.b === key &&
             <TableCell align="right" sx={{ backgroundColor: 'LightGrey' }}>{notBeveragesSugars}</TableCell>
         }
-        {formData.category !== 'beverages' && apiResult.points_a.b != key &&
+        {formData.category !== 'beverages' && apiResult.points_a.b !== key &&
             <TableCell align="right">{notBeveragesSugars}</TableCell>
         }
-        {formData.category === 'beverages' && apiResult.points_a.b == key &&
+        {formData.category === 'beverages' && apiResult.points_a.b === key &&
             <TableCell align="right" sx={{ backgroundColor: 'LightGrey' }}>{beveragesSugars}</TableCell>
         }
-        {formData.category === 'beverages' && apiResult.points_a.b != key &&
+        {formData.category === 'beverages' && apiResult.points_a.b !== key &&
             <TableCell align="right">{beveragesSugars}</TableCell>
         }
-        {apiResult.points_a.c == key ?
+        {apiResult.points_a.c === key ?
             <TableCell align="right" sx={{ backgroundColor: 'LightGrey' }}>{'> ' + key}</TableCell>
             : <TableCell align="right">{'> ' + key}</TableCell>
         }
-        {apiResult.points_a.d == key ?
+        {apiResult.points_a.d === key ?
             <TableCell align="right" sx={{ backgroundColor: 'LightGrey' }}>{sodium}</TableCell>
             : <TableCell align="right">{sodium}</TableCell>
         }
