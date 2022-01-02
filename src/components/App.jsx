@@ -13,13 +13,9 @@ const App = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Form
-        formData={formData}
-        setApiResult={setApiResult}
-        setFormData={setFormData}
-      ></Form>
+      <Form setApiResult={setApiResult} setFormData={setFormData}></Form>
       {apiResult ? <NutriScore apiResult={apiResult} /> : null}
-      {apiResult ? <Detail apiResult={apiResult} formData={formData}/> : null}
+      {apiResult ? <Detail apiResult={apiResult} formData={formData} /> : null}
       {/* {apiResult ? (
         <Box>
           <h2>Resultado</h2>
