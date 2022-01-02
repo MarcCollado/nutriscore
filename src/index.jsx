@@ -13,8 +13,6 @@ import Container from '@mui/material/Container';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
-const hello = 'hello';
-
 ReactDOM.render(
   <React.StrictMode>
     <Container
