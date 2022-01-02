@@ -31,21 +31,21 @@ const Form = ({ setFormData, setApiResult }) => {
   const [protein, setProtein] = useState(0.0);
   const [isWater, setIsWater] = useState(false);
 
-  const formData = {
-    category: category,
-    energy: energy,
-    fibre: fibre,
-    fruit_and_vegetables: fruitAndVegetables,
-    is_water: isWater,
-    protein: protein,
-    sodium: sodium,
-    saturated_fats: saturatedFats,
-    saturated_fats_and_lipids: saturatedFatsAndLipids,
-    sugars: sugars,
-  };
-
   // Submit button
   const onSubmit = async () => {
+    // Create an object with form data inputs
+    const formData = {
+      category: category,
+      energy: energy,
+      fibre: fibre,
+      fruit_and_vegetables: fruitAndVegetables,
+      is_water: isWater,
+      protein: protein,
+      sodium: sodium,
+      saturated_fats: saturatedFats,
+      saturated_fats_and_lipids: saturatedFatsAndLipids,
+      sugars: sugars,
+    };
     // Set form data on App.js before submit
     setFormData(formData);
     // Fetch Calculate API
@@ -66,7 +66,7 @@ const Form = ({ setFormData, setApiResult }) => {
     setSaturatedFatsAndLipids(0.0);
     setSugars(0.0);
     // Reset data on App.js component
-    setFormData(formData);
+    setFormData(null);
     setApiResult(null);
   };
 
