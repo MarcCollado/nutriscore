@@ -43,45 +43,14 @@ const Detail = ({ apiResult, formData }) => {
         </TableCell>
 
         {/* Energy */}
-        {formData.category !== 'beverages' ? (
-          <TableCell
-            align="right"
-            sx={{
-              backgroundColor:
-                apiResult.points_a.a === key ? 'LightGrey' : '#ffffff',
-            }}
-          >
-            {notBeveragesEnergy}
-          </TableCell>
-        ) : (
-          <TableCell
-            align="right"
-            sx={{
-              backgroundColor:
-                apiResult.points_a.a === key ? 'LightGrey' : '##ffffff',
-            }}
-          >
-            {beveragesEnergy}
-          </TableCell>
-        )}
+        {formData.category !== 'beverages'
+          ? createTableCell(key, notBeveragesEnergy)
+          : createTableCell(key, beveragesEnergy)}
 
-        {/* @danielgbaena este es pa ti ;) */}
-        {formData.category !== 'beverages' && apiResult.points_a.b === key && (
-          <TableCell align="right" sx={{ backgroundColor: 'LightGrey' }}>
-            {notBeveragesSugars}
-          </TableCell>
-        )}
-        {formData.category !== 'beverages' && apiResult.points_a.b !== key && (
-          <TableCell align="right">{notBeveragesSugars}</TableCell>
-        )}
-        {formData.category === 'beverages' && apiResult.points_a.b === key && (
-          <TableCell align="right" sx={{ backgroundColor: 'LightGrey' }}>
-            {beveragesSugars}
-          </TableCell>
-        )}
-        {formData.category === 'beverages' && apiResult.points_a.b !== key && (
-          <TableCell align="right">{beveragesSugars}</TableCell>
-        )}
+        {/* Sugars */}
+        {formData.category !== 'beverages'
+          ? createTableCell(key, notBeveragesSugars)
+          : createTableCell(key, beveragesSugars)}
         {apiResult.points_a.c === key ? (
           <TableCell align="right" sx={{ backgroundColor: 'LightGrey' }}>
             {'> ' + key}
@@ -97,6 +66,20 @@ const Detail = ({ apiResult, formData }) => {
           <TableCell align="right">{sodium}</TableCell>
         )}
       </TableRow>
+    );
+  };
+
+  const createTableCell = (key, value) => {
+    return (
+      <TableCell
+        align="right"
+        sx={{
+          backgroundColor:
+            apiResult.points_a.a === key ? 'LightGrey' : '#ffffff',
+        }}
+      >
+        {value}
+      </TableCell>
     );
   };
 
