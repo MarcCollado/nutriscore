@@ -13,7 +13,7 @@ const Detail = ({ apiResult, formData }) => {
   const createPointsATableRow = (
     beveragesEnergy,
     beveragesSugars,
-    fatsSaturatedFatsAndLipids,
+    saturatedFatsAndLipids,
     key,
     notBeveragesEnergy,
     notBeveragesSugars,
@@ -55,9 +55,63 @@ const Detail = ({ apiResult, formData }) => {
           ? key === 0
             ? createTableCell(key, '≤ ' + (key + 1))
             : createTableCell(key, '> ' + key)
-          : createTableCell(key, fatsSaturatedFatsAndLipids)}
+          : createTableCell(key, saturatedFatsAndLipids)}
         {/* Sodium */}
         {createTableCell(key, sodium)}
+      </TableRow>
+    );
+  };
+
+  const createPointsCTableRow = (
+    beveragesFruitsAndVegetables,
+    fibre,
+    notBeveragesFruitsAndVegetables,
+    key,
+    proteins
+  ) => {
+    const beveragesColors = [
+      '#ffffff',
+      '#e8f2ec',
+      '#d1e5da',
+      '#bad8c7',
+      '#a3cbb5',
+      '#8cbfa2',
+      '#75b290',
+      '#5ea57d',
+      '#47986b',
+      '#308b58',
+      '#197f46',
+    ];
+    const notBeveragesColors = [
+      '#ffffff',
+      '#d1e5da',
+      '#a3cbb5',
+      '#75b290',
+      '#47986b',
+      '#197f46',
+    ];
+    return (
+      <TableRow key={key}>
+        <TableCell
+          align="right"
+          component="th"
+          scope="row"
+          sx={
+            formData.category !== 'beverages'
+              ? key <= 5 && { backgroundColor: notBeveragesColors[key] }
+              : { backgroundColor: beveragesColors[key] }
+          }
+        >
+          {formData.category !== 'beverages' && key > 5 ? '-' : key}
+        </TableCell>
+        {/* Fruits and vegetables */}
+        {formData.category === 'beverages'
+          ? createTableCell(key, beveragesFruitsAndVegetables)
+          : createTableCell(key, notBeveragesFruitsAndVegetables)}
+        {/* Fibre */}
+        {createTableCell(key, fibre)}
+        {/* Proteins */}
+        {createTableCell(key, proteins)}
       </TableRow>
     );
   };
@@ -217,21 +271,23 @@ const Detail = ({ apiResult, formData }) => {
             </TableHead>
             {/* Table body */}
             <TableBody>
-              {createPointsATableRow(
-                '≤ 0,0',
-                '≤ 0,0',
-                0,
-                '≤ 335',
-                '≤ 4,5',
-                '≤ 90'
-              )}
+              {createPointsCTableRow('≤ 40', '≤ 0,7', '≤ 40', 0, '≤ 1,6')}
+              {createPointsCTableRow('-', '> 0,7', '> 40', 1, '> 1,6')}
+              {createPointsCTableRow('> 40', '> 1,4', '> 60', 2, '> 3,2')}
+              {createPointsCTableRow('-', '> 2,1', '-', 3, '> 4,8')}
+              {createPointsCTableRow('> 60', '> 2,8', '-', 4, '> 6,4')}
+              {createPointsCTableRow('-', '> 3,5', '> 80', 5, '> 8,0')}
+              {createPointsCTableRow('-', '-', '-', 6, '-')}
+              {createPointsCTableRow('-', '-', '-', 7, '-')}
+              {createPointsCTableRow('-', '-', '-', 8, '-')}
+              {createPointsCTableRow('-', '-', '-', 9, '-')}
+              {createPointsCTableRow('> 80', '-', '-', 10, '-')}
               {/* Category score */}
               <TableRow key="11" sx={{ border: 2 }}>
                 <TableCell align="right" component="th" scope="row"></TableCell>
                 <TableCell align="right">a = {apiResult.points_a.a}</TableCell>
                 <TableCell align="right">b = {apiResult.points_a.b}</TableCell>
                 <TableCell align="right">c = {apiResult.points_a.c}</TableCell>
-                <TableCell align="right">d = {apiResult.points_a.d}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
