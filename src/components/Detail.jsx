@@ -44,20 +44,20 @@ const Detail = ({ apiResult, formData }) => {
         </TableCell>
         {/* Energy */}
         {formData.category !== 'beverages'
-          ? createTableCell(key, notBeveragesEnergy)
-          : createTableCell(key, beveragesEnergy)}
+          ? createTableCell(apiResult.points_a.a, key, notBeveragesEnergy)
+          : createTableCell(apiResult.points_a.a, key, beveragesEnergy)}
         {/* Sugars */}
         {formData.category !== 'beverages'
-          ? createTableCell(key, notBeveragesSugars)
-          : createTableCell(key, beveragesSugars)}
+          ? createTableCell(apiResult.points_a.b, key, notBeveragesSugars)
+          : createTableCell(apiResult.points_a.b, key, beveragesSugars)}
         {/* Saturated fats/Saturated fats and lipids */}
         {formData.category !== 'fats'
           ? key === 0
-            ? createTableCell(key, '≤ ' + (key + 1))
-            : createTableCell(key, '> ' + key)
-          : createTableCell(key, saturatedFatsAndLipids)}
+            ? createTableCell(apiResult.points_a.c, key, '≤ ' + (key + 1))
+            : createTableCell(apiResult.points_a.c, key, '> ' + key)
+          : createTableCell(apiResult.points_a.c, key, saturatedFatsAndLipids)}
         {/* Sodium */}
-        {createTableCell(key, sodium)}
+        {createTableCell(apiResult.points_a.d, key, sodium)}
       </TableRow>
     );
   };
@@ -106,23 +106,30 @@ const Detail = ({ apiResult, formData }) => {
         </TableCell>
         {/* Fruits and vegetables */}
         {formData.category === 'beverages'
-          ? createTableCell(key, beveragesFruitsAndVegetables)
-          : createTableCell(key, notBeveragesFruitsAndVegetables)}
+          ? createTableCell(
+              apiResult.points_c.a,
+              key,
+              beveragesFruitsAndVegetables
+            )
+          : createTableCell(
+              apiResult.points_c.a,
+              key,
+              notBeveragesFruitsAndVegetables
+            )}
         {/* Fibre */}
-        {createTableCell(key, fibre)}
+        {createTableCell(apiResult.points_c.b, key, fibre)}
         {/* Proteins */}
-        {createTableCell(key, proteins)}
+        {createTableCell(apiResult.points_c.c, key, proteins)}
       </TableRow>
     );
   };
 
-  const createTableCell = (key, text) => {
+  const createTableCell = (comparison, key, text) => {
     return (
       <TableCell
         align="right"
         sx={{
-          backgroundColor:
-            apiResult.points_a.a === key ? 'LightGrey' : '#ffffff',
+          backgroundColor: comparison === key ? 'LightGrey' : '#ffffff',
         }}
       >
         {text}
@@ -300,6 +307,114 @@ const Detail = ({ apiResult, formData }) => {
         </TableContainer>
         Puntos C = a + b + c ={' '}
         {apiResult.points_a.a + apiResult.points_a.b + apiResult.points_a.c}
+        <br />
+        Puntuación final:
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 400 }} aria-label="Detail table">
+            {/* Table headers */}
+            <TableHead></TableHead>
+            {/* Table body */}
+            <TableBody>
+              <TableRow key={0}>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {'Puntos A ≥ 11'}
+                </TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+              <TableRow key={1}>
+                <TableCell>
+                  {'Puntos de frutas y vegetales '}
+                  {formData.category !== 'beverages' ? '=' : '≥'} 5:
+                  <br />
+                  {'Puntuación final = Puntos A - Puntos C'}
+                  {apiResult.points_a.a +
+                    apiResult.points_a.b +
+                    apiResult.points_a.c +
+                    apiResult.points_a.d >=
+                    11 &&
+                    apiResult.points_c.a >= 5 &&
+                    ' = ' + apiResult.final_score}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    backgroundColor:
+                      apiResult.points_a.a +
+                        apiResult.points_a.b +
+                        apiResult.points_a.c +
+                        apiResult.points_a.d >=
+                        11 && apiResult.points_c.a >= 5
+                        ? 'LightGrey'
+                        : '#ffffff',
+                  }}
+                ></TableCell>
+              </TableRow>
+              <TableRow key={2}>
+                <TableCell>
+                  {'Puntos de frutas y vegetales < 5:'}
+                  <br />
+                  {
+                    'Puntuación final = Puntos A - (puntos de fibra + puntos de frutas y vegetales)'
+                  }
+                  {apiResult.points_a.a +
+                    apiResult.points_a.b +
+                    apiResult.points_a.c +
+                    apiResult.points_a.d >=
+                    11 &&
+                    apiResult.points_c.a < 5 &&
+                    ' = ' + apiResult.final_score}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    backgroundColor:
+                      apiResult.points_a.a +
+                        apiResult.points_a.b +
+                        apiResult.points_a.c +
+                        apiResult.points_a.d >=
+                        11 && apiResult.points_c.a < 5
+                        ? 'LightGrey'
+                        : '#ffffff',
+                  }}
+                ></TableCell>
+              </TableRow>
+              <TableRow key={3}>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {'Puntos A < 11'}
+                </TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+              <TableRow key={4}>
+                <TableCell>
+                  {'Puntuación final = Puntos A - Puntos C'}
+                  {apiResult.points_a.a +
+                    apiResult.points_a.b +
+                    apiResult.points_a.c +
+                    apiResult.points_a.d <
+                    11 && ' = ' + apiResult.final_score}
+                </TableCell>
+                <TableCell
+                  sx={{
+                    backgroundColor:
+                      apiResult.points_a.a +
+                        apiResult.points_a.b +
+                        apiResult.points_a.c +
+                        apiResult.points_a.d <
+                      11
+                        ? 'LightGrey'
+                        : '#ffffff',
+                  }}
+                ></TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     )
   );
