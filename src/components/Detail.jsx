@@ -133,6 +133,7 @@ const Detail = ({ apiResult, formData }) => {
   return (
     apiResult && (
       <div>
+        Puntos A y C:
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 400 }} aria-label="Detail table">
             {/* Table headers */}
@@ -249,15 +250,20 @@ const Detail = ({ apiResult, formData }) => {
 
               {/* Category score */}
               <TableRow key="11" sx={{ border: 2 }}>
-                <TableCell align="right" component="th" scope="row"></TableCell>
-                <TableCell align="right">a = {apiResult.points_a.a}</TableCell>
-                <TableCell align="right">b = {apiResult.points_a.b}</TableCell>
-                <TableCell align="right">c = {apiResult.points_a.c}</TableCell>
-                <TableCell align="right">d = {apiResult.points_a.d}</TableCell>
+                <TableCell component="th" scope="row"></TableCell>
+                <TableCell>a = {apiResult.points_a.a}</TableCell>
+                <TableCell>b = {apiResult.points_a.b}</TableCell>
+                <TableCell>c = {apiResult.points_a.c}</TableCell>
+                <TableCell>d = {apiResult.points_a.d}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
+        Puntos A = a + b + c + d ={' '}
+        {apiResult.points_a.a +
+          apiResult.points_a.b +
+          apiResult.points_a.c +
+          apiResult.points_a.d}
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 400 }} aria-label="Detail table">
             {/* Table headers */}
@@ -284,14 +290,16 @@ const Detail = ({ apiResult, formData }) => {
               {createPointsCTableRow('> 80', '-', '-', 10, '-')}
               {/* Category score */}
               <TableRow key="11" sx={{ border: 2 }}>
-                <TableCell align="right" component="th" scope="row"></TableCell>
-                <TableCell align="right">a = {apiResult.points_a.a}</TableCell>
-                <TableCell align="right">b = {apiResult.points_a.b}</TableCell>
-                <TableCell align="right">c = {apiResult.points_a.c}</TableCell>
+                <TableCell component="th" scope="row"></TableCell>
+                <TableCell>a = {apiResult.points_a.a}</TableCell>
+                <TableCell>b = {apiResult.points_a.b}</TableCell>
+                <TableCell>c = {apiResult.points_a.c}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
+        Puntos C = a + b + c ={' '}
+        {apiResult.points_a.a + apiResult.points_a.b + apiResult.points_a.c}
       </div>
     )
   );
