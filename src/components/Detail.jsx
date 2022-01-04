@@ -323,10 +323,20 @@ const Detail = ({ apiResult, formData }) => {
                 >
                   {'Puntos A ≥ 11'}
                 </TableCell>
-                <TableCell></TableCell>
               </TableRow>
               <TableRow key={1}>
-                <TableCell>
+                <TableCell
+                  sx={{
+                    backgroundColor:
+                      apiResult.points_a.a +
+                        apiResult.points_a.b +
+                        apiResult.points_a.c +
+                        apiResult.points_a.d >=
+                        11 && apiResult.points_c.a >= 5
+                        ? 'LightGrey'
+                        : '#ffffff',
+                  }}
+                >
                   {'Puntos de frutas y vegetales '}
                   {formData.category !== 'beverages' ? '=' : '≥'} 5:
                   <br />
@@ -339,6 +349,8 @@ const Detail = ({ apiResult, formData }) => {
                     apiResult.points_c.a >= 5 &&
                     ' = ' + apiResult.final_score}
                 </TableCell>
+              </TableRow>
+              <TableRow key={2}>
                 <TableCell
                   sx={{
                     backgroundColor:
@@ -346,14 +358,11 @@ const Detail = ({ apiResult, formData }) => {
                         apiResult.points_a.b +
                         apiResult.points_a.c +
                         apiResult.points_a.d >=
-                        11 && apiResult.points_c.a >= 5
+                        11 && apiResult.points_c.a < 5
                         ? 'LightGrey'
                         : '#ffffff',
                   }}
-                ></TableCell>
-              </TableRow>
-              <TableRow key={2}>
-                <TableCell>
+                >
                   {'Puntos de frutas y vegetales < 5:'}
                   <br />
                   {
@@ -367,18 +376,6 @@ const Detail = ({ apiResult, formData }) => {
                     apiResult.points_c.a < 5 &&
                     ' = ' + apiResult.final_score}
                 </TableCell>
-                <TableCell
-                  sx={{
-                    backgroundColor:
-                      apiResult.points_a.a +
-                        apiResult.points_a.b +
-                        apiResult.points_a.c +
-                        apiResult.points_a.d >=
-                        11 && apiResult.points_c.a < 5
-                        ? 'LightGrey'
-                        : '#ffffff',
-                  }}
-                ></TableCell>
               </TableRow>
               <TableRow key={3}>
                 <TableCell
@@ -388,17 +385,8 @@ const Detail = ({ apiResult, formData }) => {
                 >
                   {'Puntos A < 11'}
                 </TableCell>
-                <TableCell></TableCell>
               </TableRow>
               <TableRow key={4}>
-                <TableCell>
-                  {'Puntuación final = Puntos A - Puntos C'}
-                  {apiResult.points_a.a +
-                    apiResult.points_a.b +
-                    apiResult.points_a.c +
-                    apiResult.points_a.d <
-                    11 && ' = ' + apiResult.final_score}
-                </TableCell>
                 <TableCell
                   sx={{
                     backgroundColor:
@@ -410,7 +398,130 @@ const Detail = ({ apiResult, formData }) => {
                         ? 'LightGrey'
                         : '#ffffff',
                   }}
-                ></TableCell>
+                >
+                  {'Puntuación final = Puntos A - Puntos C'}
+                  {apiResult.points_a.a +
+                    apiResult.points_a.b +
+                    apiResult.points_a.c +
+                    apiResult.points_a.d <
+                    11 && ' = ' + apiResult.final_score}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        Nutri-Score:
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 400 }} aria-label="Detail table">
+            {/* Table headers */}
+            <TableHead>
+              <TableRow>
+                <TableCell>Puntuación final</TableCell>
+                <TableCell>Nutri-Score</TableCell>
+              </TableRow>
+            </TableHead>
+            {/* Table body */}
+            <TableBody>
+              <TableRow key={0}>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {formData.category !== 'beverages' ? 'De -15 a -1' : 'Agua'}
+                </TableCell>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  sx={{
+                    backgroundColor:
+                      apiResult.nutri_score === 'A' ? 'LightGrey' : '#ffffff',
+                  }}
+                >
+                  A
+                </TableCell>
+              </TableRow>
+              <TableRow key={1}>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {formData.category !== 'beverages'
+                    ? 'De 0 a 2'
+                    : 'De -15 a 1'}
+                </TableCell>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  sx={{
+                    backgroundColor:
+                      apiResult.nutri_score === 'B' ? 'LightGrey' : '#ffffff',
+                  }}
+                >
+                  B
+                </TableCell>
+              </TableRow>
+              <TableRow key={2}>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {formData.category !== 'beverages' ? 'De 3 a 10' : 'De 2 a 5'}
+                </TableCell>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  sx={{
+                    backgroundColor:
+                      apiResult.nutri_score === 'C' ? 'LightGrey' : '#ffffff',
+                  }}
+                >
+                  C
+                </TableCell>
+              </TableRow>
+              <TableRow key={3}>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {formData.category !== 'beverages'
+                    ? 'De 11 a 18'
+                    : 'De 6 a 9'}
+                </TableCell>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  sx={{
+                    backgroundColor:
+                      apiResult.nutri_score === 'D' ? 'LightGrey' : '#ffffff',
+                  }}
+                >
+                  D
+                </TableCell>
+              </TableRow>
+              <TableRow key={4}>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  {formData.category !== 'beverages'
+                    ? 'De 19 a 40'
+                    : 'De 10 a 45'}
+                </TableCell>
+                <TableCell
+                  component="th"
+                  scope="col"
+                  sx={{
+                    backgroundColor:
+                      apiResult.nutri_score === 'E' ? 'LightGrey' : '#ffffff',
+                  }}
+                >
+                  E
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
