@@ -323,61 +323,61 @@ const Detail = ({ apiResult, formData }) => {
                 >
                   {'Puntos A ≥ 11'}
                 </TableCell>
+                <TableRow>
+                  <TableCell
+                    sx={{
+                      backgroundColor:
+                        apiResult.points_a.a +
+                          apiResult.points_a.b +
+                          apiResult.points_a.c +
+                          apiResult.points_a.d >=
+                          11 && apiResult.points_c.a >= 5
+                          ? 'LightGrey'
+                          : '#ffffff',
+                    }}
+                  >
+                    {'Puntos de frutas y vegetales '}
+                    {formData.category !== 'beverages' ? '=' : '≥'} 5:
+                    <br />
+                    {'Puntuación final = Puntos A - Puntos C'}
+                    {apiResult.points_a.a +
+                      apiResult.points_a.b +
+                      apiResult.points_a.c +
+                      apiResult.points_a.d >=
+                      11 &&
+                      apiResult.points_c.a >= 5 &&
+                      ' = ' + apiResult.final_score}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell
+                    sx={{
+                      backgroundColor:
+                        apiResult.points_a.a +
+                          apiResult.points_a.b +
+                          apiResult.points_a.c +
+                          apiResult.points_a.d >=
+                          11 && apiResult.points_c.a < 5
+                          ? 'LightGrey'
+                          : '#ffffff',
+                    }}
+                  >
+                    {'Puntos de frutas y vegetales < 5:'}
+                    <br />
+                    {
+                      'Puntuación final = Puntos A - (puntos de fibra + puntos de frutas y vegetales)'
+                    }
+                    {apiResult.points_a.a +
+                      apiResult.points_a.b +
+                      apiResult.points_a.c +
+                      apiResult.points_a.d >=
+                      11 &&
+                      apiResult.points_c.a < 5 &&
+                      ' = ' + apiResult.final_score}
+                  </TableCell>
+                </TableRow>
               </TableRow>
               <TableRow key={1}>
-                <TableCell
-                  sx={{
-                    backgroundColor:
-                      apiResult.points_a.a +
-                        apiResult.points_a.b +
-                        apiResult.points_a.c +
-                        apiResult.points_a.d >=
-                        11 && apiResult.points_c.a >= 5
-                        ? 'LightGrey'
-                        : '#ffffff',
-                  }}
-                >
-                  {'Puntos de frutas y vegetales '}
-                  {formData.category !== 'beverages' ? '=' : '≥'} 5:
-                  <br />
-                  {'Puntuación final = Puntos A - Puntos C'}
-                  {apiResult.points_a.a +
-                    apiResult.points_a.b +
-                    apiResult.points_a.c +
-                    apiResult.points_a.d >=
-                    11 &&
-                    apiResult.points_c.a >= 5 &&
-                    ' = ' + apiResult.final_score}
-                </TableCell>
-              </TableRow>
-              <TableRow key={2}>
-                <TableCell
-                  sx={{
-                    backgroundColor:
-                      apiResult.points_a.a +
-                        apiResult.points_a.b +
-                        apiResult.points_a.c +
-                        apiResult.points_a.d >=
-                        11 && apiResult.points_c.a < 5
-                        ? 'LightGrey'
-                        : '#ffffff',
-                  }}
-                >
-                  {'Puntos de frutas y vegetales < 5:'}
-                  <br />
-                  {
-                    'Puntuación final = Puntos A - (puntos de fibra + puntos de frutas y vegetales)'
-                  }
-                  {apiResult.points_a.a +
-                    apiResult.points_a.b +
-                    apiResult.points_a.c +
-                    apiResult.points_a.d >=
-                    11 &&
-                    apiResult.points_c.a < 5 &&
-                    ' = ' + apiResult.final_score}
-                </TableCell>
-              </TableRow>
-              <TableRow key={3}>
                 <TableCell
                   component="th"
                   scope="col"
@@ -385,8 +385,6 @@ const Detail = ({ apiResult, formData }) => {
                 >
                   {'Puntos A < 11'}
                 </TableCell>
-              </TableRow>
-              <TableRow key={4}>
                 <TableCell
                   sx={{
                     backgroundColor:
