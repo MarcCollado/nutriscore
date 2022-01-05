@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import {
   Box,
   Button,
@@ -12,6 +11,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+
+import { NutriCard } from '../utils/containers';
 
 // Base API URL
 const baseApiUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
@@ -71,160 +72,162 @@ const Form = ({ setFormData, setApiResult }) => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} sm={9} md={6} lg={4} sx={{ pr: 2 }} xl={3}>
-        <Typography sx={{ my: 1.5 }} variant="h5">
-          Categoría
-        </Typography>
-        <Select
-          defaultValue={category}
-          fullWidth
-          id="category"
-          label="Categoría"
-          onChange={(e) => setCategory(e.target.value)}
-          value={category}
-        >
-          <MenuItem value="cheese">Queso</MenuItem>
-          <MenuItem value="beverages">Bebidas</MenuItem>
-          <MenuItem value="fats">Grasas, aceites, o mantequillas</MenuItem>
-          <MenuItem value="others">Otros</MenuItem>
-        </Select>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="h5">Puntos A</Typography>
-        <TextField
-          defaultValue={energy}
-          id="energy"
-          label="Energía (KJ)"
-          margin="normal"
-          onChange={(e) => setEnergy(e.target.value)}
-          required={true}
-          sx={{ pr: 2 }}
-          type="number"
-          value={energy}
-          variant="outlined"
-        />
-        <TextField
-          defaultValue={sugars}
-          id="sugars"
-          label="Azúcares (g)"
-          margin="normal"
-          onChange={(e) => setSugars(e.target.value)}
-          required={true}
-          sx={{ pr: 2 }}
-          type="number"
-          value={sugars}
-          variant="outlined"
-        />
-        {category === 'cheese' || category === 'others' ? (
+    <NutriCard>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={9} md={6} lg={4} sx={{ pr: 2 }} xl={3}>
+          <Typography sx={{ mb: 1.5 }} variant="h5">
+            Categoría
+          </Typography>
+          <Select
+            defaultValue={category}
+            fullWidth
+            id="category"
+            label="Categoría"
+            onChange={(e) => setCategory(e.target.value)}
+            value={category}
+          >
+            <MenuItem value="cheese">Queso</MenuItem>
+            <MenuItem value="beverages">Bebidas</MenuItem>
+            <MenuItem value="fats">Grasas, aceites, o mantequillas</MenuItem>
+            <MenuItem value="others">Otros</MenuItem>
+          </Select>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h5">Puntos A</Typography>
           <TextField
-            defaultValue={saturatedFats}
-            id="saturatedFats"
-            label="Grasas saturadas (g)"
+            defaultValue={energy}
+            id="energy"
+            label="Energía (KJ)"
             margin="normal"
-            onChange={(e) => setSaturatedFats(e.target.value)}
-            required={false}
-            sx={{ pr: 2 }}
-            type="number"
-            value={saturatedFats}
-            variant="outlined"
-          />
-        ) : null}
-        {category === 'fats' || category === 'beverages' ? (
-          <TextField
-            defaultValue={saturatedFatsAndLipids}
-            id="saturatedFatsAndLipids"
-            label="Grasas saturadas y lípidos (%)"
-            margin="normal"
-            onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
-            required={false}
-            sx={{ pr: 2 }}
-            type="number"
-            value={saturatedFatsAndLipids}
-            variant="outlined"
-          />
-        ) : null}
-        <TextField
-          defaultValue={sodium}
-          id="sodium"
-          label="Sodio (mg)"
-          margin="normal"
-          onChange={(e) => setSodium(e.target.value)}
-          required={true}
-          sx={{ pr: 2 }}
-          type="number"
-          value={sodium}
-          variant="outlined"
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Box>
-          <Typography variant="h5">Puntos C</Typography>
-          <TextField
-            defaultValue={fruitAndVegetables}
-            id="fruitAndVegetables"
-            label="Frutas y vegetales (%)"
-            margin="normal"
-            onChange={(e) => setFruitAndVegetables(e.target.value)}
+            onChange={(e) => setEnergy(e.target.value)}
             required={true}
             sx={{ pr: 2 }}
             type="number"
-            value={fruitAndVegetables}
+            value={energy}
             variant="outlined"
           />
           <TextField
-            defaultValue={fibre}
-            id="fibre"
-            label="Fibra (g)"
+            defaultValue={sugars}
+            id="sugars"
+            label="Azúcares (g)"
             margin="normal"
-            onChange={(e) => setFibre(e.target.value)}
+            onChange={(e) => setSugars(e.target.value)}
             required={true}
             sx={{ pr: 2 }}
             type="number"
-            value={fibre}
+            value={sugars}
             variant="outlined"
           />
-          <TextField
-            defaultValue={protein}
-            id="protein"
-            label="Proteínas (g)"
-            margin="normal"
-            onChange={(e) => setProtein(e.target.value)}
-            required={true}
-            sx={{ pr: 2 }}
-            type="number"
-            value={protein}
-            variant="outlined"
-          />
-          {category === 'beverages' ? (
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={isWater}
-                  onChange={(e) => setIsWater(e.target.checked)}
-                  name="isWater"
-                />
-              }
-              label="Es agua"
-              labelPlacement="start"
-              value="isWater"
+          {category === 'cheese' || category === 'others' ? (
+            <TextField
+              defaultValue={saturatedFats}
+              id="saturatedFats"
+              label="Grasas saturadas (g)"
+              margin="normal"
+              onChange={(e) => setSaturatedFats(e.target.value)}
+              required={false}
+              sx={{ pr: 2 }}
+              type="number"
+              value={saturatedFats}
+              variant="outlined"
             />
           ) : null}
-        </Box>
+          {category === 'fats' || category === 'beverages' ? (
+            <TextField
+              defaultValue={saturatedFatsAndLipids}
+              id="saturatedFatsAndLipids"
+              label="Grasas saturadas y lípidos (%)"
+              margin="normal"
+              onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
+              required={false}
+              sx={{ pr: 2 }}
+              type="number"
+              value={saturatedFatsAndLipids}
+              variant="outlined"
+            />
+          ) : null}
+          <TextField
+            defaultValue={sodium}
+            id="sodium"
+            label="Sodio (mg)"
+            margin="normal"
+            onChange={(e) => setSodium(e.target.value)}
+            required={true}
+            sx={{ pr: 2 }}
+            type="number"
+            value={sodium}
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Box>
+            <Typography variant="h5">Puntos C</Typography>
+            <TextField
+              defaultValue={fruitAndVegetables}
+              id="fruitAndVegetables"
+              label="Frutas y vegetales (%)"
+              margin="normal"
+              onChange={(e) => setFruitAndVegetables(e.target.value)}
+              required={true}
+              sx={{ pr: 2 }}
+              type="number"
+              value={fruitAndVegetables}
+              variant="outlined"
+            />
+            <TextField
+              defaultValue={fibre}
+              id="fibre"
+              label="Fibra (g)"
+              margin="normal"
+              onChange={(e) => setFibre(e.target.value)}
+              required={true}
+              sx={{ pr: 2 }}
+              type="number"
+              value={fibre}
+              variant="outlined"
+            />
+            <TextField
+              defaultValue={protein}
+              id="protein"
+              label="Proteínas (g)"
+              margin="normal"
+              onChange={(e) => setProtein(e.target.value)}
+              required={true}
+              sx={{ pr: 2 }}
+              type="number"
+              value={protein}
+              variant="outlined"
+            />
+            {category === 'beverages' ? (
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isWater}
+                    onChange={(e) => setIsWater(e.target.checked)}
+                    name="isWater"
+                  />
+                }
+                label="Es agua"
+                labelPlacement="start"
+                value="isWater"
+              />
+            ) : null}
+          </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <Box>
+            <Stack spacing={2} direction="row">
+              <Button onClick={onReset} variant="outlined">
+                Reset
+              </Button>
+              <Button onClick={onSubmit} variant="contained">
+                Calcular
+              </Button>
+            </Stack>
+          </Box>
+        </Grid>
       </Grid>
-      <Grid item xs={4}>
-        <Box>
-          <Stack spacing={2} direction="row">
-            <Button onClick={onReset} variant="outlined">
-              Reset
-            </Button>
-            <Button onClick={onSubmit} variant="contained">
-              Calcular
-            </Button>
-          </Stack>
-        </Box>
-      </Grid>
-    </Grid>
+    </NutriCard>
   );
 };
 
