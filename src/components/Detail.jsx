@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 
 import { tableColors } from '../utils/colors';
+import { NutriCard } from '../utils/containers';
 
 const Detail = ({ apiResult, formData }) => {
   const createPointsATableRow = (
@@ -104,7 +105,7 @@ const Detail = ({ apiResult, formData }) => {
 
   return (
     apiResult && (
-      <div>
+      <NutriCard>
         Puntos A y C:
         {/* Points A table */}
         <TableContainer component={Paper}>
@@ -490,7 +491,7 @@ const Detail = ({ apiResult, formData }) => {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
+      </NutriCard>
     )
   );
 };
