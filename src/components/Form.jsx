@@ -4,6 +4,7 @@ import {
   Button,
   FormControlLabel,
   Grid,
+  InputAdornment,
   MenuItem,
   Select,
   Stack,
@@ -97,7 +98,10 @@ const Form = ({ setFormData, setApiResult }) => {
           <TextField
             defaultValue={energy}
             id="energy"
-            label="Energía (KJ)"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">KJ</InputAdornment>,
+            }}
+            label="Energía"
             margin="normal"
             onChange={(e) => setEnergy(e.target.value)}
             required={true}
@@ -109,7 +113,10 @@ const Form = ({ setFormData, setApiResult }) => {
           <TextField
             defaultValue={sugars}
             id="sugars"
-            label="Azúcares (g)"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">g</InputAdornment>,
+            }}
+            label="Azúcares"
             margin="normal"
             onChange={(e) => setSugars(e.target.value)}
             required={true}
@@ -122,7 +129,10 @@ const Form = ({ setFormData, setApiResult }) => {
             <TextField
               defaultValue={saturatedFats}
               id="saturatedFats"
-              label="Grasas saturadas (g)"
+              InputProps={{
+                endAdornment: <InputAdornment position="end">g</InputAdornment>,
+              }}
+              label="Grasas saturadas"
               margin="normal"
               onChange={(e) => setSaturatedFats(e.target.value)}
               required={false}
@@ -136,7 +146,10 @@ const Form = ({ setFormData, setApiResult }) => {
             <TextField
               defaultValue={saturatedFatsAndLipids}
               id="saturatedFatsAndLipids"
-              label="Grasas saturadas y lípidos (%)"
+              InputProps={{
+                endAdornment: <InputAdornment position="end">%</InputAdornment>,
+              }}
+              label="Grasas saturadas y lípidos"
               margin="normal"
               onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
               required={false}
@@ -149,7 +162,10 @@ const Form = ({ setFormData, setApiResult }) => {
           <TextField
             defaultValue={sodium}
             id="sodium"
-            label="Sodio (mg)"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">mg</InputAdornment>,
+            }}
+            label="Sodio"
             margin="normal"
             onChange={(e) => setSodium(e.target.value)}
             required={true}
@@ -165,7 +181,10 @@ const Form = ({ setFormData, setApiResult }) => {
             <TextField
               defaultValue={fruitAndVegetables}
               id="fruitAndVegetables"
-              label="Frutas y vegetales (%)"
+              InputProps={{
+                endAdornment: <InputAdornment position="end">%</InputAdornment>,
+              }}
+              label="Frutas y vegetales"
               margin="normal"
               onChange={(e) => setFruitAndVegetables(e.target.value)}
               required={true}
@@ -177,7 +196,10 @@ const Form = ({ setFormData, setApiResult }) => {
             <TextField
               defaultValue={fibre}
               id="fibre"
-              label="Fibra (g)"
+              InputProps={{
+                endAdornment: <InputAdornment position="end">g</InputAdornment>,
+              }}
+              label="Fibra"
               margin="normal"
               onChange={(e) => setFibre(e.target.value)}
               required={true}
@@ -189,7 +211,10 @@ const Form = ({ setFormData, setApiResult }) => {
             <TextField
               defaultValue={protein}
               id="protein"
-              label="Proteínas (g)"
+              InputProps={{
+                endAdornment: <InputAdornment position="end">g</InputAdornment>,
+              }}
+              label="Proteínas"
               margin="normal"
               onChange={(e) => setProtein(e.target.value)}
               required={true}
