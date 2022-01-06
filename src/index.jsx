@@ -15,7 +15,7 @@ ReactDOM.render(
     <Container
       sx={{
         mx: 'auto',
-        my: 6,
+        my: 4,
       }}
     >
       <App />
