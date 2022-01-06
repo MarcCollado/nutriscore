@@ -1,12 +1,14 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
+import { NutriCard } from '../utils/containers';
+
 const NutriScore = ({ apiResult }) => {
   const letter = apiResult?.nutri_score.toLowerCase();
 
   return (
     apiResult && (
-      <>
+      <NutriCard>
         <Typography sx={{ mt: 4 }} variant="h5">
           Resultado
         </Typography>
@@ -20,7 +22,7 @@ const NutriScore = ({ apiResult }) => {
           alt="Nutri-Score"
           src={require(`../assets/img/nutri_score_${letter}_2x.png`)}
         />
-      </>
+      </NutriCard>
     )
   );
 };
