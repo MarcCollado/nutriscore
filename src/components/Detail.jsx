@@ -57,43 +57,48 @@ const Detail = ({ apiResult, formData }) => {
     notBeveragesFruitsAndVegetables,
     key,
     proteins
-  ) => (
-    // key === '3' ? (
-    <TableRow key={key}>
-      <TableCell
-        align="right"
-        component="th"
-        scope="row"
-        sx={
-          // Use different color scale for beverages -> Fruit goes to 10
-          formData.category !== 'beverages'
-            ? key <= 5 && {
-                backgroundColor: tableColors.pointsC.notBeverages[key],
-              }
-            : { backgroundColor: tableColors.pointsC.beverages[key] }
-        }
-      >
-        {formData.category !== 'beverages' && key > 5 ? '-' : key}
-      </TableCell>
-      {/* Fruits and vegetables */}
-      {formData.category === 'beverages'
-        ? createTableCell(
-            apiResult.points_c.a,
-            key,
-            beveragesFruitsAndVegetables
-          )
-        : createTableCell(
-            apiResult.points_c.a,
-            key,
-            notBeveragesFruitsAndVegetables
-          )}
-      {/* Fibre */}
-      {createTableCell(apiResult.points_c.b, key, fibre)}
-      {/* Proteins */}
-      {createTableCell(apiResult.points_c.c, key, proteins)}
-    </TableRow>
-    // ) : null;
-  );
+  ) => {
+    // Only beverages can earn up to 10 points C
+    if (formData.category !== 'beverages' && key > 5) {
+      return null;
+    } else {
+      return (
+        <TableRow key={key}>
+          <TableCell
+            align="right"
+            component="th"
+            scope="row"
+            sx={
+              // Use different color scale for beverages -> Fruit goes to 10
+              formData.category !== 'beverages'
+                ? key <= 5 && {
+                    backgroundColor: tableColors.pointsC.notBeverages[key],
+                  }
+                : { backgroundColor: tableColors.pointsC.beverages[key] }
+            }
+          >
+            {key}
+          </TableCell>
+          {/* Fruits and vegetables */}
+          {formData.category === 'beverages'
+            ? createTableCell(
+                apiResult.points_c.a,
+                key,
+                beveragesFruitsAndVegetables
+              )
+            : createTableCell(
+                apiResult.points_c.a,
+                key,
+                notBeveragesFruitsAndVegetables
+              )}
+          {/* Fibre */}
+          {createTableCell(apiResult.points_c.b, key, fibre)}
+          {/* Proteins */}
+          {createTableCell(apiResult.points_c.c, key, proteins)}
+        </TableRow>
+      );
+    }
+  };
 
   const createTableCell = (comparison, key, text) => (
     <TableCell
