@@ -9,9 +9,7 @@ const NutriScore = ({ apiResult }) => {
   return (
     apiResult && (
       <NutriCard>
-        <Typography sx={{ mt: 4 }} variant="h5">
-          Resultado
-        </Typography>
+        <Typography variant="h5">Resultado</Typography>
         <Box
           component="img"
           sx={{
