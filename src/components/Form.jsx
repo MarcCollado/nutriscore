@@ -87,10 +87,10 @@ const Form = ({ setFormData, setApiResult }) => {
             onChange={(e) => setCategory(e.target.value)}
             value={category}
           >
-            <MenuItem value="cheese">Queso</MenuItem>
-            <MenuItem value="beverages">Bebidas</MenuItem>
-            <MenuItem value="fats">Grasas, aceites, o mantequillas</MenuItem>
-            <MenuItem value="others">Otros</MenuItem>
+            <MenuItem value="cheese">🧀 Queso</MenuItem>
+            <MenuItem value="beverages">🥤 Bebidas</MenuItem>
+            <MenuItem value="fats">🍯 Grasas, aceites, o mantequillas</MenuItem>
+            <MenuItem value="others">🎰 Otros</MenuItem>
           </Select>
         </Grid>
         <Grid item xs={12}>
@@ -239,13 +239,13 @@ const Form = ({ setFormData, setApiResult }) => {
             ) : null}
           </Box>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <Box>
             <Stack spacing={2} direction="row">
               <Button onClick={onReset} variant="outlined">
                 Reset
               </Button>
-              <Button onClick={onSubmit} variant="contained">
+              <Button onClick={onSubmit} size="large" variant="contained">
                 Calcular
               </Button>
             </Stack>
