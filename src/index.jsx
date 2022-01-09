@@ -8,10 +8,12 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import App from './components/App';
+import Navbar from './components/Navbar';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <Navbar />
     <Container
       sx={{
         mx: 'auto',
