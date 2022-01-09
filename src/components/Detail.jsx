@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -117,7 +116,7 @@ const Detail = ({ apiResult, formData }) => {
         {/* Points A table */}
         <NutriCard>
           <Typography sx={{ mb: 1 }} variant="h5">
-            Detalle de puntos A
+            🔬 Detalle de puntos A
           </Typography>
           <TableContainer>
             <Table
@@ -264,7 +263,7 @@ const Detail = ({ apiResult, formData }) => {
         {/* Points C table */}
         <NutriCard>
           <Typography sx={{ mb: 1 }} variant="h5">
-            Detalle de puntos C
+            🔬 Detalle de puntos C
           </Typography>
           <TableContainer>
             <Table
@@ -316,11 +315,13 @@ const Detail = ({ apiResult, formData }) => {
             Puntos C = a + b + c = {apiResult.points_c.score}
           </Typography>
         </NutriCard>
-        {/* Final score table */}
+        {/* How it was calculated table */}
         <NutriCard>
+          <Typography sx={{ mb: 1 }} variant="h5">
+            🤔 Cómo se calculó mi Nutri-Score
+          </Typography>
           <TableContainer>
-            <Table sx={{ minWidth: 400 }} aria-label="Detail table">
-              {/* Table body */}
+            <Table sx={{ minWidth: 400 }} aria-label="How table">
               <TableBody>
                 <TableRow key={0}>
                   <TableCell
@@ -415,8 +416,12 @@ const Detail = ({ apiResult, formData }) => {
               </TableBody>
             </Table>
           </TableContainer>
-          Nutri-Score:
-          <TableContainer component={Paper}>
+        </NutriCard>
+        <NutriCard>
+          <Typography sx={{ mb: 1 }} variant="h5">
+            🏆 Mi puntuación
+          </Typography>
+          <TableContainer>
             <Table sx={{ minWidth: 400 }} aria-label="Detail table">
               {/* Table headers */}
               <TableHead>
