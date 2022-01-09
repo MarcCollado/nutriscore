@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Container } from '@mui/material';
 import '@fontsource/roboto/300.css';
@@ -9,19 +10,25 @@ import '@fontsource/roboto/700.css';
 
 import App from './components/App';
 import Navbar from './components/Navbar';
+import Search from './components/Search';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Navbar />
-    <Container
-      sx={{
-        mx: 'auto',
-        my: 4,
-      }}
-    >
-      <App />
-    </Container>
+    <BrowserRouter>
+      <Navbar />
+      <Container
+        sx={{
+          mx: 'auto',
+          my: 4,
+        }}
+      >
+        <Routes>
+          <Route path="/" element={<App />}></Route>
+          <Route path="/search" element={<Search />}></Route>
+        </Routes>
+      </Container>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
