@@ -8,7 +8,7 @@ export const NutriCard = (props) => (
       borderRadius: 4,
       // boxShadow: '0 7px 30px -10px rgba(150,170,180,0.5)',
       mx: 'auto',
-      my: 3,
+      // my: 3,
       p: 4,
       ...props.sx,
     }}
