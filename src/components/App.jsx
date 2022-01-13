@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import Detail from './Detail';
 import Form from './Form';
@@ -12,11 +12,11 @@ const App = () => {
   const [apiResult, setApiResult] = useState(null);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Stack spacing={4}>
       <Form setApiResult={setApiResult} setFormData={setFormData}></Form>
       {apiResult ? <NutriScore apiResult={apiResult} /> : null}
       {apiResult ? <Detail apiResult={apiResult} formData={formData} /> : null}
-    </Box>
+    </Stack>
   );
 };
 
