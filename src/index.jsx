@@ -17,12 +17,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Navbar />
-      <Container
-        sx={{
-          mx: 'auto',
-          my: 4,
-        }}
-      >
+      <Container>
         <Routes>
           <Route path="/" element={<App />}></Route>
           <Route path="/search" element={<Search />}></Route>
