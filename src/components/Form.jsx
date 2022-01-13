@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Box,
   Button,
   FormControlLabel,
   Grid,
@@ -75,7 +74,8 @@ const Form = ({ setFormData, setApiResult }) => {
   return (
     <NutriCard>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={9} md={6} lg={4} sx={{ pr: 2 }} xl={3}>
+        {/* Category */}
+        <Grid item xs={12} sm={8} md={6} lg={4} xl={2} sx={{ pr: 2 }}>
           <Typography sx={{ mb: 1.5 }} variant="h5">
             Categoría
           </Typography>
@@ -93,6 +93,7 @@ const Form = ({ setFormData, setApiResult }) => {
             <MenuItem value="others">🎰 Otros</MenuItem>
           </Select>
         </Grid>
+        {/* Points A */}
         <Grid item xs={12}>
           <Typography variant="h5">Puntos A</Typography>
           <TextField
@@ -175,81 +176,79 @@ const Form = ({ setFormData, setApiResult }) => {
             variant="outlined"
           />
         </Grid>
+        {/* Points C */}
         <Grid item xs={12}>
-          <Box>
-            <Typography variant="h5">Puntos C</Typography>
-            <TextField
-              defaultValue={fruitAndVegetables}
-              id="fruitAndVegetables"
-              InputProps={{
-                endAdornment: <InputAdornment position="end">%</InputAdornment>,
-              }}
-              label="Frutas y vegetales"
-              margin="normal"
-              onChange={(e) => setFruitAndVegetables(e.target.value)}
-              required={true}
-              sx={{ pr: 2 }}
-              type="number"
-              value={fruitAndVegetables}
-              variant="outlined"
+          <Typography variant="h5">Puntos C</Typography>
+          <TextField
+            defaultValue={fruitAndVegetables}
+            id="fruitAndVegetables"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">%</InputAdornment>,
+            }}
+            label="Frutas y vegetales"
+            margin="normal"
+            onChange={(e) => setFruitAndVegetables(e.target.value)}
+            required={true}
+            sx={{ pr: 2 }}
+            type="number"
+            value={fruitAndVegetables}
+            variant="outlined"
+          />
+          <TextField
+            defaultValue={fibre}
+            id="fibre"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">g</InputAdornment>,
+            }}
+            label="Fibra"
+            margin="normal"
+            onChange={(e) => setFibre(e.target.value)}
+            required={true}
+            sx={{ pr: 2 }}
+            type="number"
+            value={fibre}
+            variant="outlined"
+          />
+          <TextField
+            defaultValue={protein}
+            id="protein"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">g</InputAdornment>,
+            }}
+            label="Proteínas"
+            margin="normal"
+            onChange={(e) => setProtein(e.target.value)}
+            required={true}
+            sx={{ pr: 2 }}
+            type="number"
+            value={protein}
+            variant="outlined"
+          />
+          {category === 'beverages' ? (
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={isWater}
+                  onChange={(e) => setIsWater(e.target.checked)}
+                  name="isWater"
+                />
+              }
+              label="Es agua"
+              labelPlacement="start"
+              value="isWater"
             />
-            <TextField
-              defaultValue={fibre}
-              id="fibre"
-              InputProps={{
-                endAdornment: <InputAdornment position="end">g</InputAdornment>,
-              }}
-              label="Fibra"
-              margin="normal"
-              onChange={(e) => setFibre(e.target.value)}
-              required={true}
-              sx={{ pr: 2 }}
-              type="number"
-              value={fibre}
-              variant="outlined"
-            />
-            <TextField
-              defaultValue={protein}
-              id="protein"
-              InputProps={{
-                endAdornment: <InputAdornment position="end">g</InputAdornment>,
-              }}
-              label="Proteínas"
-              margin="normal"
-              onChange={(e) => setProtein(e.target.value)}
-              required={true}
-              sx={{ pr: 2 }}
-              type="number"
-              value={protein}
-              variant="outlined"
-            />
-            {category === 'beverages' ? (
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={isWater}
-                    onChange={(e) => setIsWater(e.target.checked)}
-                    name="isWater"
-                  />
-                }
-                label="Es agua"
-                labelPlacement="start"
-                value="isWater"
-              />
-            ) : null}
-          </Box>
+          ) : null}
         </Grid>
+        {/* Buttons */}
         <Grid item xs={6}>
-          <Box>
-            <Stack spacing={2} direction="row">
-              <Button onClick={onReset} variant="outlined">
-                Reset
-              </Button>
-              <Button onClick={onSubmit} size="large" variant="contained">
-                Calcular
-              </Button>
-            </Stack>
-          </Box>
+          <Stack spacing={2} direction="row">
+            <Button onClick={onReset} variant="outlined">
+              Reset
+            </Button>
+            <Button onClick={onSubmit} size="large" variant="contained">
+              Calcular
+            </Button>
+          </Stack>
         </Grid>
       </Grid>
     </NutriCard>
