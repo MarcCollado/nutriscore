@@ -12,6 +12,7 @@ import {
 
 import { tableColors } from '../utils/colors';
 import { NutriCard } from '../utils/containers';
+import { createCell, tableAValues, tableCValues } from '../utils/tables';
 
 const Detail = ({ apiResult, formData }) => {
   const createPointsATableRow = (
@@ -24,6 +25,7 @@ const Detail = ({ apiResult, formData }) => {
     sodium
   ) => (
     <TableRow key={key}>
+      {/* Color gradient */}
       <TableCell
         align="right"
         component="th"
@@ -34,28 +36,28 @@ const Detail = ({ apiResult, formData }) => {
       </TableCell>
       {/* Energy */}
       {formData.category !== 'beverages'
-        ? createTableCell(apiResult.points_a.a, key, notBeveragesEnergy)
-        : createTableCell(apiResult.points_a.a, key, beveragesEnergy)}
+        ? createCell(apiResult.points_a.a, key, notBeveragesEnergy)
+        : createCell(apiResult.points_a.a, key, beveragesEnergy)}
       {/* Sugars */}
       {formData.category !== 'beverages'
-        ? createTableCell(apiResult.points_a.b, key, notBeveragesSugars)
-        : createTableCell(apiResult.points_a.b, key, beveragesSugars)}
+        ? createCell(apiResult.points_a.b, key, notBeveragesSugars)
+        : createCell(apiResult.points_a.b, key, beveragesSugars)}
       {/* Saturated fats / Saturated fats and lipids */}
       {formData.category !== 'fats'
         ? key === 0
-          ? createTableCell(apiResult.points_a.c, key, '≤ ' + (key + 1))
-          : createTableCell(apiResult.points_a.c, key, '> ' + key)
-        : createTableCell(apiResult.points_a.c, key, saturatedFatsAndLipids)}
+          ? createCell(apiResult.points_a.c, key, '≤ ' + (key + 1))
+          : createCell(apiResult.points_a.c, key, '> ' + key)
+        : createCell(apiResult.points_a.c, key, saturatedFatsAndLipids)}
       {/* Sodium */}
-      {createTableCell(apiResult.points_a.d, key, sodium)}
+      {createCell(apiResult.points_a.d, key, sodium)}
     </TableRow>
   );
 
   const createPointsCTableRow = (
     beveragesFruitsAndVegetables,
     fibre,
-    notBeveragesFruitsAndVegetables,
     key,
+    notBeveragesFruitsAndVegetables,
     proteins
   ) => {
     // Only beverages can earn up to 10 points C
@@ -81,35 +83,24 @@ const Detail = ({ apiResult, formData }) => {
           </TableCell>
           {/* Fruits and vegetables */}
           {formData.category === 'beverages'
-            ? createTableCell(
+            ? createCell(
                 apiResult.points_c.a,
                 key,
                 beveragesFruitsAndVegetables
               )
-            : createTableCell(
+            : createCell(
                 apiResult.points_c.a,
                 key,
                 notBeveragesFruitsAndVegetables
               )}
           {/* Fibre */}
-          {createTableCell(apiResult.points_c.b, key, fibre)}
+          {createCell(apiResult.points_c.b, key, fibre)}
           {/* Proteins */}
-          {createTableCell(apiResult.points_c.c, key, proteins)}
+          {createCell(apiResult.points_c.c, key, proteins)}
         </TableRow>
       );
     }
   };
-
-  const createTableCell = (comparison, key, text) => (
-    <TableCell
-      align="right"
-      sx={{
-        backgroundColor: comparison === key ? 'LightGrey' : '#ffffff',
-      }}
-    >
-      {text}
-    </TableCell>
-  );
 
   return (
     apiResult && (
@@ -134,105 +125,7 @@ const Detail = ({ apiResult, formData }) => {
                 </TableHead>
                 {/* Table body */}
                 <TableBody>
-                  {createPointsATableRow(
-                    '≤ 0,0',
-                    '≤ 0,0',
-                    '< 10',
-                    0,
-                    '≤ 335',
-                    '≤ 4,5',
-                    '≤ 90'
-                  )}
-                  {createPointsATableRow(
-                    '≤ 30',
-                    '≤ 3,0',
-                    '< 16',
-                    1,
-                    '> 335',
-                    '> 4,5',
-                    '> 90'
-                  )}
-                  {createPointsATableRow(
-                    '≤ 60',
-                    '> 13,5',
-                    '< 22',
-                    2,
-                    '> 670',
-                    '> 9,0',
-                    '> 180'
-                  )}
-                  {createPointsATableRow(
-                    '≤ 90',
-                    '≤ 4,5',
-                    '< 28',
-                    3,
-                    '> 1005',
-                    '> 13,5',
-                    '> 270'
-                  )}
-                  {createPointsATableRow(
-                    '≤ 120',
-                    '≤ 6,0',
-                    '< 34',
-                    4,
-                    '> 1340',
-                    '> 18,0',
-                    '> 360'
-                  )}
-                  {createPointsATableRow(
-                    '≤ 150',
-                    '≤ 7,5',
-                    '< 40',
-                    5,
-                    '> 1675',
-                    '> 22,5',
-                    '> 450'
-                  )}
-                  {createPointsATableRow(
-                    '≤ 180',
-                    '≤ 9,0',
-                    '< 46',
-                    6,
-                    '> 2010',
-                    '> 27,0',
-                    '> 540'
-                  )}
-                  {createPointsATableRow(
-                    '≤ 210',
-                    '≤ 10,5',
-                    '< 52',
-                    7,
-                    '> 2345',
-                    '> 31,0',
-                    '> 630'
-                  )}
-                  {createPointsATableRow(
-                    '≤ 240',
-                    '≤ 12,0',
-                    '< 58',
-                    8,
-                    '> 2680',
-                    '> 36,0',
-                    '> 720'
-                  )}
-                  {createPointsATableRow(
-                    '≤ 270',
-                    '≤ 13,5',
-                    '< 64',
-                    9,
-                    '> 3015',
-                    '> 40,0',
-                    '> 810'
-                  )}
-                  {createPointsATableRow(
-                    '> 270',
-                    '> 13,5',
-                    '≥ 64',
-                    10,
-                    '> 3350',
-                    '> 45,0',
-                    '> 900'
-                  )}
+                  {tableAValues.map((r) => createPointsATableRow(...r))}
                   {/* Category score */}
                   <TableRow key="11">
                     <TableCell align="right" component="th" scope="row">
@@ -276,17 +169,7 @@ const Detail = ({ apiResult, formData }) => {
                 </TableHead>
                 {/* Table body */}
                 <TableBody>
-                  {createPointsCTableRow('≤ 40', '≤ 0,7', '≤ 40', 0, '≤ 1,6')}
-                  {createPointsCTableRow('-', '> 0,7', '> 40', 1, '> 1,6')}
-                  {createPointsCTableRow('> 40', '> 1,4', '> 60', 2, '> 3,2')}
-                  {createPointsCTableRow('-', '> 2,1', '-', 3, '> 4,8')}
-                  {createPointsCTableRow('> 60', '> 2,8', '-', 4, '> 6,4')}
-                  {createPointsCTableRow('-', '> 3,5', '> 80', 5, '> 8,0')}
-                  {createPointsCTableRow('-', '-', '-', 6, '-')}
-                  {createPointsCTableRow('-', '-', '-', 7, '-')}
-                  {createPointsCTableRow('-', '-', '-', 8, '-')}
-                  {createPointsCTableRow('-', '-', '-', 9, '-')}
-                  {createPointsCTableRow('> 80', '-', '-', 10, '-')}
+                  {tableCValues.map((r) => createPointsCTableRow(...r))}
                   {/* Category score */}
                   <TableRow key="11">
                     <TableCell align="right" component="th" scope="row">
