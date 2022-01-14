@@ -1,13 +1,4 @@
-import {
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from '@mui/material';
+import { TableCell } from '@mui/material';
 
 export const tableAValues = [
   ['≤ 0,0', '≤ 0,0', '< 10', 0, '≤ 335', '≤ 4,5', '≤ 90'],
