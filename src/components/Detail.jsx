@@ -198,13 +198,13 @@ const Detail = ({ apiResult, formData }) => {
               🤔 Cómo se calculó mi Nutri-Score
             </Typography>
             <TableContainer>
-              <Table sx={{ minWidth: 400 }} aria-label="How table">
+              <Table aria-label="How table">
                 <TableBody>
                   <TableRow key={0}>
                     <TableCell
                       component="th"
                       scope="col"
-                      style={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: 'bold' }}
                     >
                       {'Puntos A ≥ 11'}
                     </TableCell>
@@ -212,11 +212,8 @@ const Detail = ({ apiResult, formData }) => {
                       <TableCell
                         sx={{
                           backgroundColor:
-                            apiResult.points_a.a +
-                              apiResult.points_a.b +
-                              apiResult.points_a.c +
-                              apiResult.points_a.d >=
-                              11 && apiResult.points_c.a >= 5
+                            apiResult.points_a.score >= 11 &&
+                            apiResult.points_c.a >= 5
                               ? 'LightGrey'
                               : '#ffffff',
                         }}
@@ -225,11 +222,7 @@ const Detail = ({ apiResult, formData }) => {
                         {formData.category !== 'beverages' ? '=' : '≥'} 5:
                         <br />
                         {'Puntuación final = Puntos A - Puntos C'}
-                        {apiResult.points_a.a +
-                          apiResult.points_a.b +
-                          apiResult.points_a.c +
-                          apiResult.points_a.d >=
-                          11 &&
+                        {apiResult.points_a.score >= 11 &&
                           apiResult.points_c.a >= 5 &&
                           ' = ' + apiResult.final_score}
                       </TableCell>
@@ -238,11 +231,8 @@ const Detail = ({ apiResult, formData }) => {
                       <TableCell
                         sx={{
                           backgroundColor:
-                            apiResult.points_a.a +
-                              apiResult.points_a.b +
-                              apiResult.points_a.c +
-                              apiResult.points_a.d >=
-                              11 && apiResult.points_c.a < 5
+                            apiResult.points_a.score >= 11 &&
+                            apiResult.points_c.a < 5
                               ? 'LightGrey'
                               : '#ffffff',
                         }}
@@ -252,11 +242,7 @@ const Detail = ({ apiResult, formData }) => {
                         {
                           'Puntuación final = Puntos A - (puntos de fibra + puntos de frutas y vegetales)'
                         }
-                        {apiResult.points_a.a +
-                          apiResult.points_a.b +
-                          apiResult.points_a.c +
-                          apiResult.points_a.d >=
-                          11 &&
+                        {apiResult.points_a.score >= 11 &&
                           apiResult.points_c.a < 5 &&
                           ' = ' + apiResult.final_score}
                       </TableCell>
@@ -273,21 +259,14 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell
                       sx={{
                         backgroundColor:
-                          apiResult.points_a.a +
-                            apiResult.points_a.b +
-                            apiResult.points_a.c +
-                            apiResult.points_a.d <
-                          11
+                          apiResult.points_a.score < 11
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
                     >
                       {'Puntuación final = Puntos A - Puntos C'}
-                      {apiResult.points_a.a +
-                        apiResult.points_a.b +
-                        apiResult.points_a.c +
-                        apiResult.points_a.d <
-                        11 && ' = ' + apiResult.final_score}
+                      {apiResult.points_a.score < 11 &&
+                        ' = ' + apiResult.final_score}
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -300,7 +279,7 @@ const Detail = ({ apiResult, formData }) => {
               🏆 Mi puntuación
             </Typography>
             <TableContainer>
-              <Table sx={{ minWidth: 400 }} aria-label="Detail table">
+              <Table aria-label="Detail table">
                 {/* Table headers */}
                 <TableHead>
                   <TableRow>
@@ -314,7 +293,7 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell
                       component="th"
                       scope="col"
-                      style={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: 'bold' }}
                     >
                       {formData.category !== 'beverages'
                         ? 'De -15 a -1'
@@ -337,7 +316,7 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell
                       component="th"
                       scope="col"
-                      style={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: 'bold' }}
                     >
                       {formData.category !== 'beverages'
                         ? 'De 0 a 2'
@@ -360,7 +339,7 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell
                       component="th"
                       scope="col"
-                      style={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: 'bold' }}
                     >
                       {formData.category !== 'beverages'
                         ? 'De 3 a 10'
@@ -383,7 +362,7 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell
                       component="th"
                       scope="col"
-                      style={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: 'bold' }}
                     >
                       {formData.category !== 'beverages'
                         ? 'De 11 a 18'
@@ -406,7 +385,7 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell
                       component="th"
                       scope="col"
-                      style={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: 'bold' }}
                     >
                       {formData.category !== 'beverages'
                         ? 'De 19 a 40'
