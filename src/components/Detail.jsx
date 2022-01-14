@@ -113,10 +113,10 @@ const Detail = ({ apiResult, formData }) => {
 
   return (
     apiResult && (
-      <Grid container spacing={2}>
-        {/* Points A table */}
-        <Grid item xs={12} lg={6}>
-          <NutriCard>
+      <NutriCard>
+        <Grid container spacing={6}>
+          {/* Points A table */}
+          <Grid item xs={12} lg={6}>
             <Typography sx={{ mb: 1 }} variant="h5">
               🔬 Detalle de puntos A
             </Typography>
@@ -257,11 +257,9 @@ const Detail = ({ apiResult, formData }) => {
             <Typography sx={{ mt: 2 }} variant="h6">
               Puntos A = a + b + c + d = {apiResult.points_a.score}
             </Typography>
-          </NutriCard>
-        </Grid>
-        {/* Points C table */}
-        <Grid item xs={12} lg={6}>
-          <NutriCard>
+          </Grid>
+          {/* Points C table */}
+          <Grid item xs={12} lg={6}>
             <Typography sx={{ mb: 1 }} variant="h5">
               🔬 Detalle de puntos C
             </Typography>
@@ -310,11 +308,9 @@ const Detail = ({ apiResult, formData }) => {
             <Typography sx={{ mt: 2 }} variant="h6">
               Puntos C = a + b + c = {apiResult.points_c.score}
             </Typography>
-          </NutriCard>
-        </Grid>
-        {/* How it was calculated table */}
-        <Grid item xs={12} lg={6}>
-          <NutriCard>
+          </Grid>
+          {/* How it was calculated table */}
+          <Grid item xs={12} lg={6}>
             <Typography sx={{ mb: 1 }} variant="h5">
               🤔 Cómo se calculó mi Nutri-Score
             </Typography>
@@ -414,10 +410,9 @@ const Detail = ({ apiResult, formData }) => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </NutriCard>
-        </Grid>
-        <Grid item xs={12} lg={6}>
-          <NutriCard>
+          </Grid>
+          {/* My score */}
+          <Grid item xs={12} lg={6}>
             <Typography sx={{ mb: 1 }} variant="h5">
               🏆 Mi puntuación
             </Typography>
@@ -550,9 +545,9 @@ const Detail = ({ apiResult, formData }) => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </NutriCard>
+          </Grid>
         </Grid>
-      </Grid>
+      </NutriCard>
     )
   );
 };
