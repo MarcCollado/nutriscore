@@ -12,7 +12,7 @@ const App = () => {
   const [apiResult, setApiResult] = useState(null);
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={4} direction="column" alignItems="center">
       <Form setApiResult={setApiResult} setFormData={setFormData}></Form>
       {apiResult ? <NutriScore apiResult={apiResult} /> : null}
       {apiResult ? <Detail apiResult={apiResult} formData={formData} /> : null}
