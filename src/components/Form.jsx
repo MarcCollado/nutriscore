@@ -21,15 +21,15 @@ const Form = ({ setFormData, setApiResult }) => {
   // Categories
   const [category, setCategory] = useState('others');
   // Points A
-  const [energy, setEnergy] = useState(0.0);
-  const [sugars, setSugars] = useState(0.0);
-  const [saturatedFats, setSaturatedFats] = useState(0.0);
-  const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = useState(0.0);
-  const [sodium, setSodium] = useState(0.0);
+  const [energy, setEnergy] = useState();
+  const [sugars, setSugars] = useState();
+  const [saturatedFats, setSaturatedFats] = useState();
+  const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = useState();
+  const [sodium, setSodium] = useState();
   // Points C
-  const [fruitAndVegetables, setFruitAndVegetables] = useState(0.0);
-  const [fibre, setFibre] = useState(0.0);
-  const [protein, setProtein] = useState(0.0);
+  const [fruitAndVegetables, setFruitAndVegetables] = useState();
+  const [fibre, setFibre] = useState();
+  const [protein, setProtein] = useState();
   const [isWater, setIsWater] = useState(false);
 
   // Submit button
@@ -47,6 +47,7 @@ const Form = ({ setFormData, setApiResult }) => {
       saturated_fats_and_lipids: saturatedFatsAndLipids,
       sugars: sugars,
     };
+    console.log(formData);
     // Set form data on App.js before submit
     setFormData(formData);
     // Fetch Calculate API
@@ -57,15 +58,15 @@ const Form = ({ setFormData, setApiResult }) => {
 
   // Reset button
   const onReset = async () => {
-    setEnergy(0.0);
-    setFibre(0.0);
-    setFruitAndVegetables(0.0);
+    setEnergy();
+    setFibre();
+    setFruitAndVegetables();
     setIsWater(false);
-    setProtein(0.0);
-    setSodium(0.0);
-    setSaturatedFats(0.0);
-    setSaturatedFatsAndLipids(0.0);
-    setSugars(0.0);
+    setProtein();
+    setSodium();
+    setSaturatedFats();
+    setSaturatedFatsAndLipids();
+    setSugars();
     // Reset data on App.js component
     setFormData(null);
     setApiResult(null);
@@ -80,7 +81,6 @@ const Form = ({ setFormData, setApiResult }) => {
             Categoría
           </Typography>
           <Select
-            defaultValue={category}
             fullWidth
             id="category"
             label="Categoría"
@@ -97,10 +97,11 @@ const Form = ({ setFormData, setApiResult }) => {
         <Grid item xs={12}>
           <Typography variant="h5">Puntos A</Typography>
           <TextField
-            defaultValue={energy}
             id="energy"
             InputProps={{
               endAdornment: <InputAdornment position="end">KJ</InputAdornment>,
+              inputMode: 'numeric',
+              pattern: '[0-9]*',
             }}
             label="Energía"
             margin="normal"
@@ -112,10 +113,11 @@ const Form = ({ setFormData, setApiResult }) => {
             variant="outlined"
           />
           <TextField
-            defaultValue={sugars}
             id="sugars"
             InputProps={{
               endAdornment: <InputAdornment position="end">g</InputAdornment>,
+              inputMode: 'numeric',
+              pattern: '[0-9]*',
             }}
             label="Azúcares"
             margin="normal"
@@ -128,10 +130,11 @@ const Form = ({ setFormData, setApiResult }) => {
           />
           {category === 'cheese' || category === 'others' ? (
             <TextField
-              defaultValue={saturatedFats}
               id="saturatedFats"
               InputProps={{
                 endAdornment: <InputAdornment position="end">g</InputAdornment>,
+                inputMode: 'numeric',
+                pattern: '[0-9]*',
               }}
               label="Grasas saturadas"
               margin="normal"
@@ -145,26 +148,28 @@ const Form = ({ setFormData, setApiResult }) => {
           ) : null}
           {category === 'fats' || category === 'beverages' ? (
             <TextField
-              defaultValue={saturatedFatsAndLipids}
               id="saturatedFatsAndLipids"
               InputProps={{
                 endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                inputMode: 'numeric',
+                pattern: '[0-9]*',
               }}
               label="Grasas saturadas y lípidos"
               margin="normal"
               onChange={(e) => setSaturatedFatsAndLipids(e.target.value)}
               required={false}
-              sx={{ pr: 2 }}
+              sx={{ minWidth: '250px', pr: 2 }}
               type="number"
               value={saturatedFatsAndLipids}
               variant="outlined"
             />
           ) : null}
           <TextField
-            defaultValue={sodium}
             id="sodium"
             InputProps={{
               endAdornment: <InputAdornment position="end">mg</InputAdornment>,
+              inputMode: 'numeric',
+              pattern: '[0-9]*',
             }}
             label="Sodio"
             margin="normal"
@@ -180,10 +185,11 @@ const Form = ({ setFormData, setApiResult }) => {
         <Grid item xs={12}>
           <Typography variant="h5">Puntos C</Typography>
           <TextField
-            defaultValue={fruitAndVegetables}
             id="fruitAndVegetables"
             InputProps={{
               endAdornment: <InputAdornment position="end">%</InputAdornment>,
+              inputMode: 'numeric',
+              pattern: '[0-9]*',
             }}
             label="Frutas y vegetales"
             margin="normal"
@@ -195,10 +201,11 @@ const Form = ({ setFormData, setApiResult }) => {
             variant="outlined"
           />
           <TextField
-            defaultValue={fibre}
             id="fibre"
             InputProps={{
               endAdornment: <InputAdornment position="end">g</InputAdornment>,
+              inputMode: 'numeric',
+              pattern: '[0-9]*',
             }}
             label="Fibra"
             margin="normal"
@@ -210,10 +217,11 @@ const Form = ({ setFormData, setApiResult }) => {
             variant="outlined"
           />
           <TextField
-            defaultValue={protein}
             id="protein"
             InputProps={{
               endAdornment: <InputAdornment position="end">g</InputAdornment>,
+              inputMode: 'numeric',
+              pattern: '[0-9]*',
             }}
             label="Proteínas"
             margin="normal"
