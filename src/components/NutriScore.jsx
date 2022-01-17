@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { NutriCard } from '../utils/containers';
 
@@ -9,13 +9,11 @@ const NutriScore = ({ apiResult }) => {
   return (
     apiResult && (
       <NutriCard>
-        <Typography variant="h5">Resultado</Typography>
         <Box
           component="img"
           sx={{
             mx: 'auto',
-            my: 1,
-            maxWidth: { xs: 200, sm: 250 },
+            maxWidth: { xs: 200, sm: 275 },
           }}
           alt="Nutri-Score"
           src={require(`../assets/img/nutri_score_${letter}_2x.png`)}
