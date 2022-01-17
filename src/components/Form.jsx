@@ -43,8 +43,8 @@ const Form = ({ setFormData, setApiResult }) => {
       is_water: isWater,
       protein: protein,
       sodium: sodium,
-      saturated_fats: saturatedFats,
-      saturated_fats_and_lipids: saturatedFatsAndLipids,
+      saturated_fats: saturatedFats || 0.0,
+      saturated_fats_and_lipids: saturatedFatsAndLipids || 0.0,
       sugars: sugars,
     };
     console.log(formData);
