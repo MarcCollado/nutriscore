@@ -252,7 +252,10 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell
                       component="th"
                       scope="col"
-                      style={{ fontWeight: 'bold' }}
+                      sx={{
+                        fontWeight: 'bold',
+                        width: { xs: '30%', md: '50%', lg: '35%' },
+                      }}
                     >
                       {'Puntos A < 11'}
                     </TableCell>
