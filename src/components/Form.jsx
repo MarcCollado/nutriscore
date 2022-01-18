@@ -21,15 +21,15 @@ const Form = ({ setFormData, setApiResult }) => {
   // Categories
   const [category, setCategory] = useState('others');
   // Points A
-  const [energy, setEnergy] = useState();
-  const [sugars, setSugars] = useState();
-  const [saturatedFats, setSaturatedFats] = useState();
-  const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = useState();
-  const [sodium, setSodium] = useState();
+  const [energy, setEnergy] = useState('');
+  const [sugars, setSugars] = useState('');
+  const [saturatedFats, setSaturatedFats] = useState('');
+  const [saturatedFatsAndLipids, setSaturatedFatsAndLipids] = useState('');
+  const [sodium, setSodium] = useState('');
   // Points C
-  const [fruitAndVegetables, setFruitAndVegetables] = useState();
-  const [fibre, setFibre] = useState();
-  const [protein, setProtein] = useState();
+  const [fruitAndVegetables, setFruitAndVegetables] = useState('');
+  const [fibre, setFibre] = useState('');
+  const [protein, setProtein] = useState('');
   const [isWater, setIsWater] = useState(false);
 
   // Submit button
@@ -57,15 +57,15 @@ const Form = ({ setFormData, setApiResult }) => {
 
   // Reset button
   const onReset = async () => {
-    setEnergy();
-    setFibre();
-    setFruitAndVegetables();
+    setEnergy('');
+    setFibre('');
+    setFruitAndVegetables('');
     setIsWater(false);
-    setProtein();
-    setSodium();
-    setSaturatedFats();
-    setSaturatedFatsAndLipids();
-    setSugars();
+    setProtein('');
+    setSodium('');
+    setSaturatedFats('');
+    setSaturatedFatsAndLipids('');
+    setSugars('');
     // Reset data on App.js component
     setFormData(null);
     setApiResult(null);
