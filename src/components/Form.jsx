@@ -47,7 +47,6 @@ const Form = ({ setFormData, setApiResult }) => {
       saturated_fats_and_lipids: saturatedFatsAndLipids || 0.0,
       sugars: sugars,
     };
-    console.log(formData);
     // Set form data on App.js before submit
     setFormData(formData);
     // Fetch Calculate API
