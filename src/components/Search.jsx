@@ -8,26 +8,30 @@ import SearchIcon from '@mui/icons-material/Search';
 const baseApiUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
 
 const Search = () => {
+  // Text input query
   const [query, setQuery] = useState('');
-  const [result, setResult] = useState(null);
+  // API response
+  const [apiResult, setApiResult] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [pageSize, setPageSize] = React.useState(25);
 
   // Submit button
   const onSubmit = async () => {
+    setIsLoading(true);
     // Fetch Search API
-    // setResult(true);
     fetch(`${baseApiUrl}search?q=${JSON.stringify(query)}`)
-      .then((res) => res.json())
       .then((res) => {
-        const rows = res.map((r, i) => {
-          r.id = i;
-          return r;
-        });
-        setResult(rows);
+        setIsLoading(false);
+        return res.json();
+      })
+      .then((res) => {
+        const rows = res.map((r, i) => ({ ...r, id: i }));
+        setApiResult(rows);
       });
   };
 
   return (
-    <Stack spacing={2} sx={{ mx: 'auto', width: '80%' }}>
+    <Stack spacing={2} sx={{ mx: 'auto', width: '90%' }}>
       <Stack direction="row" spacing={2} sx={{ mx: 'auto', width: 400 }}>
         <TextField
           id="search"
@@ -41,22 +45,27 @@ const Search = () => {
           label="Buscador"
           onChange={(e) => setQuery(e.target.value)}
           variant="outlined"
-          required={true}
+          required
           value={query}
         />
         <Button onClick={onSubmit} variant="contained">
           Buscar
         </Button>
       </Stack>
-      {result && (
-        <div style={{ height: 300, width: '100%' }}>
+      {apiResult && (
+        <div style={{ height: '72vh', marginTop: '24px', width: '100%' }}>
           <DataGrid
-            rows={result}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            aria-label="Tabla de resultados"
+            autoPageSize
             checkboxSelection
-            disableSelectionOnClick
+            density="compact"
+            loading={isLoading}
+            rows={apiResult}
+            columns={columns}
+            onPageSizeChange={(s) => setPageSize(s)}
+            pageSize={pageSize}
+            pagination
+            rowsPerPageOptions={[25, 50, 100]}
           />
         </div>
       )}
