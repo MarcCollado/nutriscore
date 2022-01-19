@@ -15,7 +15,10 @@ import {
 import { NutriCard } from '../utils/containers';
 
 const Suggestions = ({ apiResult }) => {
-  const [nutriScore, setNutriScore] = useState('A');
+  const [nutriTarget, setNutriTarget] = useState(
+    String.fromCharCode(apiResult.nutri_score.charCodeAt(0) - 1)
+  );
+
   const selectScore =
     apiResult.nutri_score === 'B'
       ? ['A']
@@ -33,12 +36,11 @@ const Suggestions = ({ apiResult }) => {
             Selecciona el valor de Nutri-Score que quieres conseguir:
           </Typography>
           <Select
-            defaultValue={nutriScore}
+            defaultValue={nutriTarget}
             fullWidth
-            id="nutri-score-select"
+            id="nutri-score-target"
             label="Nutri-Score"
-            onChange={(e) => setNutriScore(e.target.value)}
-            value={nutriScore}
+            onChange={(e) => setNutriTarget(e.target.value)}
           >
             {selectScore.map((item) => (
               <MenuItem key={item} value={item}>
@@ -48,7 +50,7 @@ const Suggestions = ({ apiResult }) => {
           </Select>
         </Grid>
         <TableContainer>
-          <Table size="small" aria-label="Detail table A">
+          <Table size="small" aria-label="Suggestions">
             {/* Table headers */}
             <TableHead key="1">
               <TableRow>
@@ -57,33 +59,22 @@ const Suggestions = ({ apiResult }) => {
             </TableHead>
             <TableBody>
               <TableRow key="2">
-                {apiResult.nutri_score === 'A' ? (
+                {nutriTarget === 'A' ? (
                   <TableCell>
                     No hay ninguna sugerencia, tu producto tiene la puntuación
-                    deseada
-                  </TableCell>
-                ) : apiResult.nutri_score === 'B' ? (
-                  <TableCell>
-                    Reduce los Puntos A al menos en{' '}
-                    {apiResult.points_a.score + 1}
-                  </TableCell>
-                ) : apiResult.nutri_score === 'C' ? (
-                  <TableCell>
-                    Reduce los Puntos A al menos en{' '}
-                    {apiResult.points_a.score - 2}
-                  </TableCell>
-                ) : apiResult.nutri_score === 'D' ? (
-                  <TableCell>
-                    Reduce los Puntos A al menos en{' '}
-                    {apiResult.points_a.score - 10}
+                    deseada.
                   </TableCell>
                 ) : (
-                  apiResult.nutri_score === 'E' && (
-                    <TableCell>
-                      Reduce los Puntos A al menos en{' '}
-                      {apiResult.points_a.score - 18}
-                    </TableCell>
-                  )
+                  <TableCell>
+                    {`Reduce los Puntos A al menos en ` +
+                      (nutriTarget === 'B'
+                        ? apiResult.points_a.score + 1
+                        : nutriTarget === 'C'
+                        ? apiResult.points_a.score - 2
+                        : nutriTarget === 'D'
+                        ? apiResult.points_a.score - 10
+                        : nutriTarget === 'E' && apiResult.points_a.score - 18)}
+                  </TableCell>
                 )}
               </TableRow>
               {apiResult.points_a.score >= 11 &&
