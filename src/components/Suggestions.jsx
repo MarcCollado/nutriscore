@@ -16,37 +16,37 @@ import { NutriCard } from '../utils/containers';
 
 const Suggestions = ({ apiResult }) => {
   const [nutriScore, setNutriScore] = useState('A');
-  var selectValues = [];
+  const selectScore =
+    apiResult.nutri_score === 'B'
+      ? ['A']
+      : apiResult.nutri_score === 'C'
+      ? ['A', 'B']
+      : apiResult.nutri_score === 'D'
+      ? ['A', 'B', 'C']
+      : apiResult.nutri_score === 'E' && ['A', 'B', 'C', 'D'];
 
   return (
     <NutriCard>
       <Grid container spacing={2}>
-        <Typography sx={{ mb: 1.5 }} variant="h5">
-          Selecciona el valor de Nutri-Score que quieres conseguir:
-        </Typography>
-
-        {apiResult.nutri_score === 'B'
-          ? (selectValues = ['A'])
-          : apiResult.nutri_score === 'C'
-          ? (selectValues = ['A', 'B'])
-          : apiResult.nutri_score === 'D'
-          ? (selectValues = ['A', 'B', 'C'])
-          : apiResult.nutri_score === 'E' &&
-            (selectValues = ['A', 'B', 'C', 'D'])}
-
-        <Select
-          defaultValue={nutriScore}
-          fullWidth
-          id="nutri-score-select"
-          label="Nutri-Score"
-          onChange={(e) => setNutriScore(e.target.value)}
-          value={nutriScore}
-        >
-          {selectValues.map((item) => (
-            <MenuItem value={item}>{item}</MenuItem>
-          ))}
-        </Select>
-
+        <Grid item xs={12} sm={8} md={6} lg={4} xl={2} sx={{ pr: 2 }}>
+          <Typography sx={{ mb: 1.5 }} variant="h5">
+            Selecciona el valor de Nutri-Score que quieres conseguir:
+          </Typography>
+          <Select
+            defaultValue={nutriScore}
+            fullWidth
+            id="nutri-score-select"
+            label="Nutri-Score"
+            onChange={(e) => setNutriScore(e.target.value)}
+            value={nutriScore}
+          >
+            {selectScore.map((item) => (
+              <MenuItem key={item} value={item}>
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+        </Grid>
         <TableContainer>
           <Table size="small" aria-label="Detail table A">
             {/* Table headers */}
@@ -90,8 +90,7 @@ const Suggestions = ({ apiResult }) => {
               apiResult.points_c.a < 5 &&
               apiResult.points_c.c > 0 ? (
                 apiResult.nutri_score !== 'E' ? (
-                  apiResult.points_a.score ===
-                  1(
+                  apiResult.points_a.score === 1 && (
                     <TableRow>
                       {' '}
                       {/* CÓMO PONEMOS LAS KEYS? */}
