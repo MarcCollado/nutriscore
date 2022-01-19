@@ -44,9 +44,10 @@ const Search = () => {
           }}
           label="Buscador"
           onChange={(e) => setQuery(e.target.value)}
-          variant="outlined"
+          onKeyPress={(e) => e.charCode === 13 && onSubmit()}
           required
           value={query}
+          variant="outlined"
         />
         <Button onClick={onSubmit} variant="contained">
           Buscar
@@ -58,13 +59,13 @@ const Search = () => {
             aria-label="Tabla de resultados"
             autoPageSize
             checkboxSelection
+            columns={columns}
             density="compact"
             loading={isLoading}
-            rows={apiResult}
-            columns={columns}
             onPageSizeChange={(s) => setPageSize(s)}
             pageSize={pageSize}
             pagination
+            rows={apiResult}
             rowsPerPageOptions={[25, 50, 100]}
           />
         </div>
@@ -75,6 +76,14 @@ const Search = () => {
 
 const columns = [
   { field: 'barcode', headerName: 'Barcode', width: 150, editable: false },
+  {
+    field: 'brands',
+    headerName: 'Brands',
+    width: 150,
+    editable: false,
+    valueGetter: (params) =>
+      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  },
   {
     field: 'name',
     headerName: 'Name',
