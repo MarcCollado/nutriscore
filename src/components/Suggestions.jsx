@@ -59,7 +59,7 @@ const Suggestions = ({ apiResult }) => {
             </TableHead>
             <TableBody>
               <TableRow key="2">
-                {nutriTarget === 'A' ? (
+                {apiResult.nutri_score === 'A' ? (
                   <TableCell>
                     No hay ninguna sugerencia, tu producto tiene la puntuación
                     deseada.
@@ -67,16 +67,17 @@ const Suggestions = ({ apiResult }) => {
                 ) : (
                   <TableCell>
                     {`Reduce los Puntos A al menos en ` +
-                      (nutriTarget === 'B'
-                        ? apiResult.points_a.score + 1
-                        : nutriTarget === 'C'
+                      (nutriTarget === 'A'
+                        ? apiResult.points_a.score - 1
+                        : nutriTarget === 'B'
                         ? apiResult.points_a.score - 2
-                        : nutriTarget === 'D'
+                        : nutriTarget === 'C'
                         ? apiResult.points_a.score - 10
-                        : nutriTarget === 'E' && apiResult.points_a.score - 18)}
+                        : nutriTarget === 'D' && apiResult.points_a.score - 18)}
                   </TableCell>
                 )}
               </TableRow>
+              {/* @danielgbaena — revisa hasta aquí ☝️ */}
               {apiResult.points_a.score >= 11 &&
               apiResult.points_c.a < 5 &&
               apiResult.points_c.c > 0 ? (
