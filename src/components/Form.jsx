@@ -71,6 +71,22 @@ const Form = ({ setFormData, setApiResult }) => {
     setApiResult(null);
   };
 
+  // Reset button
+  const onSeed = async () => {
+    setEnergy(330);
+    setFibre(10);
+    setFruitAndVegetables(23);
+    setIsWater(false);
+    setProtein(34);
+    setSodium(7);
+    setSaturatedFats(29);
+    setSaturatedFatsAndLipids(27);
+    setSugars(6);
+    // Reset data on App.js component
+    setFormData(null);
+    setApiResult(null);
+  };
+
   return (
     <NutriCard>
       <Grid container spacing={2}>
@@ -249,6 +265,9 @@ const Form = ({ setFormData, setApiResult }) => {
         {/* Buttons */}
         <Grid item xs={6}>
           <Stack spacing={2} direction="row">
+            <Button onClick={onSeed} variant="outlined">
+              🍀 Seed
+            </Button>
             <Button onClick={onReset} variant="outlined">
               Reset
             </Button>
