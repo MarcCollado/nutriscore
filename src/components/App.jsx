@@ -17,7 +17,9 @@ const App = () => {
       <Form setApiResult={setApiResult} setFormData={setFormData}></Form>
       {apiResult ? <NutriScore apiResult={apiResult} /> : null}
       {apiResult ? <Detail apiResult={apiResult} formData={formData} /> : null}
-      {apiResult ? <Suggestions apiResult={apiResult} /> : null}
+      {apiResult ? (
+        <Suggestions apiResult={apiResult} formData={formData} />
+      ) : null}
     </Stack>
   );
 };

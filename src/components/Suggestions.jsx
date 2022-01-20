@@ -4,24 +4,26 @@ import {
   Grid,
   MenuItem,
   Select,
-  Typography,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material';
 import { NutriCard } from '../utils/containers';
 
-const Suggestions = ({ apiResult }) => {
+const Suggestions = ({ apiResult, formData }) => {
   const [nutriTarget, setNutriTarget] = useState(
     String.fromCharCode(apiResult.nutri_score.charCodeAt(0) - 1)
   );
 
   const selectScore =
     apiResult.nutri_score === 'B'
-      ? ['A']
+      ? formData.category === 'beverages'
+        ? []
+        : ['A']
       : apiResult.nutri_score === 'C'
       ? ['A', 'B']
       : apiResult.nutri_score === 'D'
@@ -52,13 +54,13 @@ const Suggestions = ({ apiResult }) => {
         <TableContainer>
           <Table size="small" aria-label="Suggestions">
             {/* Table headers */}
-            <TableHead key="1">
+            <TableHead key={0}>
               <TableRow>
                 <TableCell>Sugerencias</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow key="2">
+              <TableRow key={1}>
                 {apiResult.nutri_score === 'A' ? (
                   <TableCell>
                     No hay ninguna sugerencia, tu producto tiene la puntuación
@@ -66,53 +68,39 @@ const Suggestions = ({ apiResult }) => {
                   </TableCell>
                 ) : (
                   <TableCell>
-                    {`Reduce los Puntos A al menos en ` +
-                      (nutriTarget === 'A'
-                        ? apiResult.points_a.score - 1
+                    {`Reduce tu puntuación final al menos en ` +
+                      (nutriTarget === 'A' && formData.category !== 'beverages'
+                        ? 1 + apiResult.final_score
                         : nutriTarget === 'B'
-                        ? apiResult.points_a.score - 2
+                        ? formData.category === 'beverages'
+                          ? apiResult.final_score - 1
+                          : apiResult.final_score - 2
                         : nutriTarget === 'C'
-                        ? apiResult.points_a.score - 10
-                        : nutriTarget === 'D' && apiResult.points_a.score - 18)}
+                        ? formData.category === 'beverages'
+                          ? apiResult.final_score - 5
+                          : apiResult.final_score - 10
+                        : nutriTarget === 'D' &&
+                          formData.category === 'beverages'
+                        ? apiResult.final_score - 9
+                        : apiResult.final_score - 18)}
                   </TableCell>
                 )}
               </TableRow>
               {/* @danielgbaena — revisa hasta aquí ☝️ */}
               {apiResult.points_a.score >= 11 &&
-              apiResult.points_c.a < 5 &&
-              apiResult.points_c.c > 0 ? (
-                apiResult.nutri_score !== 'E' ? (
-                  apiResult.points_a.score === 1 && (
-                    <TableRow>
-                      {' '}
-                      {/* CÓMO PONEMOS LAS KEYS? */}
-                      <TableCell>
-                        Resta al menos {apiResult.points_a.score - 11} Punto A o
-                        aumenta los puntos de frutas y vegetales como mínimo en{' '}
-                        {5 - apiResult.points_c.a} para restar tus Puntos C a la
-                        puntuación final
-                      </TableCell>
-                    </TableRow>
-                  )
-                ) : (
-                  <TableRow>
+                apiResult.points_c.a < 5 &&
+                apiResult.points_c.c > 0 && (
+                  <TableRow key={2}>
                     <TableCell>
-                      Resta al menos {apiResult.points_a.score - 11} Puntos A o
-                      aumenta los puntos de frutas y vegetales como mínimo en{' '}
-                      {5 - apiResult.points_c.a} para restar tus Puntos C a la
-                      puntuación final
+                      {`Resta al menos ${apiResult.points_a.score - 11} Punto${
+                        apiResult.points_a.score !== 1 && 's'
+                      } A o
+                      aumenta los puntos de frutas y vegetales como mínimo en
+                      ${5 - apiResult.points_c.a} para restar tus Puntos C a la
+                      puntuación final`}
                     </TableCell>
                   </TableRow>
-                )
-              ) : (
-                <TableRow>
-                  <TableCell>
-                    Aumenta los puntos de frutas y vegetales como mínimo en{' '}
-                    {5 - apiResult.points_c.a} para restar tus Puntos C a tu
-                    puntuación final
-                  </TableCell>
-                </TableRow>
-              )}
+                )}
               {apiResult.points_a.a > 5 && (
                 <TableRow>
                   {/*KEYS!*/}
