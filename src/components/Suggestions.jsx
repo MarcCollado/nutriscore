@@ -101,9 +101,7 @@ const Suggestions = ({ apiResult, formData }) => {
                 apiResult.points_c.c > 0 && (
                   <TableRow key={2}>
                     <TableCell>
-                      {`Resta al menos ${Math.abs(
-                        apiResult.points_a.score - 10
-                      )} Punto${
+                      {`Resta al menos ${apiResult.points_a.score - 10} Punto${
                         12 - apiResult.points_a.score !== 1 ? 's' : ''
                       } A o
                       aumenta los puntos de frutas y vegetales como mínimo en
