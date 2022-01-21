@@ -120,7 +120,6 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell align="right">Energía (KJ)</TableCell>
                     <TableCell align="right">Azúcares (g)</TableCell>
                     <TableCell align="right">
-                      $
                       {formData.category === 'fats'
                         ? `Grasas saturadas y lípidos (g)`
                         : `Grasas saturadas(g)`}
