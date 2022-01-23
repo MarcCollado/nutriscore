@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# 🍔 nutriscore.app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Control de versiones
 
-## Available Scripts
+### v2.0
 
-In the project directory, you can run:
+- Calculador
+  - Deprecado de categorías en favor del campo tipo de producto
+- Búsqueda
+  - Obtención de resultados en DB local
+  - Actualización periódica de la DB local a partir de OFF
+  - Auto-filtrado previo basado en el nuevo campo tipo de producto
+  - Click en un resultado muestra su detalle
 
-### `npm start`
+### v1.0
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Calculador
+  - Introducir parámetros nutricionales requeridos por el Nutri-Score en un formulario
+  - Validación automática de parámetros
+  - Soporte para las distintas cuatro categorías
+  - Capacidad de modificar valores de manera iterativa
+  - Capacidad para resetear valores
+- Detalle de Nutri-Score
+  - Obtención del resultado Nutri-Score
+  - Explicación desglosada de la puntuación A y C
+  - Explicación del cálculo de la puntuación final
+  - Tabla resumen con los valores asociados a la puntuación final
+- Sugerencias
+  - Selección del valor Nutri-Score deseado
+  - Recomendaciones para alcanzar el valor Nutri-Score deseado
+- Búsqueda
+  - Capacidad para buscar productos a través de la API de Open Food Facts (OFF)
+  - Obtención de tabla de resultados con correspondiente información nutricional
+  - Capacidad de filtrado y ordenación de resultados
