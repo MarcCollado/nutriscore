@@ -6,6 +6,8 @@
 
 - Calculador
   - Deprecado de categorías en favor del campo tipo de producto
+- Sugerencias
+  - Los mensajes ahora incorporan información de productos relacionados
 - Búsqueda
   - Obtención de resultados en DB local
   - Actualización periódica de la DB local a partir de OFF
