@@ -19,27 +19,28 @@ const Suggestions = ({ apiResult, formData }) => {
     String.fromCharCode(apiResult.nutri_score.charCodeAt(0) - 1)
   );
 
-  const selectScore =
-    apiResult.nutri_score === 'B'
-      ? formData.category === 'beverages'
-        ? []
-        : ['A']
-      : apiResult.nutri_score === 'C'
-      ? formData.category === 'beverages'
-        ? ['B']
-        : ['A', 'B']
-      : apiResult.nutri_score === 'D'
-      ? formData.category === 'beverages'
-        ? ['B', 'C']
-        : ['A', 'B', 'C']
-      : apiResult.nutri_score === 'E' && formData.category === 'beverages'
-      ? ['B', 'C', 'D']
-      : ['A', 'B', 'C', 'D'];
+  const selectScore = () => {
+    let selectValue =
+      apiResult.nutri_score === 'B'
+        ? ['A']
+        : apiResult.nutri_score === 'C'
+        ? ['A', 'B']
+        : apiResult.nutri_score === 'D'
+        ? ['A', 'B', 'C']
+        : apiResult.nutri_score === 'E'
+        ? ['A', 'B', 'C', 'D']
+        : null;
+
+    if (selectValue !== null && formData.category === 'beverages') {
+      return selectValue.shift();
+    } else {
+      return selectValue;
+    }
+  };
 
   return (
     <NutriCard>
       <Grid container spacing={2}>
-        {/*MANTENER EL LAYOUT CUANDO ES A!!!*/}
         {apiResult.nutri_score !== 'A' && (
           <Grid item xs={12} sm={8} md={6} lg={4} xl={2} sx={{ pr: 2 }}>
             <Typography sx={{ mb: 1.5 }} variant="h5">
@@ -51,8 +52,9 @@ const Suggestions = ({ apiResult, formData }) => {
               id="nutri-score-target"
               label="Nutri-Score"
               onChange={(e) => setNutriTarget(e.target.value)}
+              sx={{ mb: 2 }}
             >
-              {selectScore.map((item) => (
+              {selectScore().map((item) => (
                 <MenuItem key={item} value={item}>
                   {item}
                 </MenuItem>
@@ -63,13 +65,14 @@ const Suggestions = ({ apiResult, formData }) => {
         <TableContainer>
           <Table size="small" aria-label="Suggestions">
             {/* Table headers */}
-            <TableHead key={0}>
+            <TableHead>
               <TableRow>
                 <TableCell>Sugerencias</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow key={1}>
+              <TableRow>
+                {/* TODO: stretch the container to fill the empty space */}
                 {apiResult.nutri_score === 'A' ? (
                   <TableCell>
                     No hay ninguna sugerencia, tu producto tiene la puntuación
@@ -95,24 +98,22 @@ const Suggestions = ({ apiResult, formData }) => {
                   </TableCell>
                 )}
               </TableRow>
-              {/* @danielgbaena — revisa hasta aquí ☝️ */}
               {apiResult.points_a.score >= 11 &&
                 apiResult.points_c.a < 5 &&
                 apiResult.points_c.c > 0 && (
-                  <TableRow key={2}>
+                  <TableRow>
                     <TableCell>
                       {`Resta al menos ${apiResult.points_a.score - 10} Punto${
                         12 - apiResult.points_a.score !== 1 ? 's' : ''
-                      } A o
-                      aumenta los puntos de frutas y vegetales como mínimo en
-                      ${5 - apiResult.points_c.a} para restar tus Puntos C a la
+                      } A o aumenta los puntos de frutas y vegetales como mínimo en ${
+                        5 - apiResult.points_c.a
+                      } para restar tus Puntos C a la
                       puntuación final`}
                     </TableCell>
                   </TableRow>
                 )}
               {apiResult.points_a.a > 5 && (
                 <TableRow>
-                  {/*KEYS!*/}
                   <TableCell>
                     Intenta que la cantidad de energía sea menor
                   </TableCell>
@@ -120,7 +121,6 @@ const Suggestions = ({ apiResult, formData }) => {
               )}
               {apiResult.points_a.b > 5 && (
                 <TableRow>
-                  {/*KEYS!*/}
                   <TableCell>
                     La puntuación podría mejorar con menos azúcares
                   </TableCell>
@@ -128,7 +128,6 @@ const Suggestions = ({ apiResult, formData }) => {
               )}
               {apiResult.points_a.c > 5 && (
                 <TableRow>
-                  {/*KEYS!*/}
                   <TableCell>
                     Sería conveniente reducir la cantidad de grasas
                   </TableCell>
@@ -136,7 +135,6 @@ const Suggestions = ({ apiResult, formData }) => {
               )}
               {apiResult.points_a.d > 5 && (
                 <TableRow>
-                  {/*KEYS!*/}
                   <TableCell>Deberías considerar disminuir el sodio</TableCell>
                 </TableRow>
               )}
