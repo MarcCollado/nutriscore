@@ -212,6 +212,7 @@ const Detail = ({ apiResult, formData }) => {
                     >
                       {'Puntos A ≥ 11'}
                     </TableCell>
+                    {/* TODO: <tr> cannot appear as a child of <tr> */}
                     <TableRow>
                       <TableCell
                         sx={{
