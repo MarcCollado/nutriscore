@@ -111,7 +111,12 @@ const Detail = ({ apiResult, formData }) => {
             <Typography sx={{ mb: 1 }} variant="h5">
               🔬 Detalle de puntos A
             </Typography>
-            <TableContainer>
+            <TableContainer
+              sx={{
+                border: '1px solid rgba(0, 0, 0, 0.1)',
+                borderRadius: 4,
+              }}
+            >
               <Table size="small" aria-label="Detail table A">
                 {/* Table headers */}
                 <TableHead>
@@ -160,7 +165,12 @@ const Detail = ({ apiResult, formData }) => {
             <Typography sx={{ mb: 1 }} variant="h5">
               🔬 Detalle de puntos C
             </Typography>
-            <TableContainer>
+            <TableContainer
+              sx={{
+                border: '1px solid rgba(0, 0, 0, 0.1)',
+                borderRadius: 4,
+              }}
+            >
               <Table size="small" aria-label="Detail table C">
                 {/* Table headers */}
                 <TableHead>
@@ -201,7 +211,12 @@ const Detail = ({ apiResult, formData }) => {
             <Typography sx={{ mb: 1 }} variant="h5">
               🤔 Cómo se calculó mi Nutri-Score
             </Typography>
-            <TableContainer>
+            <TableContainer
+              sx={{
+                border: '1px solid rgba(0, 0, 0, 0.1)',
+                borderRadius: 4,
+              }}
+            >
               <Table aria-label="How table">
                 <TableBody>
                   <TableRow key={0}>
@@ -286,7 +301,12 @@ const Detail = ({ apiResult, formData }) => {
             <Typography sx={{ mb: 1 }} variant="h5">
               🏆 Mi puntuación
             </Typography>
-            <TableContainer>
+            <TableContainer
+              sx={{
+                border: '1px solid rgba(0, 0, 0, 0.1)',
+                borderRadius: 4,
+              }}
+            >
               <Table aria-label="Detail table">
                 {/* Table headers */}
                 <TableHead>
