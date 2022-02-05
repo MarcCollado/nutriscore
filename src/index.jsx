@@ -17,7 +17,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Navbar />
-      <Container>
+      <Container maxWidth="lg">
         <Routes>
           <Route path="/" element={<App />}></Route>
           <Route path="/search" element={<Search />}></Route>
