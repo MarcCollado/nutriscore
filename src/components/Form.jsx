@@ -91,7 +91,7 @@ const Form = ({ setFormData, setApiResult }) => {
     <NutriCard>
       <Grid container spacing={2}>
         {/* Category */}
-        <Grid item xs={12} sm={8} md={6} lg={4} xl={2} sx={{ pr: 2 }}>
+        <Grid item xs={9} sm={7} md={5} lg={4}>
           <Typography sx={{ mb: 1.5 }} variant="h5">
             Categoría
           </Typography>
@@ -263,8 +263,8 @@ const Form = ({ setFormData, setApiResult }) => {
           ) : null}
         </Grid>
         {/* Buttons */}
-        <Grid item xs={6}>
-          <Stack spacing={2} direction="row">
+        <Grid item xs={12}>
+          <Stack spacing={2} direction="row" sx={{ float: 'right' }}>
             <Button onClick={onSeed} variant="outlined">
               🍀 Seed
             </Button>
