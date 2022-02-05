@@ -40,9 +40,9 @@ const Suggestions = ({ apiResult, formData }) => {
 
   return (
     <NutriCard>
-      <Grid container spacing={2}>
+      <Grid container>
         {apiResult.nutri_score !== 'A' && (
-          <Grid item xs={12} sm={8} md={6} lg={4} xl={2} sx={{ pr: 2 }}>
+          <Grid item xs={9} sm={7} md={5} lg={4}>
             <Typography sx={{ mb: 1.5 }} variant="h5">
               Selecciona el valor de Nutri-Score que quieres conseguir:
             </Typography>
@@ -62,85 +62,97 @@ const Suggestions = ({ apiResult, formData }) => {
             </Select>
           </Grid>
         )}
-        <TableContainer>
-          <Table size="small" aria-label="Suggestions">
-            {/* Table headers */}
-            <TableHead>
-              <TableRow>
-                <TableCell>Sugerencias</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                {/* TODO: stretch the container to fill the empty space */}
-                {apiResult.nutri_score === 'A' ? (
-                  <TableCell>
-                    No hay ninguna sugerencia, tu producto tiene la puntuación
-                    deseada.
-                  </TableCell>
-                ) : (
-                  <TableCell>
-                    {`Reduce tu puntuación final al menos en ` +
-                      (nutriTarget === 'A' && formData.category !== 'beverages'
-                        ? 1 + apiResult.final_score
-                        : nutriTarget === 'B'
-                        ? formData.category === 'beverages'
-                          ? apiResult.final_score - 1
-                          : apiResult.final_score - 2
-                        : nutriTarget === 'C'
-                        ? formData.category === 'beverages'
-                          ? apiResult.final_score - 5
-                          : apiResult.final_score - 10
-                        : nutriTarget === 'D' &&
-                          formData.category === 'beverages'
-                        ? apiResult.final_score - 9
-                        : apiResult.final_score - 18)}
-                  </TableCell>
-                )}
-              </TableRow>
-              {apiResult.points_a.score >= 11 &&
-                apiResult.points_c.a < 5 &&
-                apiResult.points_c.c > 0 && (
+        <Grid item xs={12}>
+          <TableContainer
+            sx={{
+              border: '1px solid rgba(0, 0, 0, 0.1)',
+              borderRadius: 4,
+            }}
+          >
+            <Table size="small" aria-label="Suggestions">
+              {/* Table headers */}
+              <TableHead>
+                <TableRow>
+                  <TableCell>Sugerencias</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  {/* TODO: stretch the container to fill the empty space */}
+                  {apiResult.nutri_score === 'A' ? (
+                    <TableCell>
+                      No hay ninguna sugerencia, tu producto tiene la puntuación
+                      deseada.
+                    </TableCell>
+                  ) : (
+                    <TableCell>
+                      {`Reduce tu puntuación final al menos en ` +
+                        (nutriTarget === 'A' &&
+                        formData.category !== 'beverages'
+                          ? 1 + apiResult.final_score
+                          : nutriTarget === 'B'
+                          ? formData.category === 'beverages'
+                            ? apiResult.final_score - 1
+                            : apiResult.final_score - 2
+                          : nutriTarget === 'C'
+                          ? formData.category === 'beverages'
+                            ? apiResult.final_score - 5
+                            : apiResult.final_score - 10
+                          : nutriTarget === 'D' &&
+                            formData.category === 'beverages'
+                          ? apiResult.final_score - 9
+                          : apiResult.final_score - 18)}
+                    </TableCell>
+                  )}
+                </TableRow>
+                {apiResult.points_a.score >= 11 &&
+                  apiResult.points_c.a < 5 &&
+                  apiResult.points_c.c > 0 && (
+                    <TableRow>
+                      <TableCell>
+                        {`Resta al menos ${
+                          apiResult.points_a.score - 10
+                        } Punto${
+                          12 - apiResult.points_a.score !== 1 ? 's' : ''
+                        } A o aumenta los puntos de frutas y vegetales como mínimo en ${
+                          5 - apiResult.points_c.a
+                        } para restar tus Puntos C a la
+                      puntuación final`}
+                      </TableCell>
+                    </TableRow>
+                  )}
+                {apiResult.points_a.a > 5 && (
                   <TableRow>
                     <TableCell>
-                      {`Resta al menos ${apiResult.points_a.score - 10} Punto${
-                        12 - apiResult.points_a.score !== 1 ? 's' : ''
-                      } A o aumenta los puntos de frutas y vegetales como mínimo en ${
-                        5 - apiResult.points_c.a
-                      } para restar tus Puntos C a la
-                      puntuación final`}
+                      Intenta que la cantidad de energía sea menor
                     </TableCell>
                   </TableRow>
                 )}
-              {apiResult.points_a.a > 5 && (
-                <TableRow>
-                  <TableCell>
-                    Intenta que la cantidad de energía sea menor
-                  </TableCell>
-                </TableRow>
-              )}
-              {apiResult.points_a.b > 5 && (
-                <TableRow>
-                  <TableCell>
-                    La puntuación podría mejorar con menos azúcares
-                  </TableCell>
-                </TableRow>
-              )}
-              {apiResult.points_a.c > 5 && (
-                <TableRow>
-                  <TableCell>
-                    Sería conveniente reducir la cantidad de grasas
-                  </TableCell>
-                </TableRow>
-              )}
-              {apiResult.points_a.d > 5 && (
-                <TableRow>
-                  <TableCell>Deberías considerar disminuir el sodio</TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                {apiResult.points_a.b > 5 && (
+                  <TableRow>
+                    <TableCell>
+                      La puntuación podría mejorar con menos azúcares
+                    </TableCell>
+                  </TableRow>
+                )}
+                {apiResult.points_a.c > 5 && (
+                  <TableRow>
+                    <TableCell>
+                      Sería conveniente reducir la cantidad de grasas
+                    </TableCell>
+                  </TableRow>
+                )}
+                {apiResult.points_a.d > 5 && (
+                  <TableRow>
+                    <TableCell>
+                      Deberías considerar disminuir el sodio
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
       </Grid>
     </NutriCard>
   );
