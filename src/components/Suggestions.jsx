@@ -29,7 +29,7 @@ const Suggestions = ({ apiResult, formData }) => {
         ? ['A', 'B', 'C']
         : apiResult.nutri_score === 'E'
         ? ['A', 'B', 'C', 'D']
-        : null;
+        : [''];
 
     if (selectValue !== null && formData.category === 'beverages') {
       return selectValue.shift();
@@ -41,27 +41,31 @@ const Suggestions = ({ apiResult, formData }) => {
   return (
     <NutriCard>
       <Grid container>
-        {apiResult.nutri_score !== 'A' && (
-          <Grid item xs={9} sm={7} md={5} lg={4}>
-            <Typography sx={{ mb: 1.5 }} variant="h5">
-              Selecciona el valor de Nutri-Score que quieres conseguir:
-            </Typography>
-            <Select
-              defaultValue={nutriTarget}
-              fullWidth
-              id="nutri-score-target"
-              label="Nutri-Score"
-              onChange={(e) => setNutriTarget(e.target.value)}
-              sx={{ mb: 2 }}
-            >
-              {selectScore().map((item) => (
-                <MenuItem key={item} value={item}>
-                  {item}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-        )}
+        <Grid item xs={9} sm={7} md={5} lg={4}>
+          <Typography sx={{ mb: 1.5, minWidth: '50vw' }} variant="h5">
+            {apiResult.nutri_score === 'A'
+              ? 'Tu producto ha alcanzado la máxima puntuación de Nutri-Score:'
+              : 'Selecciona el valor de Nutri-Score que quieres conseguir:'}
+          </Typography>
+          <Select
+            defaultValue={nutriTarget}
+            fullWidth
+            id="nutri-score-target"
+            label="Nutri-Score"
+            onChange={(e) => setNutriTarget(e.target.value)}
+            sx={{
+              display: `${apiResult.nutri_score === 'A' ? 'none' : 'block'}`,
+              mb: 2,
+            }}
+          >
+            {selectScore().map((item) => (
+              <MenuItem key={item} value={item}>
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+        </Grid>
+
         <Grid item xs={12}>
           <TableContainer
             sx={{
