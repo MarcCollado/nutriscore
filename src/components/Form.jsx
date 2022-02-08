@@ -32,6 +32,14 @@ const Form = ({ setFormData, setApiResult }) => {
   const [protein, setProtein] = useState('');
   const [isWater, setIsWater] = useState(false);
 
+  // Event listener to submit form on Enter
+  document.addEventListener('keydown', function (e) {
+    if (e.code === 'Enter') {
+      //checks whether the pressed key is "Enter"
+      formIsValid() && onSubmit();
+    }
+  });
+
   // Form is valid and complete
   const formIsValid = () => {
     if (
@@ -50,37 +58,34 @@ const Form = ({ setFormData, setApiResult }) => {
 
   // Render submit button
   const SubmitButton = () => {
-    if (formIsValid()) {
-      return (
-        <Button onClick={onSubmit} size="large" variant="contained">
-          Calcular
-        </Button>
-      );
-    } else {
-      return (
-        <Button disabled onClick={onSubmit} size="large" variant="contained">
-          Calcular
-        </Button>
-      );
-    }
+    return (
+      <Button
+        disabled={!formIsValid()}
+        id="submit"
+        onClick={onSubmit}
+        size="large"
+        variant="contained"
+      >
+        Calcular
+      </Button>
+    );
   };
 
   // Handle form submit
   const onSubmit = async () => {
-    const formData = {
-      category: category,
-      energy: energy,
-      fibre: fibre,
-      fruit_and_vegetables: fruitAndVegetables,
-      is_water: isWater,
-      protein: protein,
-      sodium: sodium,
-      saturated_fats: saturatedFats || 0.0,
-      saturated_fats_and_lipids: saturatedFatsAndLipids || 0.0,
-      sugars: sugars,
-    };
-
     if (formIsValid()) {
+      const formData = {
+        category: category,
+        energy: energy,
+        fibre: fibre,
+        fruit_and_vegetables: fruitAndVegetables,
+        is_water: isWater,
+        protein: protein,
+        sodium: sodium,
+        saturated_fats: saturatedFats || 0.0,
+        saturated_fats_and_lipids: saturatedFatsAndLipids || 0.0,
+        sugars: sugars,
+      };
       // Set form data on App.js before submit
       setFormData(formData);
       // Fetch Calculate API
@@ -88,7 +93,6 @@ const Form = ({ setFormData, setApiResult }) => {
         .then((res) => res.json())
         .then((res) => setApiResult(res));
     }
-
     return;
   };
 
@@ -119,9 +123,6 @@ const Form = ({ setFormData, setApiResult }) => {
     setSaturatedFats(29);
     setSaturatedFatsAndLipids(27);
     setSugars(6);
-    // Reset data on App.js component
-    setFormData(null);
-    setApiResult(null);
   };
 
   return (
