@@ -41,7 +41,13 @@ const Suggestions = ({ apiResult, formData }) => {
     <NutriCard>
       <Grid container>
         <Grid item xs={9} sm={7} md={5} lg={4}>
-          <Typography sx={{ mb: 1.5, minWidth: '50vw' }} variant="h5">
+          <Typography
+            sx={{
+              mb: 1.5,
+              width: 'clamp(450px, 75vw, 950px);',
+            }}
+            variant="h5"
+          >
             {apiResult.nutri_score === 'A'
               ? 'Tu producto ha alcanzado la máxima puntuación de Nutri-Score:'
               : 'Selecciona el valor de Nutri-Score que quieres conseguir:'}
