@@ -15,8 +15,22 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [pageSize, setPageSize] = React.useState(25);
 
-  // Submit button
-  const onSubmit = async () => {
+  // Event listener to search on Enter
+  document.addEventListener('keydown', function (e) {
+    if (e.code === 'Enter') {
+      // Checks whether the pressed key is "Enter"
+      searchIsValid() && onSearch();
+    }
+  });
+
+  // Search is valid and complete
+  const searchIsValid = () => {
+    if (!!query) return true;
+    return false;
+  };
+
+  // Search button
+  const onSearch = async () => {
     setIsLoading(true);
     // Fetch Search API
     fetch(`${baseApiUrl}search?q=${JSON.stringify(query)}`)
@@ -44,12 +58,15 @@ const Search = () => {
           }}
           label="Buscador"
           onChange={(e) => setQuery(e.target.value)}
-          onKeyPress={(e) => e.charCode === 13 && onSubmit()}
           required
           value={query}
           variant="outlined"
         />
-        <Button onClick={onSubmit} variant="contained">
+        <Button
+          disabled={!searchIsValid()}
+          onClick={onSearch}
+          variant="contained"
+        >
           Buscar
         </Button>
       </Stack>
