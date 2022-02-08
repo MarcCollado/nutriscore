@@ -35,7 +35,7 @@ const Form = ({ setFormData, setApiResult }) => {
   // Event listener to submit form on Enter
   document.addEventListener('keydown', function (e) {
     if (e.code === 'Enter') {
-      //checks whether the pressed key is "Enter"
+      // Checks whether the pressed key is "Enter"
       formIsValid() && onSubmit();
     }
   });
