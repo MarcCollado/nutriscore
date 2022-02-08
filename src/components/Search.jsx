@@ -31,7 +31,7 @@ const Search = () => {
   };
 
   return (
-    <Stack spacing={2} sx={{ mx: 'auto', width: '90%' }}>
+    <Stack spacing={2} sx={{ mx: 'auto' }}>
       <Stack direction="row" spacing={2} sx={{ mx: 'auto', width: 400 }}>
         <TextField
           id="search"
@@ -75,7 +75,15 @@ const Search = () => {
 };
 
 const columns = [
-  { field: 'barcode', headerName: 'Barcode', width: 150, editable: false },
+  {
+    field: 'nutriscore_grade',
+  },
+  {
+    field: 'name',
+    headerName: 'Name',
+    width: 250,
+    editable: false,
+  },
   {
     field: 'brands',
     headerName: 'Brands',
@@ -85,10 +93,33 @@ const columns = [
       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
   },
   {
-    field: 'name',
-    headerName: 'Name',
-    width: 250,
+    field: 'countries',
+    headerName: 'Countries',
+    width: 150,
     editable: false,
+    valueGetter: (params) =>
+      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  },
+  {
+    field: 'energy',
+  },
+  {
+    field: 'sugars',
+  },
+  {
+    field: 'saturated_fats',
+  },
+  {
+    field: 'sodium',
+  },
+  {
+    field: 'fruit_and_vegetables',
+  },
+  {
+    field: 'fibre',
+  },
+  {
+    field: 'protein',
   },
   // {
   //   field: 'fullName',
