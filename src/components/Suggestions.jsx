@@ -30,7 +30,6 @@ const Suggestions = ({ apiResult, formData }) => {
         : apiResult.nutri_score === 'E'
         ? ['A', 'B', 'C', 'D']
         : [''];
-
     if (selectValue !== null && formData.category === 'beverages') {
       return selectValue.shift();
     } else {
