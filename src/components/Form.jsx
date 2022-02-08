@@ -32,9 +32,41 @@ const Form = ({ setFormData, setApiResult }) => {
   const [protein, setProtein] = useState('');
   const [isWater, setIsWater] = useState(false);
 
-  // Submit button
+  // Form is valid and complete
+  const formIsValid = () => {
+    if (
+      !!category &&
+      !!energy &&
+      !!sugars &&
+      (!!saturatedFats || !!saturatedFatsAndLipids) &&
+      !!sodium &&
+      !!fruitAndVegetables &&
+      !!fibre &&
+      !!protein
+    )
+      return true;
+    return false;
+  };
+
+  // Render submit button
+  const SubmitButton = () => {
+    if (formIsValid()) {
+      return (
+        <Button onClick={onSubmit} size="large" variant="contained">
+          Calcular
+        </Button>
+      );
+    } else {
+      return (
+        <Button disabled onClick={onSubmit} size="large" variant="contained">
+          Calcular
+        </Button>
+      );
+    }
+  };
+
+  // Handle form submit
   const onSubmit = async () => {
-    // Create an object with form data inputs
     const formData = {
       category: category,
       energy: energy,
@@ -47,12 +79,17 @@ const Form = ({ setFormData, setApiResult }) => {
       saturated_fats_and_lipids: saturatedFatsAndLipids || 0.0,
       sugars: sugars,
     };
-    // Set form data on App.js before submit
-    setFormData(formData);
-    // Fetch Calculate API
-    fetch(`${baseApiUrl}calculate?q=${JSON.stringify(formData)}`)
-      .then((res) => res.json())
-      .then((res) => setApiResult(res));
+
+    if (formIsValid()) {
+      // Set form data on App.js before submit
+      setFormData(formData);
+      // Fetch Calculate API
+      fetch(`${baseApiUrl}calculate?q=${JSON.stringify(formData)}`)
+        .then((res) => res.json())
+        .then((res) => setApiResult(res));
+    }
+
+    return;
   };
 
   // Reset button
@@ -71,7 +108,7 @@ const Form = ({ setFormData, setApiResult }) => {
     setApiResult(null);
   };
 
-  // Reset button
+  // Seed button
   const onSeed = async () => {
     setEnergy(330);
     setFibre(10);
@@ -271,9 +308,7 @@ const Form = ({ setFormData, setApiResult }) => {
             <Button onClick={onReset} variant="outlined">
               Reset
             </Button>
-            <Button onClick={onSubmit} size="large" variant="contained">
-              Calcular
-            </Button>
+            <SubmitButton />
           </Stack>
         </Grid>
       </Grid>
