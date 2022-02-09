@@ -4,6 +4,8 @@ import { Button, InputAdornment, Stack, TextField } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import SearchIcon from '@mui/icons-material/Search';
 
+import { capitalize } from '../utils/helpers';
+
 // Base API URL
 const baseApiUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
 
@@ -13,7 +15,7 @@ const Search = () => {
   // API response
   const [apiResult, setApiResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [pageSize, setPageSize] = React.useState(25);
+  const [pageSize, setPageSize] = useState(25);
 
   // Event listener to search on Enter
   document.addEventListener('keydown', function (e) {
@@ -35,11 +37,11 @@ const Search = () => {
     // Fetch Search API
     fetch(`${baseApiUrl}search?q=${JSON.stringify(query)}`)
       .then((res) => {
-        setIsLoading(false);
         return res.json();
       })
       .then((res) => {
         const rows = res.map((r, i) => ({ ...r, id: i }));
+        setIsLoading(false);
         setApiResult(rows);
       });
   };
@@ -75,7 +77,7 @@ const Search = () => {
           <DataGrid
             aria-label="Tabla de resultados"
             autoPageSize
-            checkboxSelection
+            // checkboxSelection
             columns={columns}
             density="compact"
             loading={isLoading}
@@ -92,61 +94,75 @@ const Search = () => {
 };
 
 const columns = [
+  // TODO: Display Letter + order properly
   {
     field: 'nutriscore_grade',
+    flex: 1,
+    headerName: 'Nutri-Score',
+    editable: false,
   },
   {
     field: 'name',
-    headerName: 'Name',
-    width: 250,
+    flex: 3,
+    headerName: 'Nombre',
     editable: false,
   },
   {
     field: 'brands',
+    flex: 2,
     headerName: 'Brands',
-    width: 150,
     editable: false,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+    valueGetter: (params) => {
+      params.row.brands.map((b, i) =>
+        i === 0 ? capitalize(b) : ' ' + capitalize(b)
+      );
+    },
   },
+  // TODO: Countries display flags
   {
     field: 'countries',
+    flex: 1,
     headerName: 'Countries',
-    width: 150,
-    editable: false,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+    valueGetter: (params) => {
+      // let unique = [...new Set(params.row.countries)];
+      return params.row.countries;
+    },
   },
   {
     field: 'energy',
+    flex: 1,
+    headerName: 'Energía',
   },
   {
     field: 'sugars',
+    flex: 1,
+    headerName: 'Azúcares',
   },
   {
     field: 'saturated_fats',
+    flex: 1,
+    headerName: 'Grasas',
   },
   {
     field: 'sodium',
+    flex: 1,
+    headerName: 'Sodio',
   },
   {
     field: 'fruit_and_vegetables',
+    flex: 1,
+    headerName: 'Frutas y vegetales',
   },
   {
     field: 'fibre',
+    flex: 1,
+    headerName: 'Fibra',
   },
   {
     field: 'protein',
+    flex: 1,
+    headerName: 'Proteínas',
   },
-  // {
-  //   field: 'fullName',
-  //   headerName: 'Full name',
-  //   description: 'This column has a value getter and is not sortable.',
-  //   sortable: false,
-  //   width: 160,
-  //   valueGetter: (params) =>
-  //     `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  // },
 ];
 
 export default Search;
