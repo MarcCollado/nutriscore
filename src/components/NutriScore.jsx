@@ -6,6 +6,7 @@ import { NutriCard } from '../utils/containers';
 const NutriScore = ({ apiResult }) => {
   const letter = apiResult?.nutri_score.toLowerCase();
 
+  // TODO: highlight color
   return (
     apiResult && (
       <NutriCard>
