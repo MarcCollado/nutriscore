@@ -1,5 +1,5 @@
 export const capitalize = (word) => {
-  return word.charAt(0).toUpperCase() + word.slice(1);
+  return !!word ? word.charAt(0).toUpperCase() + word.slice(1) : word;
 };
 
 export const nutriScoreSorting = (ns1, ns2) => {
