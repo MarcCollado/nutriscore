@@ -5,7 +5,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { capitalize } from '../utils/helpers';
-// import { nutriScoreSorting } from '../utils/helpers';
 import seed from '../docs/search.json';
 
 // Base API URL
@@ -87,8 +86,8 @@ const Search = () => {
               sorting: {
                 sortModel: [
                   {
-                    field: 'nutriscore_grade',
-                    sort: 'desc',
+                    field: 'custom_sort',
+                    sort: 'asc',
                   },
                 ],
               },
@@ -107,8 +106,17 @@ const Search = () => {
 };
 
 const columns = [
-  // TODO: Order properly
-  // https://mui.com/components/data-grid/sorting/#custom-comparator
+  {
+    field: 'custom_sort',
+    flex: 1,
+    editable: false,
+    headerName: 'Sort',
+    hide: true,
+    valueGetter: (params) =>
+      params.row.nutriscore_grade
+        ? params.row.nutriscore_grade.charCodeAt(0)
+        : 102,
+  },
   {
     field: 'nutriscore_grade',
     flex: 1,
