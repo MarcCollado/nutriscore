@@ -146,36 +146,49 @@ const columns = [
     field: 'energy',
     flex: 1,
     headerName: 'Energía (KJ)',
+    valueParser: (params) => (Math.round(params.value * 100) / 100).toFixed(2),
   },
   {
     field: 'sugars',
     flex: 1,
     headerName: 'Azúcares (g)',
+    valueFormatter: (params) =>
+      (Math.round(params.value * 100) / 100).toFixed(2),
   },
   {
     field: 'saturated_fats',
     flex: 1,
     headerName: 'Grasas (g)',
+    valueFormatter: (params) =>
+      (Math.round(params.value * 100) / 100).toFixed(2),
   },
   {
     field: 'sodium',
     flex: 1,
     headerName: 'Sodio (g)',
+    valueFormatter: (params) =>
+      (Math.round(params.value * 100) / 100).toFixed(2),
   },
   {
     field: 'fruit_and_vegetables',
     flex: 1,
     headerName: 'Frutas y vegetales (%)',
+    valueFormatter: (params) =>
+      (Math.round(params.value * 100) / 100).toFixed(2),
   },
   {
     field: 'fibre',
     flex: 1,
     headerName: 'Fibra (g)',
+    valueFormatter: (params) =>
+      (Math.round(params.value * 100) / 100).toFixed(2),
   },
   {
     field: 'protein',
     flex: 1,
     headerName: 'Proteínas (g)',
+    valueFormatter: (params) =>
+      (Math.round(params.value * 100) / 100).toFixed(2),
   },
 ];
 
