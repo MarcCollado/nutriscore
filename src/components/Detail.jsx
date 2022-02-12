@@ -12,7 +12,7 @@ import {
 
 import { tableColors } from '../utils/colors';
 import { NutriCard } from '../utils/containers';
-import { createCell, tableAValues, tableCValues } from '../utils/tables';
+import { createCell, tableAValues, tableCValues } from '../utils/maps';
 
 const Detail = ({ apiResult, formData }) => {
   const createPointsATableRow = (

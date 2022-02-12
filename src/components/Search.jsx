@@ -5,7 +5,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { nsColors } from '../utils/colors';
-import { capitalize, getFlags } from '../utils/helpers';
+import { capitalize } from '../utils/helpers';
+import { getFlags } from '../utils/maps';
 import seed from '../docs/search.json';
 
 // Base API URL
