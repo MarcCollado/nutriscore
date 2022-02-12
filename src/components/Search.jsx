@@ -4,7 +4,7 @@ import { Button, InputAdornment, Stack, TextField } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import SearchIcon from '@mui/icons-material/Search';
 
-import { capitalize } from '../utils/helpers';
+import { capitalize, getFlags } from '../utils/helpers';
 import seed from '../docs/search.json';
 
 // Base API URL
@@ -143,10 +143,11 @@ const columns = [
     field: 'countries',
     flex: 1,
     headerName: 'Countries',
-    hide: true,
     valueGetter: (params) => {
       // let unique = [...new Set(params.row.countries)];
-      return params.row.countries;
+      return params.row.countries.map((c, i) =>
+        i === 0 ? getFlags(c) : ' ' + getFlags(c)
+      );
     },
   },
   {
