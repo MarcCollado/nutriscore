@@ -113,17 +113,16 @@ const columns = [
     headerName: 'Sort',
     hide: true,
     valueGetter: (params) =>
-      params.row.nutriscore_grade
-        ? params.row.nutriscore_grade.charCodeAt(0)
+      params.row.nutriscore_data.nutri_score
+        ? params.row.nutriscore_data.nutri_score.charCodeAt(0)
         : 102,
   },
   {
-    field: 'nutriscore_grade',
+    field: 'nutriscore_data',
     flex: 1,
     headerName: 'Nutri-Score',
     editable: false,
-    // sortComparator: nutriScoreSorting,
-    valueGetter: (params) => capitalize(params.value),
+    valueGetter: (params) => capitalize(params.row.nutriscore_data.nutri_score),
   },
   {
     field: 'name',
@@ -140,26 +139,29 @@ const columns = [
       );
     },
   },
-  // TODO: Countries display flags
-  // {
-  //   field: 'countries',
-  //   flex: 1,
-  //   headerName: 'Countries',
-  //   valueGetter: (params) => {
-  //     // let unique = [...new Set(params.row.countries)];
-  //     return params.row.countries;
-  //   },
-  // },
+  {
+    field: 'countries',
+    flex: 1,
+    headerName: 'Countries',
+    hide: true,
+    valueGetter: (params) => {
+      // let unique = [...new Set(params.row.countries)];
+      return params.row.countries;
+    },
+  },
   {
     field: 'energy',
     flex: 1,
     headerName: 'Energía (KJ)',
-    valueParser: (params) => (Math.round(params.value * 100) / 100).toFixed(2),
+    valueGetter: (params) => params.row.nutriscore_data.points_a.energy,
+    valueFormatter: (params) =>
+      (Math.round(params.value * 100) / 100).toFixed(2),
   },
   {
     field: 'sugars',
     flex: 1,
     headerName: 'Azúcares (g)',
+    valueGetter: (params) => params.row.nutriscore_data.points_a.sugars,
     valueFormatter: (params) =>
       (Math.round(params.value * 100) / 100).toFixed(2),
   },
@@ -167,6 +169,7 @@ const columns = [
     field: 'saturated_fats',
     flex: 1,
     headerName: 'Grasas (g)',
+    valueGetter: (params) => params.row.nutriscore_data.points_a.saturated_fats,
     valueFormatter: (params) =>
       (Math.round(params.value * 100) / 100).toFixed(2),
   },
@@ -174,6 +177,7 @@ const columns = [
     field: 'sodium',
     flex: 1,
     headerName: 'Sodio (g)',
+    valueGetter: (params) => params.row.nutriscore_data.points_a.sodium,
     valueFormatter: (params) =>
       (Math.round(params.value * 100) / 100).toFixed(2),
   },
@@ -181,6 +185,8 @@ const columns = [
     field: 'fruit_and_vegetables',
     flex: 1,
     headerName: 'Frutas y vegetales (%)',
+    valueGetter: (params) =>
+      params.row.nutriscore_data.points_c.fruits_and_vegetables,
     valueFormatter: (params) =>
       (Math.round(params.value * 100) / 100).toFixed(2),
   },
@@ -188,6 +194,7 @@ const columns = [
     field: 'fibre',
     flex: 1,
     headerName: 'Fibra (g)',
+    valueGetter: (params) => params.row.nutriscore_data.points_c.fibre,
     valueFormatter: (params) =>
       (Math.round(params.value * 100) / 100).toFixed(2),
   },
@@ -195,6 +202,7 @@ const columns = [
     field: 'protein',
     flex: 1,
     headerName: 'Proteínas (g)',
+    valueGetter: (params) => params.row.nutriscore_data.points_c.protein,
     valueFormatter: (params) =>
       (Math.round(params.value * 100) / 100).toFixed(2),
   },
