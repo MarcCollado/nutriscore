@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {
   Button,
+  FormControl,
   FormControlLabel,
   Grid,
   InputAdornment,
+  InputLabel,
   MenuItem,
   Select,
   Stack,
@@ -13,13 +15,15 @@ import {
 } from '@mui/material';
 
 import { NutriCard } from '../utils/containers';
+import { nsGroups } from '../utils/maps';
 
 // Base API URL
 const baseApiUrl = `https://nutri-score-app-api.ew.r.appspot.com/`;
 
 const Form = ({ setFormData, setApiResult }) => {
-  // Categories
-  const [category, setCategory] = useState('others');
+  // Categories and groups
+  const [category, setCategory] = useState('');
+  const [group, setGroup] = useState('');
   // Points A
   const [energy, setEnergy] = useState('');
   const [sugars, setSugars] = useState('');
@@ -31,6 +35,17 @@ const Form = ({ setFormData, setApiResult }) => {
   const [fibre, setFibre] = useState('');
   const [protein, setProtein] = useState('');
   const [isWater, setIsWater] = useState(false);
+
+  // Generate groups
+  const generateGroups = () => {
+    return Object.keys(nsGroups()).map((k) => {
+      return (
+        <MenuItem key={k} value={k}>
+          {nsGroups()[k]['translation']}
+        </MenuItem>
+      );
+    });
+  };
 
   // Event listener to submit form on Enter
   document.addEventListener('keydown', function (e) {
@@ -75,7 +90,7 @@ const Form = ({ setFormData, setApiResult }) => {
   const onSubmit = async () => {
     if (formIsValid()) {
       const formData = {
-        category: category,
+        group: group,
         energy: energy,
         fibre: fibre,
         fruit_and_vegetables: fruitAndVegetables,
@@ -89,7 +104,11 @@ const Form = ({ setFormData, setApiResult }) => {
       // Set form data on App.js before submit
       setFormData(formData);
       // Fetch Calculate API
-      fetch(`${baseApiUrl}calculate?q=${JSON.stringify(formData)}`)
+      fetch(
+        `${baseApiUrl}calculate?q=${JSON.stringify(
+          formData
+        )}&similar_products=True`
+      )
         .then((res) => res.json())
         .then((res) => setApiResult(res));
     }
@@ -131,20 +150,22 @@ const Form = ({ setFormData, setApiResult }) => {
         {/* Category */}
         <Grid item xs={9} sm={7} md={5} lg={4}>
           <Typography sx={{ mb: 1.5 }} variant="h5">
-            Categoría
+            Grupo
           </Typography>
-          <Select
-            fullWidth
-            id="category"
-            label="Categoría"
-            onChange={(e) => setCategory(e.target.value)}
-            value={category}
-          >
-            <MenuItem value="cheese">🧀 Queso</MenuItem>
-            <MenuItem value="beverages">🥤 Bebidas</MenuItem>
-            <MenuItem value="fats">🍯 Grasas, aceites, o mantequillas</MenuItem>
-            <MenuItem value="others">🎰 Otros</MenuItem>
-          </Select>
+          <FormControl fullWidth>
+            <InputLabel id="select-group">Selecciona un grupo</InputLabel>
+            <Select
+              id="category"
+              label="Selecciona un grupo"
+              onChange={(e) => {
+                setGroup(e.target.value);
+                setCategory(nsGroups()[e.target.value]['category']);
+              }}
+              value={group}
+            >
+              {generateGroups()}
+            </Select>
+          </FormControl>
         </Grid>
         {/* Points A */}
         <Grid item xs={12}>
