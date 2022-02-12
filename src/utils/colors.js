@@ -1,3 +1,11 @@
+export const nsColors = {
+  A: 'rgb(56, 127, 72)',
+  B: 'rgb(145, 185, 73)',
+  C: 'rgb(246, 205, 70)',
+  D: 'rgb(223, 134, 49)',
+  E: 'rgb(213, 76, 4)',
+};
+
 export const tableColors = {
   pointsA: [
     '#ffffff',
