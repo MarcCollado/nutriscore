@@ -4,6 +4,7 @@ import { Button, InputAdornment, Stack, TextField } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import SearchIcon from '@mui/icons-material/Search';
 
+import { nsColors } from '../utils/colors';
 import { capitalize, getFlags } from '../utils/helpers';
 import seed from '../docs/search.json';
 
@@ -40,7 +41,7 @@ const Search = () => {
       process.env.NODE_ENV === 'development'
         ? // Use local Database
           seed.map((r, i) => ({ ...r, id: i }))
-        : // Use OpenFoods Database
+        : // Use OFF Database
           fetch(`${baseApiUrl}search?q=${JSON.stringify(query)}`)
             .then((res) => res.json())
             .then((res) => res.map((r, i) => ({ ...r, id: i })));
@@ -118,11 +119,27 @@ const columns = [
         : 102,
   },
   {
+    align: 'center',
     field: 'nutriscore_data',
     flex: 1,
     headerName: 'Nutri-Score',
     editable: false,
-    valueGetter: (params) => capitalize(params.row.nutriscore_data.nutri_score),
+    renderCell: (params) => {
+      return (
+        <p
+          style={{
+            background:
+              nsColors[capitalize(params.row.nutriscore_data.nutri_score)],
+            borderRadius: '16px',
+            color: 'white',
+            fontWeight: 'bold',
+            padding: '2px 8px',
+          }}
+        >
+          {capitalize(params.row.nutriscore_data.nutri_score)}
+        </p>
+      );
+    },
   },
   {
     field: 'name',
@@ -141,7 +158,7 @@ const columns = [
   },
   {
     field: 'countries',
-    flex: 1,
+    flex: 1.5,
     headerName: 'Countries',
     valueGetter: (params) => {
       // let unique = [...new Set(params.row.countries)];
