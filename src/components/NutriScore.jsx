@@ -4,11 +4,12 @@ import { Box } from '@mui/material';
 import { NutriCard } from '../utils/containers';
 
 const NutriScore = ({ apiResult }) => {
-  const letter = apiResult?.nutri_score.toLowerCase();
+  console.log(apiResult?.nutriscore_data?.nutri_score.toLowerCase());
+  const letter = apiResult?.nutriscore_data?.nutri_score.toLowerCase();
 
   // TODO: highlight color
   return (
-    apiResult && (
+    !!apiResult.nutriscore_data.nutri_score && (
       <NutriCard>
         <Box
           component="img"
