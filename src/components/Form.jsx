@@ -90,7 +90,6 @@ const Form = ({ setFormData, setApiResult }) => {
   const onSubmit = async () => {
     if (formIsValid()) {
       const formData = {
-        category: category,
         group: group,
         energy: energy,
         fibre: fibre,
@@ -104,8 +103,6 @@ const Form = ({ setFormData, setApiResult }) => {
       };
       // Set form data on App.js before submit
       setFormData(formData);
-      // Remove category since it is not needed for the API
-      delete formData[category];
       // Fetch Calculate API
       fetch(
         `${baseApiUrl}calculate?q=${JSON.stringify(

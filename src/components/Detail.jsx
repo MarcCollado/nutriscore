@@ -36,15 +36,15 @@ const Detail = ({ apiResult, formData }) => {
         {key}
       </TableCell>
       {/* Energy */}
-      {formData.category !== 'beverages'
+      {nutriscoreData.category !== 'beverages'
         ? createCell(nutriscoreData.points_a.a, key, notBeveragesEnergy)
         : createCell(nutriscoreData.points_a.a, key, beveragesEnergy)}
       {/* Sugars */}
-      {formData.category !== 'beverages'
+      {nutriscoreData.category !== 'beverages'
         ? createCell(nutriscoreData.points_a.b, key, notBeveragesSugars)
         : createCell(nutriscoreData.points_a.b, key, beveragesSugars)}
       {/* Saturated fats / Saturated fats and lipids */}
-      {formData.category !== 'fats'
+      {nutriscoreData.category !== 'fats'
         ? key === 0
           ? createCell(nutriscoreData.points_a.c, key, '≤ ' + (key + 1))
           : createCell(nutriscoreData.points_a.c, key, '> ' + key)
@@ -62,7 +62,7 @@ const Detail = ({ apiResult, formData }) => {
     proteins
   ) => {
     // Only beverages can earn up to 10 points C
-    if (formData.category !== 'beverages' && key > 5) {
+    if (nutriscoreData.category !== 'beverages' && key > 5) {
       return null;
     } else {
       return (
@@ -73,7 +73,7 @@ const Detail = ({ apiResult, formData }) => {
             scope="row"
             sx={
               // Use different color scale for beverages -> Fruit goes to 10
-              formData.category !== 'beverages'
+              nutriscoreData.category !== 'beverages'
                 ? key <= 5 && {
                     backgroundColor: tableColors.pointsC.notBeverages[key],
                   }
@@ -83,7 +83,7 @@ const Detail = ({ apiResult, formData }) => {
             {key}
           </TableCell>
           {/* Fruits and vegetables */}
-          {formData.category === 'beverages'
+          {nutriscoreData.category === 'beverages'
             ? createCell(
                 nutriscoreData.points_c.a,
                 key,
@@ -126,7 +126,7 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell align="right">Energía (KJ)</TableCell>
                     <TableCell align="right">Azúcares (g)</TableCell>
                     <TableCell align="right">
-                      {formData.category === 'fats'
+                      {nutriscoreData.category === 'fats'
                         ? `Grasas saturadas y lípidos (g)`
                         : `Grasas saturadas(g)`}
                     </TableCell>
@@ -240,7 +240,7 @@ const Detail = ({ apiResult, formData }) => {
                         }}
                       >
                         {'Puntos de frutas y vegetales '}
-                        {formData.category !== 'beverages' ? '=' : '≥'} 5:
+                        {nutriscoreData.category !== 'beverages' ? '=' : '≥'} 5:
                         <br />
                         {'Puntuación final = Puntos A - Puntos C'}
                         {nutriscoreData.points_a.score >= 11 &&
@@ -324,7 +324,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{ fontWeight: 'bold' }}
                     >
-                      {formData.category !== 'beverages'
+                      {nutriscoreData.category !== 'beverages'
                         ? 'De -15 a -1'
                         : 'Agua'}
                     </TableCell>
@@ -347,7 +347,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{ fontWeight: 'bold' }}
                     >
-                      {formData.category !== 'beverages'
+                      {nutriscoreData.category !== 'beverages'
                         ? 'De 0 a 2'
                         : 'De -15 a 1'}
                     </TableCell>
@@ -370,7 +370,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{ fontWeight: 'bold' }}
                     >
-                      {formData.category !== 'beverages'
+                      {nutriscoreData.category !== 'beverages'
                         ? 'De 3 a 10'
                         : 'De 2 a 5'}
                     </TableCell>
@@ -393,7 +393,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{ fontWeight: 'bold' }}
                     >
-                      {formData.category !== 'beverages'
+                      {nutriscoreData.category !== 'beverages'
                         ? 'De 11 a 18'
                         : 'De 6 a 9'}
                     </TableCell>
@@ -416,7 +416,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{ fontWeight: 'bold' }}
                     >
-                      {formData.category !== 'beverages'
+                      {nutriscoreData.category !== 'beverages'
                         ? 'De 19 a 40'
                         : 'De 10 a 45'}
                     </TableCell>
