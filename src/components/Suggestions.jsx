@@ -60,10 +60,7 @@ const Suggestions = ({ apiResult, formData }) => {
               defaultValue={nutriTarget}
               id="nutri-score-target"
               label="Selecciona un objetivo"
-              onChange={(e) => {
-                console.log(e.target.value);
-                setNutriTarget(e.target.value);
-              }}
+              onChange={(e) => setNutriTarget(e.target.value)}
               sx={{
                 display: `${
                   nutriscoreData.nutri_score === 'a' ? 'none' : 'block'
