@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
 import {
+  FormControl,
   Grid,
+  InputLabel,
   MenuItem,
   Select,
   Table,
@@ -49,28 +51,33 @@ const Suggestions = ({ apiResult, formData }) => {
             variant="h5"
           >
             {nutriscoreData.nutri_score === 'a'
-              ? 'Tu producto ha alcanzado la máxima puntuación de Nutri-Score:'
-              : 'Selecciona el valor de Nutri-Score que quieres conseguir:'}
+              ? '🎯 Tu producto ha alcanzado la máxima puntuación'
+              : '🎯 Objetivo Nutri-Score'}
           </Typography>
-          <Select
-            defaultValue={nutriTarget}
-            fullWidth
-            id="nutri-score-target"
-            label="Nutri-Score"
-            onChange={(e) => setNutriTarget(e.target.value)}
-            sx={{
-              display: `${
-                nutriscoreData.nutri_score === 'a' ? 'none' : 'block'
-              }`,
-              mb: 2,
-            }}
-          >
-            {selectScore().map((item) => (
-              <MenuItem key={item} value={item}>
-                {item.toUpperCase()}
-              </MenuItem>
-            ))}
-          </Select>
+          <FormControl fullWidth>
+            <InputLabel id="select-target">Selecciona un objetivo</InputLabel>
+            <Select
+              defaultValue={nutriTarget}
+              id="nutri-score-target"
+              label="Selecciona un objetivo"
+              onChange={(e) => {
+                console.log(e.target.value);
+                setNutriTarget(e.target.value);
+              }}
+              sx={{
+                display: `${
+                  nutriscoreData.nutri_score === 'a' ? 'none' : 'block'
+                }`,
+                mb: 2,
+              }}
+            >
+              {selectScore().map((item) => (
+                <MenuItem key={item} value={item}>
+                  {item.toUpperCase()}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
 
         <Grid item xs={12}>
