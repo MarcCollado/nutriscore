@@ -41,120 +41,123 @@ export const createCell = (comparison, key, text) => (
 );
 
 // TODO: add tooltip => However, milk, drinkable yoghurt, flavoured or chocolate milk beverages containing more than 80% milk, soups and gazpacho, and plant-based drinks are not considered beverages for the purposes of calculating the Nutri-Score.
-export const nsGroups = () => ({
-  'en:alcoholic-beverages': {
-    translation: 'Bebidas alcohólicas',
-    category: 'beverages',
-  },
-  'en:appetizers': { translation: 'Aperitivos', category: 'others' },
-  'en:artificially-sweetened-beverages': {
-    translation: 'Bebidas artificialmente azucaradas',
-    category: 'beverages',
-  },
-  'en:biscuits-and-cakes': {
-    translation: 'Galletas y tartas',
-    category: 'others',
-  },
-  'en:bread': { translation: 'Pan', category: 'others' },
-  'en:breakfast-cereals': {
-    translation: 'Cereales de desayuno',
-    category: 'others',
-  },
-  'en:cereals': { translation: 'Cereales', category: 'others' },
-  'en:cereals-and-potatoes': {
-    translation: 'Cereales y patatas',
-    category: 'others',
-  },
-  'en:cheese': { translation: 'Queso', category: 'cheese' },
-  'en:chocolate-products': {
-    translation: 'Productos de chocolate',
-    category: 'others',
-  },
-  'en:dairy-desserts': { translation: 'Postres lácteos', category: 'others' },
-  'en:dressings-and-sauces': {
-    translation: 'Aderezos y salsas',
-    category: 'others',
-  },
-  'en:dried-fruits': { translation: 'Frutas desecadas', category: 'others' },
-  'en:eggs': { translation: 'Huevos', category: 'others' },
-  'en:fats': { translation: 'Grasas', category: 'fats' },
-  'en:fatty-fish': { translation: 'Pescados grasos', category: 'others' },
-  'en:fish-and-seafood': {
-    translation: 'Pescados y mariscos',
-    category: 'others',
-  },
-  'en:fish-meat-eggs': {
-    translation: 'Pescado, carne y huevos',
-    category: 'others',
-  },
-  'en:fruit-juices': {
-    translation: 'Zumos de frutas',
-    category: 'beverages',
-  },
-  'en:fruit-nectars': {
-    translation: 'Néctares de frutas',
-    category: 'beverages',
-  },
-  'en:fruits': { translation: 'Frutas', category: 'others' },
-  'en:fruits-and-vegetables': {
-    translation: 'Frutas y vegetales',
-    category: 'others',
-  },
-  'en:ice-cream': { translation: 'Helados', category: 'others' },
-  'en:lean-fish': { translation: 'Pescados magros', category: 'others' },
-  'en:legumes': { translation: 'Legumbres', category: 'others' },
-  'en:meat-other-than-poultry': {
-    translation: 'Carnes no avícolas',
-    category: 'others',
-  },
-  'en:milk-and-yogurt': {
-    translation: 'Leches y yogures',
-    category: 'others',
-  },
-  'en:nuts': { translation: 'Frutos secos', category: 'others' },
-  'en:offals': { translation: 'Casquería', category: 'others' },
-  'en:one-dish-meals': {
-    translation: 'Platos preparados',
-    category: 'others',
-  },
-  'en:pastries': { translation: 'Pastelería', category: 'others' },
-  'en:pizza-pies-and-quiches': {
-    translation: 'Pizzas, pasteles y quiches',
-    category: 'others',
-  },
-  'en:plant-based-milk-substitutes': {
-    translation: 'Sustitutos lácteos',
-    category: 'others',
-  },
-  'en:potatoes': { translation: 'Patatas', category: 'others' },
-  'en:poultry': { translation: 'Aves de corral', category: 'others' },
-  'en:processed-meat': { translation: 'Carne procesada', category: 'others' },
-  'en:salty-and-fatty-products': {
-    translation: 'Productos grasos y salados',
-    category: 'others',
-  },
-  'en:sandwiches': { translation: 'Bocadillos', category: 'others' },
-  'en:soups': { translation: 'Sopas', category: 'others' },
-  'en:sweetened-beverages': {
-    translation: 'Bebidas azuraradas',
-    category: 'beverages',
-  },
-  'en:sweets': { translation: 'Dulces', category: 'others' },
-  'en:teas-and-herbal-teas-and-coffees': {
-    translation: 'Tes y cafés',
-    category: 'beverages',
-  },
-  'en:unknown': { translation: 'Desconocido', category: 'others' },
-  'en:unsweetened-beverages': {
-    translation: 'Bebidas no azucaradas',
-    category: 'beverages',
-  },
-  'en:vegetables': { translation: 'Verduras', category: 'others' },
-  'en:waters-and-flavored-waters': {
-    translation: 'Aguas y aguas azucaradas',
-    category: 'beverages',
-  },
-});
+export const nsGroups = (key = null) => {
+  const nsGroupsData = {
+    'en:alcoholic-beverages': {
+      translation: 'Bebidas alcohólicas',
+      category: 'beverages',
+    },
+    'en:appetizers': { translation: 'Aperitivos', category: 'others' },
+    'en:artificially-sweetened-beverages': {
+      translation: 'Bebidas artificialmente azucaradas',
+      category: 'beverages',
+    },
+    'en:biscuits-and-cakes': {
+      translation: 'Galletas y tartas',
+      category: 'others',
+    },
+    'en:bread': { translation: 'Pan', category: 'others' },
+    'en:breakfast-cereals': {
+      translation: 'Cereales de desayuno',
+      category: 'others',
+    },
+    'en:cereals': { translation: 'Cereales', category: 'others' },
+    'en:cereals-and-potatoes': {
+      translation: 'Cereales y patatas',
+      category: 'others',
+    },
+    'en:cheese': { translation: 'Queso', category: 'cheese' },
+    'en:chocolate-products': {
+      translation: 'Productos de chocolate',
+      category: 'others',
+    },
+    'en:dairy-desserts': { translation: 'Postres lácteos', category: 'others' },
+    'en:dressings-and-sauces': {
+      translation: 'Aderezos y salsas',
+      category: 'others',
+    },
+    'en:dried-fruits': { translation: 'Frutas desecadas', category: 'others' },
+    'en:eggs': { translation: 'Huevos', category: 'others' },
+    'en:fats': { translation: 'Grasas', category: 'fats' },
+    'en:fatty-fish': { translation: 'Pescados grasos', category: 'others' },
+    'en:fish-and-seafood': {
+      translation: 'Pescados y mariscos',
+      category: 'others',
+    },
+    'en:fish-meat-eggs': {
+      translation: 'Pescado, carne y huevos',
+      category: 'others',
+    },
+    'en:fruit-juices': {
+      translation: 'Zumos de frutas',
+      category: 'beverages',
+    },
+    'en:fruit-nectars': {
+      translation: 'Néctares de frutas',
+      category: 'beverages',
+    },
+    'en:fruits': { translation: 'Frutas', category: 'others' },
+    'en:fruits-and-vegetables': {
+      translation: 'Frutas y vegetales',
+      category: 'others',
+    },
+    'en:ice-cream': { translation: 'Helados', category: 'others' },
+    'en:lean-fish': { translation: 'Pescados magros', category: 'others' },
+    'en:legumes': { translation: 'Legumbres', category: 'others' },
+    'en:meat-other-than-poultry': {
+      translation: 'Carnes no avícolas',
+      category: 'others',
+    },
+    'en:milk-and-yogurt': {
+      translation: 'Leches y yogures',
+      category: 'others',
+    },
+    'en:nuts': { translation: 'Frutos secos', category: 'others' },
+    'en:offals': { translation: 'Casquería', category: 'others' },
+    'en:one-dish-meals': {
+      translation: 'Platos preparados',
+      category: 'others',
+    },
+    'en:pastries': { translation: 'Pastelería', category: 'others' },
+    'en:pizza-pies-and-quiches': {
+      translation: 'Pizzas, pasteles y quiches',
+      category: 'others',
+    },
+    'en:plant-based-milk-substitutes': {
+      translation: 'Sustitutos lácteos',
+      category: 'others',
+    },
+    'en:potatoes': { translation: 'Patatas', category: 'others' },
+    'en:poultry': { translation: 'Aves de corral', category: 'others' },
+    'en:processed-meat': { translation: 'Carne procesada', category: 'others' },
+    'en:salty-and-fatty-products': {
+      translation: 'Productos grasos y salados',
+      category: 'others',
+    },
+    'en:sandwiches': { translation: 'Bocadillos', category: 'others' },
+    'en:soups': { translation: 'Sopas', category: 'others' },
+    'en:sweetened-beverages': {
+      translation: 'Bebidas azuraradas',
+      category: 'beverages',
+    },
+    'en:sweets': { translation: 'Dulces', category: 'others' },
+    'en:teas-and-herbal-teas-and-coffees': {
+      translation: 'Tes y cafés',
+      category: 'beverages',
+    },
+    'en:unknown': { translation: 'Desconocido', category: 'others' },
+    'en:unsweetened-beverages': {
+      translation: 'Bebidas no azucaradas',
+      category: 'beverages',
+    },
+    'en:vegetables': { translation: 'Verduras', category: 'others' },
+    'en:waters-and-flavored-waters': {
+      translation: 'Aguas y aguas azucaradas',
+      category: 'beverages',
+    },
+  };
+  return !!key && key in nsGroupsData ? nsGroupsData[key] : nsGroupsData;
+};
 
 export const getFlags = (cc) => {
   if (cc === 'AD') return '🇦🇩';
