@@ -36,12 +36,12 @@ const Form = ({ setFormData, setApiResult }) => {
   const [protein, setProtein] = useState('');
   const [isWater, setIsWater] = useState(false);
 
-  // Generate groups
+  // Generate food groups
   const generateGroups = () => {
     return Object.keys(nsGroups()).map((k) => {
       return (
         <MenuItem key={k} value={k}>
-          {nsGroups()[k]['translation']}
+          {nsGroups(k)['translation']}
         </MenuItem>
       );
     });
@@ -58,7 +58,7 @@ const Form = ({ setFormData, setApiResult }) => {
   // Form is valid and complete
   const formIsValid = () => {
     if (
-      !!category &&
+      !!group &&
       !!energy &&
       !!sugars &&
       (!!saturatedFats || !!saturatedFatsAndLipids) &&
@@ -90,6 +90,7 @@ const Form = ({ setFormData, setApiResult }) => {
   const onSubmit = async () => {
     if (formIsValid()) {
       const formData = {
+        category: category,
         group: group,
         energy: energy,
         fibre: fibre,
@@ -103,6 +104,8 @@ const Form = ({ setFormData, setApiResult }) => {
       };
       // Set form data on App.js before submit
       setFormData(formData);
+      // Remove category since it is not needed for the API
+      delete formData[category];
       // Fetch Calculate API
       fetch(
         `${baseApiUrl}calculate?q=${JSON.stringify(
@@ -133,6 +136,8 @@ const Form = ({ setFormData, setApiResult }) => {
 
   // Seed button
   const onSeed = async () => {
+    setGroup('en:fish-and-seafood');
+    setCategory('others');
     setEnergy(330);
     setFibre(10);
     setFruitAndVegetables(23);
@@ -159,7 +164,7 @@ const Form = ({ setFormData, setApiResult }) => {
               label="Selecciona un grupo"
               onChange={(e) => {
                 setGroup(e.target.value);
-                setCategory(nsGroups()[e.target.value]['category']);
+                setCategory(nsGroups(e.target.value)['category']);
               }}
               value={group}
             >
