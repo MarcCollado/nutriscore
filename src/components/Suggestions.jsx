@@ -15,23 +15,22 @@ import {
 import { NutriCard } from '../utils/containers';
 
 const Suggestions = ({ apiResult, formData }) => {
-  const { nutriscore_data: nutriscoreData } = apiResult;
   const [nutriTarget, setNutriTarget] = useState(
-    String.fromCharCode(nutriscoreData.nutri_score.charCodeAt(0) - 1)
+    String.fromCharCode(apiResult.nutriscore_data.nutri_score.charCodeAt(0) - 1)
   );
-
+  const { nutriscore_data: nutriscoreData } = apiResult;
   const selectScore = () => {
     let selectValue =
-      nutriscoreData.nutri_score === 'B'
-        ? ['A']
-        : nutriscoreData.nutri_score === 'C'
-        ? ['A', 'B']
-        : nutriscoreData.nutri_score === 'D'
-        ? ['A', 'B', 'C']
-        : nutriscoreData.nutri_score === 'E'
-        ? ['A', 'B', 'C', 'D']
+      nutriscoreData.nutri_score === 'b'
+        ? ['a']
+        : nutriscoreData.nutri_score === 'c'
+        ? ['a', 'b']
+        : nutriscoreData.nutri_score === 'd'
+        ? ['a', 'b', 'c']
+        : nutriscoreData.nutri_score === 'e'
+        ? ['a', 'b', 'c', 'd']
         : [''];
-    if (selectValue !== null && formData.category === 'beverages') {
+    if (selectValue !== null && nutriscoreData.category === 'beverages') {
       return selectValue.shift();
     } else {
       return selectValue;
@@ -49,7 +48,7 @@ const Suggestions = ({ apiResult, formData }) => {
             }}
             variant="h5"
           >
-            {nutriscoreData.nutri_score === 'A'
+            {nutriscoreData.nutri_score === 'a'
               ? 'Tu producto ha alcanzado la máxima puntuación de Nutri-Score:'
               : 'Selecciona el valor de Nutri-Score que quieres conseguir:'}
           </Typography>
@@ -61,14 +60,14 @@ const Suggestions = ({ apiResult, formData }) => {
             onChange={(e) => setNutriTarget(e.target.value)}
             sx={{
               display: `${
-                nutriscoreData.nutri_score === 'A' ? 'none' : 'block'
+                nutriscoreData.nutri_score === 'a' ? 'none' : 'block'
               }`,
               mb: 2,
             }}
           >
             {selectScore().map((item) => (
               <MenuItem key={item} value={item}>
-                {item}
+                {item.toUpperCase()}
               </MenuItem>
             ))}
           </Select>
@@ -91,7 +90,7 @@ const Suggestions = ({ apiResult, formData }) => {
               <TableBody>
                 <TableRow>
                   {/* TODO: stretch the container to fill the empty space */}
-                  {nutriscoreData.nutri_score === 'A' ? (
+                  {nutriscoreData.nutri_score === 'a' ? (
                     <TableCell>
                       No hay ninguna sugerencia, tu producto tiene la puntuación
                       deseada.
@@ -99,19 +98,19 @@ const Suggestions = ({ apiResult, formData }) => {
                   ) : (
                     <TableCell>
                       {`Reduce tu puntuación final al menos en ` +
-                        (nutriTarget === 'A' &&
-                        formData.category !== 'beverages'
+                        (nutriTarget === 'a' &&
+                        nutriscoreData.category !== 'beverages'
                           ? 1 + nutriscoreData.final_score
-                          : nutriTarget === 'B'
-                          ? formData.category === 'beverages'
+                          : nutriTarget === 'b'
+                          ? nutriscoreData.category === 'beverages'
                             ? nutriscoreData.final_score - 1
                             : nutriscoreData.final_score - 2
-                          : nutriTarget === 'C'
-                          ? formData.category === 'beverages'
+                          : nutriTarget === 'c'
+                          ? nutriscoreData.category === 'beverages'
                             ? nutriscoreData.final_score - 5
                             : nutriscoreData.final_score - 10
-                          : nutriTarget === 'D' &&
-                            formData.category === 'beverages'
+                          : nutriTarget === 'd' &&
+                            nutriscoreData.category === 'beverages'
                           ? nutriscoreData.final_score - 9
                           : nutriscoreData.final_score - 18)}
                     </TableCell>
