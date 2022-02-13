@@ -333,7 +333,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          nutriscoreData.nutri_score === 'A'
+                          nutriscoreData.nutri_score === 'a'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
@@ -356,7 +356,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          nutriscoreData.nutri_score === 'B'
+                          nutriscoreData.nutri_score === 'b'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
@@ -379,7 +379,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          nutriscoreData.nutri_score === 'C'
+                          nutriscoreData.nutri_score === 'c'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
@@ -402,7 +402,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          nutriscoreData.nutri_score === 'D'
+                          nutriscoreData.nutri_score === 'd'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
@@ -425,7 +425,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          nutriscoreData.nutri_score === 'E'
+                          nutriscoreData.nutri_score === 'e'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
