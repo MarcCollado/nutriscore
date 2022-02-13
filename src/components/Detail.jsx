@@ -15,6 +15,7 @@ import { NutriCard } from '../utils/containers';
 import { createCell, tableAValues, tableCValues } from '../utils/maps';
 
 const Detail = ({ apiResult, formData }) => {
+  const { nutriscore_data: nutriscoreData } = apiResult;
   const createPointsATableRow = (
     beveragesEnergy,
     beveragesSugars,
@@ -36,20 +37,20 @@ const Detail = ({ apiResult, formData }) => {
       </TableCell>
       {/* Energy */}
       {formData.category !== 'beverages'
-        ? createCell(apiResult.points_a.a, key, notBeveragesEnergy)
-        : createCell(apiResult.points_a.a, key, beveragesEnergy)}
+        ? createCell(nutriscoreData.points_a.a, key, notBeveragesEnergy)
+        : createCell(nutriscoreData.points_a.a, key, beveragesEnergy)}
       {/* Sugars */}
       {formData.category !== 'beverages'
-        ? createCell(apiResult.points_a.b, key, notBeveragesSugars)
-        : createCell(apiResult.points_a.b, key, beveragesSugars)}
+        ? createCell(nutriscoreData.points_a.b, key, notBeveragesSugars)
+        : createCell(nutriscoreData.points_a.b, key, beveragesSugars)}
       {/* Saturated fats / Saturated fats and lipids */}
       {formData.category !== 'fats'
         ? key === 0
-          ? createCell(apiResult.points_a.c, key, '≤ ' + (key + 1))
-          : createCell(apiResult.points_a.c, key, '> ' + key)
-        : createCell(apiResult.points_a.c, key, saturatedFatsAndLipids)}
+          ? createCell(nutriscoreData.points_a.c, key, '≤ ' + (key + 1))
+          : createCell(nutriscoreData.points_a.c, key, '> ' + key)
+        : createCell(nutriscoreData.points_a.c, key, saturatedFatsAndLipids)}
       {/* Sodium */}
-      {createCell(apiResult.points_a.d, key, sodium)}
+      {createCell(nutriscoreData.points_a.d, key, sodium)}
     </TableRow>
   );
 
@@ -84,26 +85,26 @@ const Detail = ({ apiResult, formData }) => {
           {/* Fruits and vegetables */}
           {formData.category === 'beverages'
             ? createCell(
-                apiResult.points_c.a,
+                nutriscoreData.points_c.a,
                 key,
                 beveragesFruitsAndVegetables
               )
             : createCell(
-                apiResult.points_c.a,
+                nutriscoreData.points_c.a,
                 key,
                 notBeveragesFruitsAndVegetables
               )}
           {/* Fibre */}
-          {createCell(apiResult.points_c.b, key, fibre)}
+          {createCell(nutriscoreData.points_c.b, key, fibre)}
           {/* Proteins */}
-          {createCell(apiResult.points_c.c, key, proteins)}
+          {createCell(nutriscoreData.points_c.c, key, proteins)}
         </TableRow>
       );
     }
   };
 
   return (
-    apiResult && (
+    nutriscoreData && (
       <NutriCard>
         <Grid container spacing={6}>
           {/* Points A table */}
@@ -141,23 +142,23 @@ const Detail = ({ apiResult, formData }) => {
                       Resultados
                     </TableCell>
                     <TableCell align="right">
-                      a = {apiResult.points_a.a}
+                      a = {nutriscoreData.points_a.a}
                     </TableCell>
                     <TableCell align="right">
-                      b = {apiResult.points_a.b}
+                      b = {nutriscoreData.points_a.b}
                     </TableCell>
                     <TableCell align="right">
-                      c = {apiResult.points_a.c}
+                      c = {nutriscoreData.points_a.c}
                     </TableCell>
                     <TableCell align="right">
-                      d = {apiResult.points_a.d}
+                      d = {nutriscoreData.points_a.d}
                     </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>
             <Typography sx={{ mt: 2 }} variant="h6">
-              Puntos A = a + b + c + d = {apiResult.points_a.score}
+              Puntos A = a + b + c + d = {nutriscoreData.points_a.score}
             </Typography>
           </Grid>
           {/* Points C table */}
@@ -190,20 +191,20 @@ const Detail = ({ apiResult, formData }) => {
                       Resultados
                     </TableCell>
                     <TableCell align="right">
-                      a = {apiResult.points_c.a}
+                      a = {nutriscoreData.points_c.a}
                     </TableCell>
                     <TableCell align="right">
-                      b = {apiResult.points_c.b}
+                      b = {nutriscoreData.points_c.b}
                     </TableCell>
                     <TableCell align="right">
-                      c = {apiResult.points_c.c}
+                      c = {nutriscoreData.points_c.c}
                     </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>
             <Typography sx={{ mt: 2 }} variant="h6">
-              Puntos C = a + b + c = {apiResult.points_c.score}
+              Puntos C = a + b + c = {nutriscoreData.points_c.score}
             </Typography>
           </Grid>
           {/* How it was calculated table */}
@@ -232,8 +233,8 @@ const Detail = ({ apiResult, formData }) => {
                       <TableCell
                         sx={{
                           backgroundColor:
-                            apiResult.points_a.score >= 11 &&
-                            apiResult.points_c.a >= 5
+                            nutriscoreData.points_a.score >= 11 &&
+                            nutriscoreData.points_c.a >= 5
                               ? 'LightGrey'
                               : '#ffffff',
                         }}
@@ -242,17 +243,17 @@ const Detail = ({ apiResult, formData }) => {
                         {formData.category !== 'beverages' ? '=' : '≥'} 5:
                         <br />
                         {'Puntuación final = Puntos A - Puntos C'}
-                        {apiResult.points_a.score >= 11 &&
-                          apiResult.points_c.a >= 5 &&
-                          ' = ' + apiResult.final_score}
+                        {nutriscoreData.points_a.score >= 11 &&
+                          nutriscoreData.points_c.a >= 5 &&
+                          ' = ' + nutriscoreData.final_score}
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell
                         sx={{
                           backgroundColor:
-                            apiResult.points_a.score >= 11 &&
-                            apiResult.points_c.a < 5
+                            nutriscoreData.points_a.score >= 11 &&
+                            nutriscoreData.points_c.a < 5
                               ? 'LightGrey'
                               : '#ffffff',
                         }}
@@ -262,9 +263,9 @@ const Detail = ({ apiResult, formData }) => {
                         {
                           'Puntuación final = Puntos A - (puntos de fibra + puntos de frutas y vegetales)'
                         }
-                        {apiResult.points_a.score >= 11 &&
-                          apiResult.points_c.a < 5 &&
-                          ' = ' + apiResult.final_score}
+                        {nutriscoreData.points_a.score >= 11 &&
+                          nutriscoreData.points_c.a < 5 &&
+                          ' = ' + nutriscoreData.final_score}
                       </TableCell>
                     </TableRow>
                   </TableRow>
@@ -282,14 +283,14 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell
                       sx={{
                         backgroundColor:
-                          apiResult.points_a.score < 11
+                          nutriscoreData.points_a.score < 11
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
                     >
                       {'Puntuación final = Puntos A - Puntos C'}
-                      {apiResult.points_a.score < 11 &&
-                        ' = ' + apiResult.final_score}
+                      {nutriscoreData.points_a.score < 11 &&
+                        ' = ' + nutriscoreData.final_score}
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -332,7 +333,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          apiResult.nutri_score === 'A'
+                          nutriscoreData.nutri_score === 'A'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
@@ -355,7 +356,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          apiResult.nutri_score === 'B'
+                          nutriscoreData.nutri_score === 'B'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
@@ -378,7 +379,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          apiResult.nutri_score === 'C'
+                          nutriscoreData.nutri_score === 'C'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
@@ -401,7 +402,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          apiResult.nutri_score === 'D'
+                          nutriscoreData.nutri_score === 'D'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
@@ -424,7 +425,7 @@ const Detail = ({ apiResult, formData }) => {
                       scope="col"
                       sx={{
                         backgroundColor:
-                          apiResult.nutri_score === 'E'
+                          nutriscoreData.nutri_score === 'E'
                             ? 'LightGrey'
                             : '#ffffff',
                       }}
