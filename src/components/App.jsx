@@ -4,6 +4,7 @@ import { Stack } from '@mui/material';
 import Detail from './Detail';
 import Form from './Form';
 import NutriScore from './NutriScore';
+import Similar from './Similar';
 import Suggestions from './Suggestions';
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
       {apiResult ? (
         <Suggestions apiResult={apiResult} formData={formData} />
       ) : null}
+      {apiResult ? <Similar apiResult={apiResult} formData={formData} /> : null}
     </Stack>
   );
 };
