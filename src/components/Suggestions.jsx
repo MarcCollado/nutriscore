@@ -93,7 +93,6 @@ const Suggestions = ({ apiResult, formData }) => {
               </TableHead>
               <TableBody>
                 <TableRow>
-                  {/* TODO: stretch the container to fill the empty space */}
                   {nutriscoreData.nutri_score === 'a' ? (
                     <TableCell>
                       No hay ninguna sugerencia, tu producto tiene la puntuación
