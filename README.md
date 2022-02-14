@@ -2,17 +2,22 @@
 
 ## Control de versiones
 
-### v2.0
+### v1.2
+
+- Búsqueda
+  - Actualización periódica de la DB local a partir de OFF
+  - Click en un resultado muestra su detalle
+
+### v1.1
 
 - Calculador
-  - Deprecado de categorías en favor del campo tipo de producto
+  - Deprecado de `categoría` en favor del campo `grupo` de producto
+  - Nueva sección que muestra productos relacionados al calculado
 - Sugerencias
   - Los mensajes ahora incorporan información de productos relacionados
 - Búsqueda
   - Obtención de resultados en DB local
-  - Actualización periódica de la DB local a partir de OFF
-  - Auto-filtrado previo basado en el nuevo campo tipo de producto
-  - Click en un resultado muestra su detalle
+  - Auto-filtrado previo basado en el nuevo campo `grupo` de producto
 
 ### v1.0
 
