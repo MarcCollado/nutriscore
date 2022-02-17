@@ -128,7 +128,7 @@ const Detail = ({ apiResult, formData }) => {
                     <TableCell align="right">
                       {nutriscoreData.category === 'fats'
                         ? `Grasas saturadas y lípidos (g)`
-                        : `Grasas saturadas(g)`}
+                        : `Grasas saturadas (g)`}
                     </TableCell>
                     <TableCell align="right">Sodio (mg)</TableCell>
                   </TableRow>
