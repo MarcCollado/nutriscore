@@ -150,7 +150,7 @@ const columns = [
   {
     field: 'brands',
     flex: 2,
-    headerName: 'Brands',
+    headerName: 'Marcas',
     valueGetter: (params) => {
       return params.row.brands.map((b, i) =>
         i === 0 ? capitalize(b) : ' ' + capitalize(b)
@@ -160,7 +160,7 @@ const columns = [
   {
     field: 'countries',
     flex: 1.5,
-    headerName: 'Countries',
+    headerName: 'Paises',
     valueGetter: (params) => {
       // let unique = [...new Set(params.row.countries)];
       return params.row.countries.map((c, i) =>
