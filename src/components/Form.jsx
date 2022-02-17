@@ -204,7 +204,7 @@ const Form = ({ setFormData, setApiResult }) => {
             value={sugars}
             variant="outlined"
           />
-          {category === 'cheese' || category === 'others' ? (
+          {category === 'cheese' || category === 'others' || category === '' ? (
             <TextField
               id="saturatedFats"
               InputProps={{
@@ -221,8 +221,7 @@ const Form = ({ setFormData, setApiResult }) => {
               value={saturatedFats}
               variant="outlined"
             />
-          ) : null}
-          {category === 'fats' || category === 'beverages' ? (
+          ) : (
             <TextField
               id="saturatedFatsAndLipids"
               InputProps={{
@@ -239,7 +238,7 @@ const Form = ({ setFormData, setApiResult }) => {
               value={saturatedFatsAndLipids}
               variant="outlined"
             />
-          ) : null}
+          )}
           <TextField
             id="sodium"
             InputProps={{
