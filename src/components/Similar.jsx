@@ -127,7 +127,7 @@ const columns = [
   {
     field: 'sodium',
     flex: 1,
-    headerName: 'Sodio (g)',
+    headerName: 'Sodio (mg)',
     valueGetter: (params) => params.row.nutriscore_data.points_a.sodium,
     valueFormatter: (params) =>
       (Math.round(params.value * 100) / 100).toFixed(2),
