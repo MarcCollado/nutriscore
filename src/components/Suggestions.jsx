@@ -170,7 +170,13 @@ const Suggestions = ({ apiResult, formData }) => {
           </TableContainer>
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <Typography sx={{ mt: 3 }}>
+            ℹ️ Así compara tu producto con productos similares de la misma
+            categoría y objetivo Nutri-Score:
+          </Typography>
+        </Grid>
         <Grid item xs={3}>
           <Average
             apiResult={apiResult}
