@@ -14,6 +14,8 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+
+import Average from './Average';
 import { NutriCard } from '../utils/containers';
 
 const Suggestions = ({ apiResult, formData }) => {
@@ -166,6 +168,37 @@ const Suggestions = ({ apiResult, formData }) => {
               </TableBody>
             </Table>
           </TableContainer>
+        </Grid>
+      </Grid>
+      <Grid container>
+        <Grid item xs={3}>
+          <Average
+            apiResult={apiResult}
+            nutriTarget={nutriTarget}
+            property="energy"
+          ></Average>
+        </Grid>
+        <Grid item xs={3}>
+          <Average
+            apiResult={apiResult}
+            nutriTarget={nutriTarget}
+            property="sugars"
+          ></Average>
+        </Grid>
+        <Grid item xs={3}>
+          <Average
+            apiResult={apiResult}
+            nutriTarget={nutriTarget}
+            // TODO: change property
+            property="saturated_fats"
+          ></Average>
+        </Grid>
+        <Grid item xs={3}>
+          <Average
+            apiResult={apiResult}
+            nutriTarget={nutriTarget}
+            property="sodium"
+          ></Average>
         </Grid>
       </Grid>
     </NutriCard>
