@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-import { capitalize } from '../utils/helpers';
+import { nsProperties } from '../utils/maps';
 
 const Average = ({ apiResult, nutriTarget, property }) => {
   const currentValue = apiResult.nutriscore_data.points_a[property];
@@ -27,18 +27,28 @@ const Average = ({ apiResult, nutriTarget, property }) => {
           textAlign: 'center',
         }}
       >
-        <Typography sx={{ mt: 1, mb: 1 }}>{capitalize(property)}</Typography>
+        {/* TODO: update name labels in spanish */}
+        <Typography sx={{ mt: 1.5, mb: 0.5 }}>
+          {nsProperties(property)}
+        </Typography>
         <Typography
           sx={{
-            color: currentValue < average ? 'red' : 'green',
-            fontWeight: 'bold',
+            opacity: 0.75,
             padding: '2px',
           }}
         >
           {(Math.round(average * 100) / 100).toFixed(2)}
         </Typography>
-        <Typography sx={{ opacity: 0.5, mb: 1, fontSize: 'smaller' }}>
-          {currentValue}
+        <Typography
+          sx={{
+            fontSize: 'smaller',
+            fontWeight: 'bold',
+            color: currentValue < average ? 'green' : 'red',
+            mb: 1,
+            opacity: 0.75,
+          }}
+        >
+          {(Math.round(currentValue * 100) / 100).toFixed(2)}
         </Typography>
       </Box>
     )
