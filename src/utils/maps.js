@@ -164,7 +164,7 @@ export const nsProperties = (key) => {
     energy: 'Enegría',
     sugars: 'Azúcares',
     saturated_fats: 'Grasas',
-    sodium: 'Sodio,',
+    sodium: 'Sodio',
     fruits_and_vegetables: 'Frutas y vegetales',
     fiber: 'Fibra',
     protein: 'Proteínas',
