@@ -6,6 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { nsColors } from '../utils/colors';
 import { capitalize } from '../utils/helpers';
 import { getFlags } from '../utils/maps';
+import { Typography } from '@mui/material';
 
 const Similar = ({ apiResult, formData }) => {
   const [pageSize, setPageSize] = useState(25);
@@ -13,6 +14,9 @@ const Similar = ({ apiResult, formData }) => {
 
   return (
     <div style={{ height: '72vh', width: '100%' }}>
+      <Typography sx={{ mb: 1 }} variant="h5">
+        🔍 Más productos similares
+      </Typography>
       <DataGrid
         aria-label="Tabla de resultados"
         autoPageSize
