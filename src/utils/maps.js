@@ -159,6 +159,19 @@ export const nsGroups = (key = null) => {
   return !!key && key in nsGroupsData ? nsGroupsData[key] : nsGroupsData;
 };
 
+export const nsProperties = (key) => {
+  const properties = {
+    energy: 'Enegría',
+    sugars: 'Azúcares',
+    saturated_fats: 'Grasas',
+    sodium: 'Sodio,',
+    fruits_and_vegetables: 'Frutas y vegetales',
+    fiber: 'Fibra',
+    protein: 'Proteínas',
+  };
+  return properties[key];
+};
+
 export const getFlags = (cc) => {
   if (cc === 'AD') return '🇦🇩';
   if (cc === 'AE') return '🇦🇪';
