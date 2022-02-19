@@ -17,6 +17,7 @@ import {
 
 import Average from './Average';
 import { NutriCard } from '../utils/containers';
+import { capitalize } from '../utils/helpers';
 
 const Suggestions = ({ apiResult, formData }) => {
   const [nutriTarget, setNutriTarget] = useState(
@@ -173,8 +174,8 @@ const Suggestions = ({ apiResult, formData }) => {
       <Grid container spacing={1}>
         <Grid item xs={12}>
           <Typography sx={{ mt: 3 }}>
-            ℹ️ Así compara tu producto con productos similares de la misma
-            categoría y objetivo Nutri-Score:
+            {`🆚 Así compara tu producto con los productos similares de la misma
+            categoría y Nutri-Score ${capitalize(nutriTarget)}:`}
           </Typography>
         </Grid>
         <Grid item xs={3}>
@@ -195,7 +196,6 @@ const Suggestions = ({ apiResult, formData }) => {
           <Average
             apiResult={apiResult}
             nutriTarget={nutriTarget}
-            // TODO: change property
             property="saturated_fats"
           ></Average>
         </Grid>
