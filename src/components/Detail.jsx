@@ -210,7 +210,7 @@ const Detail = ({ apiResult, formData }) => {
           {/* How it was calculated table */}
           <Grid item xs={12} lg={6}>
             <Typography sx={{ mb: 1 }} variant="h5">
-              🤔 Cómo se calculó mi Nutri-Score
+              🤔 Cómo se calculó tu Nutri-Score
             </Typography>
             <TableContainer
               sx={{
@@ -300,7 +300,7 @@ const Detail = ({ apiResult, formData }) => {
           {/* My score */}
           <Grid item xs={12} lg={6}>
             <Typography sx={{ mb: 1 }} variant="h5">
-              🏆 Mi puntuación
+              🏆 Tu puntuación
             </Typography>
             <TableContainer
               sx={{
