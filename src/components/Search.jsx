@@ -38,16 +38,15 @@ const Search = () => {
   const onSearch = async () => {
     setIsLoading(true);
     // Fetch Search API
-    const rows =
-      process.env.NODE_ENV === 'development'
-        ? // Use local Database
-          seed.map((r, i) => ({ ...r, id: i }))
-        : // Use OFF Database
-          fetch(`${baseApiUrl}search?q=${JSON.stringify(query)}`)
-            .then((res) => res.json())
-            .then((res) => res.map((r, i) => ({ ...r, id: i })));
+    process.env.NODE_ENV === 'development'
+      ? // Use local Database
+        setApiResult(seed.map((r, i) => ({ ...r, id: i })))
+      : // Use OFF Database
+        fetch(`${baseApiUrl}search?q=${query}`)
+          .then((res) => res.json())
+          .then((res) => res.map((r, i) => ({ ...r, id: i })))
+          .then((res) => setApiResult(res));
     setIsLoading(false);
-    setApiResult(rows);
   };
 
   return (
