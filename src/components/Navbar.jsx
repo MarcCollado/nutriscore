@@ -28,7 +28,7 @@ const Navbar = () => {
             <Button color="inherit">Auditor</Button>
           </Link>
           <Link style={{ color: 'white', textDecoration: 'none' }} to="/search">
-            <Button color="inherit">Search</Button>
+            <Button color="inherit">Buscador</Button>
           </Link>
         </Toolbar>
       </AppBar>
