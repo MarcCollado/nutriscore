@@ -161,7 +161,7 @@ export const nsGroups = (key = null) => {
 
 export const nsProperties = (key) => {
   const properties = {
-    energy: 'Enegría',
+    energy: 'Energía',
     sugars: 'Azúcares',
     saturated_fats: 'Grasas',
     sodium: 'Sodio',
