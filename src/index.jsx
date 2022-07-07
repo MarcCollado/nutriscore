@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Container } from '@mui/material';
@@ -14,6 +14,8 @@ import App from './components/App';
 import Navbar from './components/Navbar';
 import Search from './components/Search';
 import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const theme = createTheme({
   typography: {
@@ -34,7 +36,7 @@ const theme = createTheme({
   },
 });
 
-ReactDOM.render(
+root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
@@ -47,8 +49,7 @@ ReactDOM.render(
         </Container>
       </BrowserRouter>
     </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 reportWebVitals();
